@@ -23,3 +23,8 @@ laptop `git push lab main` → lab PC `~/custos` (`git pull origin main`) → `g
 ## Open questions for humans
 - 26 Oct 12:00 format update: none sent (Aditya, 17:10). Proceed with round-1 format + criteria.
 - Exact upload deadline time ("end of day" = 23:59 IST?).
+
+## Resume notes (02:20 Tue)
+- Claude paused (usage). GPU autopilot queue: golden-path seed runs (demo/runs/* on custos-gpu); tmux `seeds` sweep -> ~/seed_sweep.log.
+- W5 bench agent was mid-run when paused: resume it (SendMessage), commit src/custos_bench + configs/bench, run smoke on GPU box, then queue main/ablation/adaptive/utility grids in infra/brev/QUEUE.
+- Live golden path on self-hosted: Act 2 D0 pays attacker, D3 quarantines + gate blocks. Act 1 D0 paid ERP at seed 7 (pick seed from sweep).

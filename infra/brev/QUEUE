@@ -1,3 +1,5 @@
 # GPU autopilot queue: one shell command per line, run top to bottom from ~/custos on custos-gpu.
 # A line runs until it succeeds (3 tries per code version). Edit + push to add work; never reorder done lines.
 .venv/bin/python infra/brev/throughput.py 256
+for s in 7 8 9 10 12 14; do .venv/bin/python scripts/demo_golden_path.py --llm live --gateway real --acts 1 2 --sides D0 D3 --seed $s --out demo/runs/seed$s 2>&1 | grep -E "^  D[03]:|GOLDEN"; done
+for s in 7 8 9; do .venv/bin/python scripts/demo_golden_path.py --llm live --gateway real --acts 2 --act2-variant attachment --sides D0 D3 --seed $s --out demo/runs/attach$s 2>&1 | grep -E "^  D[03]:|GOLDEN"; done
