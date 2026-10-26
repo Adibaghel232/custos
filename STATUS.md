@@ -1,23 +1,25 @@
 # STATUS (update after every milestone)
 
-**Now:** Mon 26 Oct ~16:00 IST — planning done; skeleton + frozen interfaces in place; spec part 2 being written.
+**Now:** Mon 26 Oct ~17:00 IST — all setup done; 5 coding agents building in parallel; 8× A100 bring-up in progress.
 
 | Area | State | Notes |
 |---|---|---|
-| Plan / spec | PLAN.md ✅ · SPEC part 1 ✅ · part 2 ⏳ | docs/SPEC.md once merged |
-| Frozen interfaces | types.py ✅ llm.py ✅ embed.py ✅ settings.py ✅ | |
-| Lab PC env | uv, py3.12, node 22, opa, brev ✅ | repo not synced yet |
-| Laptop venv | ⏳ uv sync | |
-| NVIDIA API key | ⏳ waiting for Aditya | setup window: scratchpad/setup_keys.ps1 |
-| Brev login | ⏳ waiting for Aditya | `brev login --skip-browser` on lab PC |
-| Gateway (W1/W2) | not started | |
-| Agent + finance world + gate (W3) | not started | |
-| Bench (W4) | not started | |
-| UI + API (W5) | not started | |
-| Brev vLLM (W6) | not started | A100-80GB only |
-| Results | — | |
-| Deck / video | — | |
+| Plan / spec / contracts | ✅ PLAN.md · docs/SPEC.md · docs/CONTRACTS.md | |
+| W1 core (types, llm, embed, ledger, tiers, provenance, store) | ✅ 17 offline + 3 live tests | hosted Lightning: JSON schema ✅ tool calls ✅ embed ✅ |
+| Keys / logins | ✅ NVIDIA key (.env, laptop + lab + GPU box) · ✅ Brev CLI on lab PC | |
+| GPU box `custos-gpu` | ✅ 8× A100-SXM4-80GB, 1.7 TB, docker | `ssh custos-gpu` from lab PC |
+| vLLM Lightning ×8 (ports 8000–8007) | ⏳ downloading/starting | tmux `vllm` on custos-gpu; log ~/vllm_up.log; urls → ~/vllm_urls.env |
+| W2 write path | ⏳ agent | |
+| W3 read/gate/recover/API | ⏳ agent | |
+| W4 agent + finance world + golden path | ⏳ agent | |
+| W5 bench | ⏳ agent | |
+| UI | ⏳ agent | |
+| W6 data (LongMemEval, legit/contradiction sets) | todo (parent) | |
+| Results / deck / video | — | |
+
+## Sync path
+laptop `git push lab main` → lab PC `~/custos` (`git pull origin main`) → `git push gpu main` → custos-gpu `~/custos` (`git pull`).
 
 ## Open questions for humans
-- 26 Oct 12:00 format update + judging criteria (emails) — not received yet.
+- 26 Oct 12:00 format update: none sent (Aditya, 17:10). Proceed with round-1 format + criteria.
 - Exact upload deadline time ("end of day" = 23:59 IST?).
