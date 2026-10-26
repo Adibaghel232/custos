@@ -20,8 +20,8 @@ $DOCKER pull -q "$IMAGE"
 mkdir -p "$HF_CACHE"
 
 # 1) download weights once (all servers share the cache)
-$DOCKER run --rm -v "$HF_CACHE:/root/.cache/huggingface" ${HF_TOKEN:+-e HF_TOKEN=$HF_TOKEN} --entrypoint huggingface-cli \
-  "$IMAGE" download "$MODEL" >/tmp/vllm_download.log 2>&1 || { echo "[vllm_up] download failed"; tail -20 /tmp/vllm_download.log; exit 1; }
+$DOCKER run --rm -v "$HF_CACHE:/root/.cache/huggingface" ${HF_TOKEN:+-e HF_TOKEN=$HF_TOKEN} --entrypoint python3 \
+  "$IMAGE" -c "from huggingface_hub import snapshot_download as d; print(d('$MODEL', max_workers=16))" >/tmp/vllm_download.log 2>&1 || { echo "[vllm_up] download failed"; tail -20 /tmp/vllm_download.log; exit 1; }
 echo "[vllm_up] weights cached"
 
 # 2) one server per GPU
