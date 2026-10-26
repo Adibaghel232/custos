@@ -1,0 +1,43 @@
+# Relation vocabulary for the finance (Indian AP desk) world. SPEC §5.2.
+#   functional: single-valued (a different object for the same subject is a conflict)
+#   critical:   money-moving / authority-granting attribute (R7 needs SoR verification below T2)
+#   sor:        system-of-record path used by check g (sor_verify)
+bank_account:        {functional: true,  critical: true,  sor: erp.vendor.bank_account}
+ifsc:                {functional: true,  critical: true,  sor: erp.vendor.ifsc}
+upi_vpa:             {functional: true,  critical: true,  sor: erp.vendor.upi_vpa}
+gstin:               {functional: true,  critical: true,  sor: gst.registry}
+remittance_email:    {functional: true,  critical: true,  sor: erp.vendor.remittance_email}
+payment_approver:    {functional: true,  critical: true,  sor: policy.approver}
+approval_threshold:  {functional: true,  critical: true,  sor: policy.approval_threshold_inr}
+trusted_source:      {functional: false, critical: true}
+preferred_processor: {functional: true,  critical: true}
+procedure_step:      {functional: false, critical: true}
+billing_entity:      {functional: true,  critical: false}   # slow-drift stepping stone
+contact_email:       {functional: true,  critical: false}
+address:             {functional: true,  critical: false}
+payment_terms:       {functional: true,  critical: false}
+prefers:             {functional: false, critical: false}
+"other:*":           {functional: false, critical: false}
+
+# Spelling variants the extractor tends to produce -> canonical relation (used by custos.extract).
+aliases:
+  account_number: bank_account
+  bank_account_number: bank_account
+  account_no: bank_account
+  settlement_account: bank_account
+  ifsc_code: ifsc
+  upi: upi_vpa
+  upi_id: upi_vpa
+  vpa: upi_vpa
+  gst_number: gstin
+  gst_no: gstin
+  gstin_number: gstin
+  email: contact_email
+  vendor_email: contact_email
+  remittance_advice_email: remittance_email
+  approver: payment_approver
+  approval_limit: approval_threshold
+  billing_subsidiary: billing_entity
+  bills_through: billing_entity
+  payment_term: payment_terms
+  preference: prefers
