@@ -7,8 +7,8 @@ models:                       # role -> model id (as served by build.nvidia.com;
   judge: nvidia/nemotron-3.5-lightning-30b-a3b        # NLI + grounding + instruction checks
   summariser: nvidia/nemotron-3.5-lightning-30b-a3b
   baseline: nvidia/nemotron-3.5-lightning-30b-a3b     # PromptArmor-style filter, A-MemGuard-lite
-  attacker: nvidia/nemotron-3-super-120b-a12b         # adaptive attacker + payload paraphrase
-  evaluator: nvidia/nemotron-3-super-120b-a12b        # independent judge for metrics (LongMemEval, audits)
+  attacker: nvidia/nemotron-3-ultra-550b-a55b         # adaptive attacker + payload paraphrase (Super-120B is not enabled on our key)
+  evaluator: nvidia/nemotron-3-ultra-550b-a55b        # independent judge for metrics (LongMemEval, audits)
   embed: nvidia/nemotron-3.5-embed-1b
   content_safety: nvidia/nemotron-3.5-content-safety
   jailbreak_detect: nvidia/nemoguard-jailbreak-detect
