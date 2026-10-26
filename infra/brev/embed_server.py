@@ -11,7 +11,7 @@ from transformers import AutoModel, AutoTokenizer
 
 MODEL = os.getenv("EMBED_MODEL", "nvidia/llama-nemotron-embed-1b-v2")
 tok = AutoTokenizer.from_pretrained(MODEL, trust_remote_code=True)
-model = AutoModel.from_pretrained(MODEL, trust_remote_code=True, torch_dtype=torch.bfloat16).cuda().eval()
+model = AutoModel.from_pretrained(MODEL, trust_remote_code=True, dtype=torch.bfloat16).cuda().eval()
 app = FastAPI()
 
 
@@ -37,4 +37,4 @@ def embeddings(req: dict):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=int(os.getenv("PORT", "8100")))
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", "8100")))
