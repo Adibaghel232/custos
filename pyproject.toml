@@ -47,7 +47,9 @@ packages = ["src/custos", "src/agent", "src/custos_bench"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
-pythonpath = ["src"]
+pythonpath = ["src", "."]
+addopts = "-m \"not live\""
+markers = ["live: calls real NVIDIA endpoints (run with -m live)"]
 
 [tool.ruff]
 line-length = 110
