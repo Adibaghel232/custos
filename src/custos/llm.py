@@ -181,17 +181,22 @@ class NemotronClient:
         self._clients: dict[str, Any] = {}
         self._sems: dict[str, asyncio.Semaphore] = {}
         self._schema_mode: dict[str, str] = {}   # endpoint -> "response_format" | "nvext" | "prompt"
+        self._rr: dict[str, int] = {}
 
     def _client_for(self, role: str):
+        """One AsyncOpenAI per base URL; a comma-separated base_url (one vLLM server per GPU) is round-robined."""
         from openai import AsyncOpenAI
 
         ep = self.s.endpoint(role)
         if ep.name not in self._clients:
-            self._clients[ep.name] = AsyncOpenAI(
-                base_url=ep.base_url, api_key=ep.api_key, timeout=self.s.llm["timeout_s"], max_retries=0
-            )
-            self._sems[ep.name] = asyncio.Semaphore(ep.max_concurrency)
-        return ep, self._clients[ep.name], self._sems[ep.name]
+            urls = [u.strip() for u in ep.base_url.split(",") if u.strip()]
+            self._clients[ep.name] = [AsyncOpenAI(base_url=u, api_key=ep.api_key, timeout=self.s.llm["timeout_s"],
+                                                  max_retries=0) for u in urls]
+            self._sems[ep.name] = asyncio.Semaphore(ep.max_concurrency * len(urls))
+            self._rr[ep.name] = 0
+        pool = self._clients[ep.name]
+        self._rr[ep.name] = (self._rr[ep.name] + 1) % len(pool)
+        return ep, pool[self._rr[ep.name]], self._sems[ep.name]
 
     async def _create(self, client, kwargs: dict[str, Any]):
         import openai
