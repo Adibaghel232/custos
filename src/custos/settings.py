@@ -26,9 +26,11 @@ class Settings:
         self.raw = raw
         self.models: dict[str, str] = dict(raw["models"])
         self.routing: dict[str, str] = dict(raw["routing"])
-        for role in self.models:  # per-run override: CUSTOS_ROUTE_AGENT=vllm
+        for role in self.models:  # per-run overrides: CUSTOS_ROUTE_AGENT=vllm, CUSTOS_MODEL_EMBED=nvidia/...
             if env := os.getenv(f"CUSTOS_ROUTE_{role.upper()}"):
                 self.routing[role] = env
+            if env := os.getenv(f"CUSTOS_MODEL_{role.upper()}"):
+                self.models[role] = env
         self.thresholds: dict[str, float] = dict(raw["thresholds"])
         self.llm: dict[str, Any] = dict(raw["llm"])
         self.paths: dict[str, Path] = {k: ROOT / v for k, v in raw["paths"].items()}

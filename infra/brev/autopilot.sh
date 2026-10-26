@@ -9,8 +9,7 @@ REPO=$HOME/custos
 STATE=$HOME/autopilot
 mkdir -p "$STATE/done" "$STATE/logs"
 export PATH=$HOME/.local/bin:$PATH
-set -a; . "$HOME/vllm_urls.env"; set +a
-export CUSTOS_ROUTE_AGENT=vllm CUSTOS_ROUTE_EXTRACTOR=vllm CUSTOS_ROUTE_JUDGE=vllm CUSTOS_ROUTE_SUMMARISER=vllm CUSTOS_ROUTE_BASELINE=vllm
+. "$REPO/infra/brev/env.sh"
 
 log() { echo "[$(date '+%F %T')] $*" | tee -a "$STATE/autopilot.log"; }
 

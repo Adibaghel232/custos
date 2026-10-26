@@ -18,6 +18,10 @@ endpoints:
     base_url: https://integrate.api.nvidia.com/v1
     api_key_env: NVIDIA_API_KEY
     max_concurrency: 8
+  embedsrv:                   # self-hosted nvidia/llama-nemotron-embed-1b-v2 on Brev (infra/brev/embed_server.py)
+    base_url_env: EMBED_BASE_URL
+    api_key: EMPTY
+    max_concurrency: 32
   vllm:                       # self-hosted Nemotron on Brev A100 (set VLLM_BASE_URL, e.g. http://localhost:8000/v1)
     base_url_env: VLLM_BASE_URL
     api_key: EMPTY

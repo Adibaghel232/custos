@@ -54,6 +54,7 @@ class NvidiaEmbedder:
         return hashlib.sha256(f"{self.model}|{input_type}|{text}".encode()).hexdigest()
 
     async def embed(self, texts: list[str], input_type: InputType = "passage") -> np.ndarray:
+        texts = [t if t and t.strip() else "[empty]" for t in texts]   # the API rejects blank inputs
         keys = [self._key(t, input_type) for t in texts]
         found: dict[str, np.ndarray] = {}
         with self._lock:
