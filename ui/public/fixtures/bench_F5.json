@@ -1,0 +1,42 @@
+[
+ {
+  "op": "read",
+  "label": "Read",
+  "defence": "custos",
+  "backend": "mem0",
+  "p50_ms": 10,
+  "p95_ms": 20,
+  "n": 1000,
+  "on_critical_path": true
+ },
+ {
+  "op": "write_verdict",
+  "label": "Write verdict (async)",
+  "defence": "custos",
+  "backend": "mem0",
+  "p50_ms": 800,
+  "p95_ms": 1500,
+  "n": 1000,
+  "on_critical_path": false
+ },
+ {
+  "op": "gate_check",
+  "label": "Gated call",
+  "defence": "custos",
+  "backend": "mem0",
+  "p50_ms": 15,
+  "p95_ms": 30,
+  "n": 300,
+  "on_critical_path": true
+ },
+ {
+  "op": "gate_loo",
+  "label": "Gated call + leave-one-out",
+  "defence": "custos",
+  "backend": "mem0",
+  "p50_ms": 900,
+  "p95_ms": 1500,
+  "n": 300,
+  "on_critical_path": true
+ }
+]

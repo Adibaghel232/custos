@@ -1,0 +1,562 @@
+{
+ "m_14": {
+  "revert": {
+   "result": {
+    "root": "m_14",
+    "mode": "revert",
+    "closure_by_hop": [
+     [
+      "m_14"
+     ],
+     [
+      "m_23"
+     ],
+     [
+      "m_25"
+     ]
+    ],
+    "rederived": [
+     {
+      "old": "m_23",
+      "new": "m_31"
+     }
+    ],
+    "exposure": {
+     "sessions": [
+      7,
+      9
+     ],
+     "users": [
+      "finance-clerk-02"
+     ],
+     "reads": 2,
+     "tool_calls": []
+    },
+    "ledger_seq": 41
+   },
+   "records": [
+    {
+     "id": "m_31",
+     "tenant": "northstar-demo",
+     "text": "Week 12 vendor emails: Globex confirmed Thursday delivery. Initech sent a payment reminder for ₹2,15,000.",
+     "tier": "T0",
+     "status": "committed",
+     "kind": "summary",
+     "source": {
+      "type": "derived",
+      "ref": "rederive:m_23",
+      "from": "recover"
+     },
+     "principal": "sys:recover",
+     "session": 5,
+     "parents": [
+      "e_7",
+      "e_8"
+     ],
+     "raw_hash": "e113c383cb59474461602ec382aa08d4e6d596315032fdf78f1edd5b30541230",
+     "ledger_seq": 42,
+     "sig_ok": true,
+     "valid_from": "2026-10-26T16:33:40.900+05:30",
+     "valid_to": null,
+     "recorded_at": "2026-10-26T16:33:40.900+05:30",
+     "claims": [
+      {
+       "id": "cl_m31_1",
+       "s": "vendor emails",
+       "r": "covers",
+       "o": "week 12",
+       "type": "event"
+      }
+     ],
+     "checks": [
+      {
+       "check": "conflict",
+       "result": "none found",
+       "ms": 4
+      },
+      {
+       "check": "grounding",
+       "result": "entailed by cited parents",
+       "score": 0.95,
+       "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+       "ms": 655
+      }
+     ],
+     "decision": {
+      "verdict": "commit",
+      "rule": "write.rederive_clean",
+      "explanation": "Re-derived from the clean parents of m_23 (e_7, e_8) after m_14 was reverted. Contains nothing from m_14."
+     },
+     "status_history": [
+      {
+       "ts": "2026-10-26T16:33:40.900+05:30",
+       "status": "pending",
+       "by": "gateway"
+      },
+      {
+       "ts": "2026-10-26T16:33:41.700+05:30",
+       "status": "committed",
+       "by": "gateway"
+      }
+     ]
+    }
+   ],
+   "ledger": [
+    {
+     "seq": 41,
+     "ts": "2026-10-26T16:33:40.000+05:30",
+     "event": "REVERT",
+     "record_id": "m_14",
+     "actor": "reviewer:ap-lead-01",
+     "payload_hash": "e9bbcd2b0029909c599ec25564764dc9d73dc76ef79dd053ed067b8cf1e6c5df",
+     "prev_hash": "5691fcee827148bed54c38ea50339d3fad204c244482b4f91009a5978bec6610",
+     "hash": "a7ef6cc06b7721d3023189083f6598d88cde19e81fdf154a74a86cb2a18b51dd",
+     "sig_ok": true
+    },
+    {
+     "seq": 42,
+     "ts": "2026-10-26T16:33:40.900+05:30",
+     "event": "WRITE",
+     "record_id": "m_31",
+     "actor": "gateway",
+     "payload_hash": "3b1e352b1b45f5a9df65d0e28edb3147ef9a73342575da2d79b029c9fda5a1bc",
+     "prev_hash": "a7ef6cc06b7721d3023189083f6598d88cde19e81fdf154a74a86cb2a18b51dd",
+     "hash": "e024fc6f7b813dbff8b3b4b95109b65bca41a8ba1b845ee6e3777a8de518cb99",
+     "sig_ok": true
+    },
+    {
+     "seq": 43,
+     "ts": "2026-10-26T16:33:41.700+05:30",
+     "event": "DECIDE",
+     "record_id": "m_31",
+     "actor": "gateway",
+     "payload_hash": "e2a7b79b7f2809f0a60d3c8d9c41ee3179d14174cd4b50227cc7ffdc879c9eaa",
+     "prev_hash": "e024fc6f7b813dbff8b3b4b95109b65bca41a8ba1b845ee6e3777a8de518cb99",
+     "hash": "4a3f1195eb837d2e4400c10f97215801cbffbfa5777aedf240f1e8c5b0f84615",
+     "sig_ok": true
+    }
+   ]
+  },
+  "erase": {
+   "result": {
+    "root": "m_14",
+    "mode": "erase",
+    "closure_by_hop": [
+     [
+      "m_14"
+     ],
+     [
+      "m_23"
+     ],
+     [
+      "m_25"
+     ]
+    ],
+    "rederived": [
+     {
+      "old": "m_23",
+      "new": "m_31"
+     }
+    ],
+    "exposure": {
+     "sessions": [
+      7,
+      9
+     ],
+     "users": [
+      "finance-clerk-02"
+     ],
+     "reads": 2,
+     "tool_calls": []
+    },
+    "ledger_seq": 41
+   },
+   "records": [
+    {
+     "id": "m_31",
+     "tenant": "northstar-demo",
+     "text": "Week 12 vendor emails: Globex confirmed Thursday delivery. Initech sent a payment reminder for ₹2,15,000.",
+     "tier": "T0",
+     "status": "committed",
+     "kind": "summary",
+     "source": {
+      "type": "derived",
+      "ref": "rederive:m_23",
+      "from": "recover"
+     },
+     "principal": "sys:recover",
+     "session": 5,
+     "parents": [
+      "e_7",
+      "e_8"
+     ],
+     "raw_hash": "e113c383cb59474461602ec382aa08d4e6d596315032fdf78f1edd5b30541230",
+     "ledger_seq": 42,
+     "sig_ok": true,
+     "valid_from": "2026-10-26T16:33:40.900+05:30",
+     "valid_to": null,
+     "recorded_at": "2026-10-26T16:33:40.900+05:30",
+     "claims": [
+      {
+       "id": "cl_m31_1",
+       "s": "vendor emails",
+       "r": "covers",
+       "o": "week 12",
+       "type": "event"
+      }
+     ],
+     "checks": [
+      {
+       "check": "conflict",
+       "result": "none found",
+       "ms": 4
+      },
+      {
+       "check": "grounding",
+       "result": "entailed by cited parents",
+       "score": 0.95,
+       "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+       "ms": 655
+      }
+     ],
+     "decision": {
+      "verdict": "commit",
+      "rule": "write.rederive_clean",
+      "explanation": "Re-derived from the clean parents of m_23 (e_7, e_8) after m_14 was erased. Contains nothing from m_14."
+     },
+     "status_history": [
+      {
+       "ts": "2026-10-26T16:33:40.900+05:30",
+       "status": "pending",
+       "by": "gateway"
+      },
+      {
+       "ts": "2026-10-26T16:33:41.700+05:30",
+       "status": "committed",
+       "by": "gateway"
+      }
+     ]
+    }
+   ],
+   "ledger": [
+    {
+     "seq": 41,
+     "ts": "2026-10-26T16:33:40.000+05:30",
+     "event": "ERASE",
+     "record_id": "m_14",
+     "actor": "reviewer:ap-lead-01",
+     "payload_hash": "2a40b989c8151b16e08aeb7bd4a782f464b4bb70406323b09045ade32a3e704c",
+     "prev_hash": "5691fcee827148bed54c38ea50339d3fad204c244482b4f91009a5978bec6610",
+     "hash": "5593e4a38132bf210018821ca0748b4a94da3277867c9188b1b7957be62f6452",
+     "sig_ok": true
+    },
+    {
+     "seq": 42,
+     "ts": "2026-10-26T16:33:40.900+05:30",
+     "event": "WRITE",
+     "record_id": "m_31",
+     "actor": "gateway",
+     "payload_hash": "3b1e352b1b45f5a9df65d0e28edb3147ef9a73342575da2d79b029c9fda5a1bc",
+     "prev_hash": "5593e4a38132bf210018821ca0748b4a94da3277867c9188b1b7957be62f6452",
+     "hash": "5e9402154077ab3d8f70ba0e79270cf1f4940048d7ea4caf4b92cf031cdc7bc7",
+     "sig_ok": true
+    },
+    {
+     "seq": 43,
+     "ts": "2026-10-26T16:33:41.700+05:30",
+     "event": "DECIDE",
+     "record_id": "m_31",
+     "actor": "gateway",
+     "payload_hash": "e2a7b79b7f2809f0a60d3c8d9c41ee3179d14174cd4b50227cc7ffdc879c9eaa",
+     "prev_hash": "5e9402154077ab3d8f70ba0e79270cf1f4940048d7ea4caf4b92cf031cdc7bc7",
+     "hash": "88309761bb21bd2de7ebf08771111c236825ee13db4041c149aa78b1d45ef503",
+     "sig_ok": true
+    }
+   ]
+  }
+ },
+ "m_17": {
+  "revert": {
+   "result": {
+    "root": "m_17",
+    "mode": "revert",
+    "closure_by_hop": [
+     [
+      "m_17"
+     ],
+     [
+      "m_23",
+      "m_25"
+     ]
+    ],
+    "rederived": [
+     {
+      "old": "m_23",
+      "new": "m_31"
+     }
+    ],
+    "exposure": {
+     "sessions": [
+      5,
+      7
+     ],
+     "users": [
+      "finance-clerk-02"
+     ],
+     "reads": 3,
+     "tool_calls": [
+      {
+       "call_id": "tc_s9_1",
+       "tool": "pay_invoice",
+       "status": "blocked"
+      }
+     ]
+    },
+    "ledger_seq": 42
+   },
+   "records": [
+    {
+     "id": "m_31",
+     "tenant": "northstar-demo",
+     "text": "Week 12 vendor emails: Globex confirmed Thursday delivery. Initech sent a payment reminder for ₹2,15,000.",
+     "tier": "T0",
+     "status": "committed",
+     "kind": "summary",
+     "source": {
+      "type": "derived",
+      "ref": "rederive:m_23",
+      "from": "recover"
+     },
+     "principal": "sys:recover",
+     "session": 5,
+     "parents": [
+      "e_7",
+      "e_8"
+     ],
+     "raw_hash": "e113c383cb59474461602ec382aa08d4e6d596315032fdf78f1edd5b30541230",
+     "ledger_seq": 43,
+     "sig_ok": true,
+     "valid_from": "2026-10-26T16:33:40.900+05:30",
+     "valid_to": null,
+     "recorded_at": "2026-10-26T16:33:40.900+05:30",
+     "claims": [
+      {
+       "id": "cl_m31_1",
+       "s": "vendor emails",
+       "r": "covers",
+       "o": "week 12",
+       "type": "event"
+      }
+     ],
+     "checks": [
+      {
+       "check": "conflict",
+       "result": "none found",
+       "ms": 4
+      },
+      {
+       "check": "grounding",
+       "result": "entailed by cited parents",
+       "score": 0.95,
+       "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+       "ms": 655
+      }
+     ],
+     "decision": {
+      "verdict": "commit",
+      "rule": "write.rederive_clean",
+      "explanation": "Re-derived from the clean parents of m_23 (e_7, e_8) after m_17 was reverted. Contains nothing from m_17."
+     },
+     "status_history": [
+      {
+       "ts": "2026-10-26T16:33:40.900+05:30",
+       "status": "pending",
+       "by": "gateway"
+      },
+      {
+       "ts": "2026-10-26T16:33:41.700+05:30",
+       "status": "committed",
+       "by": "gateway"
+      }
+     ]
+    }
+   ],
+   "ledger": [
+    {
+     "seq": 42,
+     "ts": "2026-10-26T16:33:40.000+05:30",
+     "event": "REVERT",
+     "record_id": "m_17",
+     "actor": "reviewer:ap-lead-01",
+     "payload_hash": "bec96d4528d567f077aaf9706444ec026e13591dd0c1162827047799776ad7c1",
+     "prev_hash": "dd1daaf15bf8468a823eb01b6fca2717b7affd62cbb697bf5aee703e01515358",
+     "hash": "713a77fbab547bb7007116b58e77ab43a472602b9516dbdda42614555c5fdf55",
+     "sig_ok": true
+    },
+    {
+     "seq": 43,
+     "ts": "2026-10-26T16:33:40.900+05:30",
+     "event": "WRITE",
+     "record_id": "m_31",
+     "actor": "gateway",
+     "payload_hash": "3b1e352b1b45f5a9df65d0e28edb3147ef9a73342575da2d79b029c9fda5a1bc",
+     "prev_hash": "713a77fbab547bb7007116b58e77ab43a472602b9516dbdda42614555c5fdf55",
+     "hash": "4a91046f31b085a521a853e91c596a7c59bfec7b99dca32fb72ef63312447ef6",
+     "sig_ok": true
+    },
+    {
+     "seq": 44,
+     "ts": "2026-10-26T16:33:41.700+05:30",
+     "event": "DECIDE",
+     "record_id": "m_31",
+     "actor": "gateway",
+     "payload_hash": "e2a7b79b7f2809f0a60d3c8d9c41ee3179d14174cd4b50227cc7ffdc879c9eaa",
+     "prev_hash": "4a91046f31b085a521a853e91c596a7c59bfec7b99dca32fb72ef63312447ef6",
+     "hash": "aabd622dec07dc165dad1a564dbb6175ce57ad0a85ae1407245cd06e93f780fb",
+     "sig_ok": true
+    }
+   ]
+  },
+  "erase": {
+   "result": {
+    "root": "m_17",
+    "mode": "erase",
+    "closure_by_hop": [
+     [
+      "m_17"
+     ],
+     [
+      "m_23",
+      "m_25"
+     ]
+    ],
+    "rederived": [
+     {
+      "old": "m_23",
+      "new": "m_31"
+     }
+    ],
+    "exposure": {
+     "sessions": [
+      5,
+      7
+     ],
+     "users": [
+      "finance-clerk-02"
+     ],
+     "reads": 3,
+     "tool_calls": [
+      {
+       "call_id": "tc_s9_1",
+       "tool": "pay_invoice",
+       "status": "blocked"
+      }
+     ]
+    },
+    "ledger_seq": 42
+   },
+   "records": [
+    {
+     "id": "m_31",
+     "tenant": "northstar-demo",
+     "text": "Week 12 vendor emails: Globex confirmed Thursday delivery. Initech sent a payment reminder for ₹2,15,000.",
+     "tier": "T0",
+     "status": "committed",
+     "kind": "summary",
+     "source": {
+      "type": "derived",
+      "ref": "rederive:m_23",
+      "from": "recover"
+     },
+     "principal": "sys:recover",
+     "session": 5,
+     "parents": [
+      "e_7",
+      "e_8"
+     ],
+     "raw_hash": "e113c383cb59474461602ec382aa08d4e6d596315032fdf78f1edd5b30541230",
+     "ledger_seq": 43,
+     "sig_ok": true,
+     "valid_from": "2026-10-26T16:33:40.900+05:30",
+     "valid_to": null,
+     "recorded_at": "2026-10-26T16:33:40.900+05:30",
+     "claims": [
+      {
+       "id": "cl_m31_1",
+       "s": "vendor emails",
+       "r": "covers",
+       "o": "week 12",
+       "type": "event"
+      }
+     ],
+     "checks": [
+      {
+       "check": "conflict",
+       "result": "none found",
+       "ms": 4
+      },
+      {
+       "check": "grounding",
+       "result": "entailed by cited parents",
+       "score": 0.95,
+       "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+       "ms": 655
+      }
+     ],
+     "decision": {
+      "verdict": "commit",
+      "rule": "write.rederive_clean",
+      "explanation": "Re-derived from the clean parents of m_23 (e_7, e_8) after m_17 was erased. Contains nothing from m_17."
+     },
+     "status_history": [
+      {
+       "ts": "2026-10-26T16:33:40.900+05:30",
+       "status": "pending",
+       "by": "gateway"
+      },
+      {
+       "ts": "2026-10-26T16:33:41.700+05:30",
+       "status": "committed",
+       "by": "gateway"
+      }
+     ]
+    }
+   ],
+   "ledger": [
+    {
+     "seq": 42,
+     "ts": "2026-10-26T16:33:40.000+05:30",
+     "event": "ERASE",
+     "record_id": "m_17",
+     "actor": "reviewer:ap-lead-01",
+     "payload_hash": "0e895d2f2888ae36379cb7c4c9f91d50828ce236ffcf46a20cef76494cf7f0a3",
+     "prev_hash": "dd1daaf15bf8468a823eb01b6fca2717b7affd62cbb697bf5aee703e01515358",
+     "hash": "12767639761b89e9f8575b82c5bb73fa5901917d31f91a095127c0d41a2ff0f9",
+     "sig_ok": true
+    },
+    {
+     "seq": 43,
+     "ts": "2026-10-26T16:33:40.900+05:30",
+     "event": "WRITE",
+     "record_id": "m_31",
+     "actor": "gateway",
+     "payload_hash": "3b1e352b1b45f5a9df65d0e28edb3147ef9a73342575da2d79b029c9fda5a1bc",
+     "prev_hash": "12767639761b89e9f8575b82c5bb73fa5901917d31f91a095127c0d41a2ff0f9",
+     "hash": "f61793b802772216be4f2ce667218154bdeac5162f3cfb070bf6463dc83c3b1f",
+     "sig_ok": true
+    },
+    {
+     "seq": 44,
+     "ts": "2026-10-26T16:33:41.700+05:30",
+     "event": "DECIDE",
+     "record_id": "m_31",
+     "actor": "gateway",
+     "payload_hash": "e2a7b79b7f2809f0a60d3c8d9c41ee3179d14174cd4b50227cc7ffdc879c9eaa",
+     "prev_hash": "f61793b802772216be4f2ce667218154bdeac5162f3cfb070bf6463dc83c3b1f",
+     "hash": "ffa91eb8dde3443b952fa1596eeaefc2078dc9930094d98a77feb347a8c30c2d",
+     "sig_ok": true
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------------------------------------
+   Design tokens. Colours are space-separated RGB triplets so Tailwind can apply alpha (bg-panel/60).
+   Dark theme is the default (screen recordings); the light theme only re-maps the same names.
+
+   Tier palette is validated for colour-blind safety (dataviz validator, dark surface #111D35, ALL pairs):
+     worst protan/deutan pair  dE 8.5  (>= 8 target)      worst normal-vision pair  dE 22.3 (>= 15 floor)
+     every tier >= 3:1 against the panel                  ink on every fill >= 4.8:1
+   The spec's original T0 amber (#F5A623) collapsed into T3 green under protanopia (dE 0.2), so T0 is a
+   darker burnt amber and the ladder spans lightness as well as hue. Tiers ALWAYS also carry their text
+   label (T0..T4); T4 adds a double ring; T0 nodes add hazard stripes. Colour is never the only cue.
+   ------------------------------------------------------------------------------------------------ */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: 11 20 38; /* #0B1426 */
+  --panel: 17 29 53; /* #111D35 */
+  --panel-2: 22 35 63; /* #16233F */
+  --border: 36 50 79; /* #24324F */
+  --text: 232 238 247; /* #E8EEF7 */
+  --muted: 147 164 191; /* #93A4BF */
+  --faint: 127 144 173; /* #7F90AD */
+
+  --t0: 201 105 10; /* #C9690A  untrusted, burnt amber */
+  --t1: 176 191 217; /* #B0BFD9  internal tool, light slate */
+  --t2: 47 134 230; /* #2F86E6  user statement, blue */
+  --t3: 118 185 0; /* #76B900  system of record, NVIDIA green */
+  --t4: 214 255 137; /* #D6FF89  operator policy, pale lime (double ring) */
+  --on-fill: 11 20 38; /* ink on tier fills */
+
+  --danger: 229 72 77; /* #E5484D */
+  --danger-ink: 255 138 142; /* text-safe red on dark */
+  --ok: 118 185 0;
+  --warn: 242 177 52; /* held / quarantine */
+  --info: 93 169 245;
+  --reverted: 91 101 120; /* #5B6578 */
+  --reverted-ink: 135 147 168;
+
+  /* defence colours (bench charts): validated all-pairs, dE >= 9.1 protan/deutan, >= 25.9 normal */
+  --def-undefended: 229 72 77;
+  --def-pi: 201 210 227;
+  --def-amg: 58 130 221;
+  --def-custos: 118 185 0;
+
+  --hazard-gap: 22 35 63;
+  --grid: 36 50 79;
+  --shadow-a: 0 0 0;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: 238 242 248; /* #EEF2F8 */
+  --panel: 255 255 255;
+  --panel-2: 246 248 252; /* #F6F8FC */
+  --border: 211 220 234;
+  --text: 15 27 51; /* #0F1B33 */
+  --muted: 82 99 128;
+  --faint: 105 122 150;
+
+  --t0: 196 98 6;
+  --t1: 98 114 143;
+  --t2: 28 111 208;
+  --t3: 86 140 0;
+  --t4: 120 160 20;
+  --on-fill: 255 255 255;
+
+  --danger: 200 40 48;
+  --danger-ink: 190 32 40;
+  --ok: 70 130 0;
+  --warn: 176 110 0;
+  --info: 20 110 200;
+  --reverted: 120 132 152;
+  --reverted-ink: 98 110 130;
+
+  --def-undefended: 200 40 48;
+  --def-pi: 98 114 143;
+  --def-amg: 28 111 208;
+  --def-custos: 70 130 0;
+
+  --hazard-gap: 246 248 252;
+  --grid: 220 228 240;
+  --shadow-a: 15 27 51;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    background: rgb(var(--bg));
+    color: rgb(var(--text));
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.9375rem; /* 15px base */
+    line-height: 1.45;
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden; /* the shell manages its own scrolling regions */
+  }
+  button {
+    font: inherit;
+    color: inherit;
+  }
+  ::selection {
+    background: rgb(var(--info) / 0.35);
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--info));
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  /* Thin, calm scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--border)) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: rgb(var(--border));
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--faint) / 0.6);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  code,
+  kbd,
+  pre,
+  .mono {
+    font-family: 'Cascadia Mono', 'JetBrains Mono', Consolas, ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-border bg-panel shadow-card;
+  }
+  .card-2 {
+    @apply rounded-lg border border-border bg-panel2;
+  }
+  .caps {
+    @apply text-xs font-semibold uppercase tracking-[0.08em] text-muted;
+  }
+  .kbd {
+    @apply inline-flex min-w-[1.5rem] items-center justify-center rounded-md border border-border bg-panel2 px-1.5 py-0.5 font-mono text-xs font-semibold text-ink;
+    box-shadow: 0 1px 0 rgb(var(--border));
+  }
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-border bg-panel2 px-3.5 py-2 text-sm font-medium text-ink transition-colors duration-150 hover:bg-border/60 disabled:cursor-not-allowed disabled:opacity-45;
+  }
+  .btn-primary {
+    @apply border-ok/70 bg-ok/15 text-ink hover:bg-ok/25;
+  }
+  .btn-danger {
+    @apply border-danger/70 bg-danger/15 text-ink hover:bg-danger/25;
+  }
+  .btn-ghost {
+    @apply border-transparent bg-transparent hover:bg-panel2;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-border bg-panel2 px-2 py-0.5 text-xs font-semibold text-muted;
+  }
+
+  /* Caution-tape fill: marks T0 (untrusted) without relying on hue. */
+  .hazard {
+    background-image: repeating-linear-gradient(135deg, rgb(var(--t0)) 0 5px, rgb(var(--hazard-gap)) 5px 10px);
+  }
+  .tier-ring-t4 {
+    box-shadow: 0 0 0 2px rgb(var(--panel)), 0 0 0 3.5px rgb(var(--t4));
+  }
+  .strike {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+  }
+  .label-clip {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* -------------------------------------------------------------------------------- motion control */
+:root[data-motion='reduced'] *,
+:root[data-motion='reduced'] *::before,
+:root[data-motion='reduced'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ----------------------------------------------------------------------------------- React Flow */
+.react-flow {
+  --xy-background-color: transparent;
+  --xy-background-pattern-dots-color-default: rgb(var(--border));
+  --xy-edge-stroke-default: rgb(var(--muted));
+  --xy-edge-stroke-width-default: 2;
+  --xy-edge-label-color-default: rgb(var(--muted));
+  --xy-edge-label-background-color-default: rgb(var(--panel));
+  --xy-controls-button-background-color-default: rgb(var(--panel-2));
+  --xy-controls-button-background-color-hover-default: rgb(var(--border));
+  --xy-controls-button-color-default: rgb(var(--text));
+  --xy-controls-button-border-color-default: rgb(var(--border));
+  --xy-attribution-background-color-default: transparent;
+  font-family: inherit;
+}
+.react-flow__attribution {
+  font-size: 11px;
+  opacity: 0.55;
+}
+.react-flow__attribution a {
+  color: rgb(var(--muted));
+}
+.react-flow__node {
+  cursor: pointer;
+}
+.react-flow__handle {
+  opacity: 0;
+  pointer-events: none;
+  width: 6px;
+  height: 6px;
+}
+.react-flow__controls {
+  box-shadow: none;
+  border: 1px solid rgb(var(--border));
+  border-radius: 10px;
+  overflow: hidden;
+}
+.react-flow__controls-button {
+  width: 30px;
+  height: 30px;
+}
+
+/* ------------------------------------------------------------------------------------- recharts */
+.recharts-wrapper {
+  font-family: inherit;
+}
+.recharts-cartesian-grid line {
+  stroke: rgb(var(--grid));
+  stroke-dasharray: none !important; /* hairline, solid, recessive */
+}
+.recharts-tooltip-cursor {
+  fill: rgb(var(--text) / 0.05);
+}
+
+/* ------------------------------------------------------------------------ misc view helpers */
+.dot-live {
+  animation: blink 1.4s ease-in-out infinite;
+}
+.sample-watermark::after {
+  content: 'SAMPLE DATA';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+  color: rgb(var(--warn) / 0.07);
+  transform: rotate(-12deg);
+  pointer-events: none;
+  user-select: none;
+}

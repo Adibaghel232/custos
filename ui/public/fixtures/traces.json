@@ -1,0 +1,32 @@
+[
+ {
+  "trace_id": "fixture-vendor-fraud-act1",
+  "scenario": "vendor_fraud",
+  "act": 1,
+  "recorded_at": "2026-10-26T16:30:00.000+05:30",
+  "live": false,
+  "backend": "mem0",
+  "events": 169,
+  "models": {
+   "agent": "nvidia/nemotron-3.5-lightning-30b-a3b",
+   "extractor": "nvidia/nemotron-3.5-lightning-30b-a3b",
+   "judge": "nvidia/nemotron-3.5-lightning-30b-a3b",
+   "embed": "nvidia/nemotron-3.5-embed-1b"
+  }
+ },
+ {
+  "trace_id": "fixture-vendor-fraud-act2",
+  "scenario": "vendor_fraud",
+  "act": 2,
+  "recorded_at": "2026-10-26T16:30:00.000+05:30",
+  "live": false,
+  "backend": "mem0",
+  "events": 171,
+  "models": {
+   "agent": "nvidia/nemotron-3.5-lightning-30b-a3b",
+   "extractor": "nvidia/nemotron-3.5-lightning-30b-a3b",
+   "judge": "nvidia/nemotron-3.5-lightning-30b-a3b",
+   "embed": "nvidia/nemotron-3.5-embed-1b"
+  }
+ }
+]

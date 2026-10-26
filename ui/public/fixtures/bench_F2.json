@@ -1,0 +1,146 @@
+[
+ {
+  "metric": "ISR",
+  "backend": "mem0",
+  "defence": "undefended",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 240,
+  "rate_pct": 80
+ },
+ {
+  "metric": "ISR",
+  "backend": "mem0",
+  "defence": "pi_filter",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 144,
+  "rate_pct": 48
+ },
+ {
+  "metric": "ISR",
+  "backend": "mem0",
+  "defence": "amemguard_style",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 96,
+  "rate_pct": 32
+ },
+ {
+  "metric": "ISR",
+  "backend": "mem0",
+  "defence": "custos",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 24,
+  "rate_pct": 8
+ },
+ {
+  "metric": "ISR",
+  "backend": "langgraph",
+  "defence": "undefended",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 225,
+  "rate_pct": 75
+ },
+ {
+  "metric": "ISR",
+  "backend": "langgraph",
+  "defence": "pi_filter",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 129,
+  "rate_pct": 43
+ },
+ {
+  "metric": "ISR",
+  "backend": "langgraph",
+  "defence": "amemguard_style",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 81,
+  "rate_pct": 27
+ },
+ {
+  "metric": "ISR",
+  "backend": "langgraph",
+  "defence": "custos",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 9,
+  "rate_pct": 3
+ },
+ {
+  "metric": "ASR",
+  "backend": "mem0",
+  "defence": "undefended",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 150,
+  "rate_pct": 50
+ },
+ {
+  "metric": "ASR",
+  "backend": "mem0",
+  "defence": "pi_filter",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 90,
+  "rate_pct": 30
+ },
+ {
+  "metric": "ASR",
+  "backend": "mem0",
+  "defence": "amemguard_style",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 60,
+  "rate_pct": 20
+ },
+ {
+  "metric": "ASR",
+  "backend": "mem0",
+  "defence": "custos",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 15,
+  "rate_pct": 5
+ },
+ {
+  "metric": "ASR",
+  "backend": "langgraph",
+  "defence": "undefended",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 135,
+  "rate_pct": 45
+ },
+ {
+  "metric": "ASR",
+  "backend": "langgraph",
+  "defence": "pi_filter",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 75,
+  "rate_pct": 25
+ },
+ {
+  "metric": "ASR",
+  "backend": "langgraph",
+  "defence": "amemguard_style",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 45,
+  "rate_pct": 15
+ },
+ {
+  "metric": "ASR",
+  "backend": "langgraph",
+  "defence": "custos",
+  "memory_state": "warm",
+  "n": 300,
+  "k": 0,
+  "rate_pct": 0
+ }
+]

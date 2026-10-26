@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Custos · demo console</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B1426'/%3E%3Cpath d='M16 5l9 4v7c0 5.2-3.6 9.2-9 11-5.4-1.8-9-5.8-9-11V9z' fill='none' stroke='%2376B900' stroke-width='2.4' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='15' r='3' fill='%2376B900'/%3E%3C/svg%3E" />
+    <script>
+      // Apply the saved theme before first paint (no flash). Wrapped: storage can throw in private windows.
+      try {
+        var t = localStorage.getItem('custos.theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,368 @@
+{
+ "nodes": [
+  {
+   "id": "erp_V-1017",
+   "kind": "source",
+   "label": "ERP · V-1017 Globex",
+   "tier": "T3",
+   "status": "n/a",
+   "session": 0
+  },
+  {
+   "id": "erp_V-1088",
+   "kind": "source",
+   "label": "ERP · V-1088 Initech",
+   "tier": "T3",
+   "status": "n/a",
+   "session": 0
+  },
+  {
+   "id": "t_s1",
+   "kind": "source",
+   "label": "User turn · S1",
+   "tier": "T2",
+   "status": "n/a",
+   "session": 1
+  },
+  {
+   "id": "erp_V-1042",
+   "kind": "source",
+   "label": "ERP · V-1042 Acme Corp",
+   "tier": "T3",
+   "status": "n/a",
+   "session": 2
+  },
+  {
+   "id": "e_9",
+   "kind": "source",
+   "label": "billing@acme-payments.example",
+   "tier": "T0",
+   "status": "n/a",
+   "session": 3
+  },
+  {
+   "id": "e_7",
+   "kind": "source",
+   "label": "ops@globex-logistics.example",
+   "tier": "T0",
+   "status": "n/a",
+   "session": 5
+  },
+  {
+   "id": "e_8",
+   "kind": "source",
+   "label": "accounts@initech-supplies.example",
+   "tier": "T0",
+   "status": "n/a",
+   "session": 5
+  },
+  {
+   "id": "m_05",
+   "kind": "record",
+   "label": "Globex.terms Net 45",
+   "tier": "T3",
+   "status": "committed",
+   "session": 0
+  },
+  {
+   "id": "m_06",
+   "kind": "record",
+   "label": "Globex.account ****2087",
+   "tier": "T3",
+   "status": "committed",
+   "session": 0
+  },
+  {
+   "id": "m_07",
+   "kind": "record",
+   "label": "Initech.terms Net 30",
+   "tier": "T3",
+   "status": "committed",
+   "session": 0
+  },
+  {
+   "id": "m_08",
+   "kind": "record",
+   "label": "Initech.account ****6603",
+   "tier": "T3",
+   "status": "committed",
+   "session": 0
+  },
+  {
+   "id": "m_09",
+   "kind": "record",
+   "label": "Globex.invoice GLX-2291 ₹8,50,000",
+   "tier": "T3",
+   "status": "committed",
+   "session": 0
+  },
+  {
+   "id": "m_10",
+   "kind": "record",
+   "label": "Initech.invoice INI-0954 ₹2,15,000",
+   "tier": "T3",
+   "status": "committed",
+   "session": 0
+  },
+  {
+   "id": "m_01",
+   "kind": "record",
+   "label": "finance-clerk-02.role accounts payable",
+   "tier": "T2",
+   "status": "committed",
+   "session": 1
+  },
+  {
+   "id": "m_02",
+   "kind": "record",
+   "label": "Acme.account ****4410",
+   "tier": "T3",
+   "status": "committed",
+   "session": 2
+  },
+  {
+   "id": "m_03",
+   "kind": "record",
+   "label": "Acme.terms Net 30",
+   "tier": "T3",
+   "status": "committed",
+   "session": 2
+  },
+  {
+   "id": "m_04",
+   "kind": "record",
+   "label": "Acme.invoice INV-0317 ₹40,00,000",
+   "tier": "T3",
+   "status": "committed",
+   "session": 2
+  },
+  {
+   "id": "m_14",
+   "kind": "record",
+   "label": "Acme.account ****9921",
+   "tier": "T0",
+   "status": "quarantined",
+   "session": 3
+  },
+  {
+   "id": "m_23",
+   "kind": "summary",
+   "label": "summary · vendor emails wk 12",
+   "tier": "T0",
+   "status": "committed",
+   "session": 5
+  },
+  {
+   "id": "m_25",
+   "kind": "summary",
+   "label": "summary · vendor emails wk 12 (clean)",
+   "tier": "T0",
+   "status": "committed",
+   "session": 7
+  },
+  {
+   "id": "sess_4",
+   "kind": "session",
+   "label": "S4",
+   "tier": null,
+   "status": "n/a",
+   "session": 4
+  },
+  {
+   "id": "sess_5",
+   "kind": "session",
+   "label": "S5",
+   "tier": null,
+   "status": "n/a",
+   "session": 5
+  },
+  {
+   "id": "sess_6",
+   "kind": "session",
+   "label": "S6",
+   "tier": null,
+   "status": "n/a",
+   "session": 6
+  },
+  {
+   "id": "sess_7",
+   "kind": "session",
+   "label": "S7",
+   "tier": null,
+   "status": "n/a",
+   "session": 7
+  },
+  {
+   "id": "sess_9",
+   "kind": "session",
+   "label": "S9",
+   "tier": null,
+   "status": "n/a",
+   "session": 9
+  }
+ ],
+ "edges": [
+  {
+   "id": "derived_from:erp_V-1017->m_05",
+   "source": "erp_V-1017",
+   "target": "m_05",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:erp_V-1017->m_06",
+   "source": "erp_V-1017",
+   "target": "m_06",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:erp_V-1088->m_07",
+   "source": "erp_V-1088",
+   "target": "m_07",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:erp_V-1088->m_08",
+   "source": "erp_V-1088",
+   "target": "m_08",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:erp_V-1017->m_09",
+   "source": "erp_V-1017",
+   "target": "m_09",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:erp_V-1088->m_10",
+   "source": "erp_V-1088",
+   "target": "m_10",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:t_s1->m_01",
+   "source": "t_s1",
+   "target": "m_01",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:erp_V-1042->m_02",
+   "source": "erp_V-1042",
+   "target": "m_02",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:erp_V-1042->m_03",
+   "source": "erp_V-1042",
+   "target": "m_03",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:erp_V-1042->m_04",
+   "source": "erp_V-1042",
+   "target": "m_04",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:e_9->m_14",
+   "source": "e_9",
+   "target": "m_14",
+   "kind": "derived_from"
+  },
+  {
+   "id": "conflicts_with:m_14->m_02",
+   "source": "m_14",
+   "target": "m_02",
+   "kind": "conflicts_with"
+  },
+  {
+   "id": "derived_from:m_14->m_23",
+   "source": "m_14",
+   "target": "m_23",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:e_7->m_23",
+   "source": "e_7",
+   "target": "m_23",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:e_8->m_23",
+   "source": "e_8",
+   "target": "m_23",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:m_23->m_25",
+   "source": "m_23",
+   "target": "m_25",
+   "kind": "derived_from"
+  },
+  {
+   "id": "derived_from:m_02->m_25",
+   "source": "m_02",
+   "target": "m_25",
+   "kind": "derived_from"
+  },
+  {
+   "id": "read_by:m_03->sess_4",
+   "source": "m_03",
+   "target": "sess_4",
+   "kind": "read_by"
+  },
+  {
+   "id": "read_by:m_02->sess_5",
+   "source": "m_02",
+   "target": "sess_5",
+   "kind": "read_by"
+  },
+  {
+   "id": "read_by:m_03->sess_5",
+   "source": "m_03",
+   "target": "sess_5",
+   "kind": "read_by"
+  },
+  {
+   "id": "read_by:m_01->sess_6",
+   "source": "m_01",
+   "target": "sess_6",
+   "kind": "read_by"
+  },
+  {
+   "id": "read_by:m_23->sess_7",
+   "source": "m_23",
+   "target": "sess_7",
+   "kind": "read_by"
+  },
+  {
+   "id": "read_by:m_02->sess_7",
+   "source": "m_02",
+   "target": "sess_7",
+   "kind": "read_by"
+  },
+  {
+   "id": "read_by:m_04->sess_9",
+   "source": "m_04",
+   "target": "sess_9",
+   "kind": "read_by"
+  },
+  {
+   "id": "read_by:m_02->sess_9",
+   "source": "m_02",
+   "target": "sess_9",
+   "kind": "read_by"
+  },
+  {
+   "id": "read_by:m_23->sess_9",
+   "source": "m_23",
+   "target": "sess_9",
+   "kind": "read_by"
+  },
+  {
+   "id": "read_by:m_25->sess_9",
+   "source": "m_25",
+   "target": "sess_9",
+   "kind": "read_by"
+  }
+ ]
+}
