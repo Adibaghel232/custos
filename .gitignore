@@ -1,0 +1,23 @@
+# secrets
+.env
+*.pem
+*.key
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+# node
+node_modules/
+ui/dist/
+# data & runs (large)
+runs/
+data/raw/
+data/cache/
+*.parquet
+# os/editor
+.DS_Store
+Thumbs.db
+.vscode/

@@ -1,0 +1,63 @@
+# Single source of truth for model ids, endpoints and thresholds.
+# Code never hard-codes a model id; compliance.py refuses non-NVIDIA models.
+
+models:                       # role -> model id (as served by build.nvidia.com; vLLM uses --served-model-name)
+  agent: nvidia/nemotron-3.5-lightning-30b-a3b
+  extractor: nvidia/nemotron-3.5-lightning-30b-a3b
+  judge: nvidia/nemotron-3.5-lightning-30b-a3b        # NLI + grounding + instruction checks
+  summariser: nvidia/nemotron-3.5-lightning-30b-a3b
+  baseline: nvidia/nemotron-3.5-lightning-30b-a3b     # PromptArmor-style filter, A-MemGuard-lite
+  attacker: nvidia/nemotron-3-super-120b-a12b         # adaptive attacker + payload paraphrase
+  evaluator: nvidia/nemotron-3-super-120b-a12b        # independent judge for metrics (LongMemEval, audits)
+  embed: nvidia/nemotron-3.5-embed-1b
+  content_safety: nvidia/nemotron-3.5-content-safety
+  jailbreak_detect: nvidia/nemoguard-jailbreak-detect
+
+endpoints:
+  hosted:
+    base_url: https://integrate.api.nvidia.com/v1
+    api_key_env: NVIDIA_API_KEY
+    max_concurrency: 8
+  vllm:                       # self-hosted Nemotron on Brev A100 (set VLLM_BASE_URL, e.g. http://localhost:8000/v1)
+    base_url_env: VLLM_BASE_URL
+    api_key: EMPTY
+    max_concurrency: 96
+
+# role -> endpoint. Override per run with env CUSTOS_ROUTE_<ROLE>=hosted|vllm (e.g. CUSTOS_ROUTE_AGENT=vllm)
+routing:
+  agent: hosted
+  extractor: hosted
+  judge: hosted
+  summariser: hosted
+  baseline: hosted
+  attacker: hosted
+  evaluator: hosted
+  embed: hosted
+
+jailbreak_detect_url: https://ai.api.nvidia.com/v1/security/nvidia/nemoguard-jailbreak-detect
+
+llm:
+  timeout_s: 120
+  max_retries: 5
+  thinking: false             # Nemotron 3.x chat_template_kwargs.enable_thinking
+  cache_path: data/cache/llm.sqlite
+  embed_cache_path: data/cache/embed.sqlite
+
+thresholds:
+  embed_conflict_cosine: 0.80     # candidate conflicts: same tenant, cosine >= this
+  embed_candidates_k: 8
+  echo_cosine: 0.85               # agent-produced claim echoes a T0/T1 item -> inherits its tier
+  nli_min_conf: 0.5
+  grounding_min_conf: 0.5
+  cusum_k: 0.5                    # CUSUM slack per low-tier edit
+  cusum_h: 3.0                    # CUSUM alarm threshold
+  cusum_window_days: 30
+  corroboration_k: 2              # independent supporters needed to release a lower-tier conflicting claim
+  loo_max_calls: 3                # leave-one-out re-plans per gated call
+  read_k: 8
+
+paths:
+  db: data/custos.sqlite
+  blobs: data/blobs
+  keys: infra/keys
+  runs: runs
