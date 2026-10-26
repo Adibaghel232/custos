@@ -1,0 +1,3 @@
+# GPU autopilot queue: one shell command per line, run top to bottom from ~/custos on custos-gpu.
+# A line runs until it succeeds (3 tries per code version). Edit + push to add work; never reorder done lines.
+.venv/bin/python infra/brev/throughput.py 256
