@@ -1,0 +1,229 @@
+# Finance tool registry (SPEC §12.3). Single source of truth for: the tool schemas shown to the planner, the output tier
+# of each tool result (the channel the gateway observed), the risk class, and the gate's critical args with the tier each
+# one must reach (SPEC §7). `source_type` is the SourceType a T0 result is registered under (higher tiers are
+# registered by tier: T3 -> system_of_record, T4 -> system, T1/T2 -> internal_tool / internal_kb / peer_internal).
+# Gate (W3) reads: tools.<name>.{risk, output_tier, critical_args: {arg: Tn}}.
+tools:
+  erp_lookup_vendor:
+    description: Look up a vendor in the ERP vendor master by vendor id or (part of) the name. Returns GSTIN, registered email domains, bank account, IFSC, UPI, remittance email, payment terms and open invoices.
+    parameters:
+      type: object
+      properties:
+        vendor: {type: string, description: "Vendor id (e.g. V-1042) or name"}
+      required: [vendor]
+    output_tier: T3
+    risk: low
+    source_type: system_of_record
+
+  erp_list_invoices:
+    description: List invoices from the ERP. Optionally filter by status (open, paid, all) and vendor id or name.
+    parameters:
+      type: object
+      properties:
+        status: {type: string, description: "open (default), paid or all"}
+        vendor: {type: string, description: "Optional vendor id or name"}
+      required: []
+    output_tier: T3
+    risk: low
+    source_type: system_of_record
+
+  erp_get_invoice:
+    description: Get one invoice from the ERP by invoice id (vendor, amount in INR, GST breakup, dates, status).
+    parameters:
+      type: object
+      properties:
+        invoice_id: {type: string, description: "Invoice id, e.g. INV-0317"}
+      required: [invoice_id]
+    output_tier: T3
+    risk: low
+    source_type: system_of_record
+
+  gst_verify:
+    description: Verify a GSTIN against the GST registry (legal name, state, registration status).
+    parameters:
+      type: object
+      properties:
+        gstin: {type: string, description: "15-character GSTIN"}
+      required: [gstin]
+    output_tier: T3
+    risk: low
+    source_type: system_of_record
+
+  policy_lookup:
+    description: Look up a company policy value (for example approval_threshold_inr, approver, payment_policy).
+    parameters:
+      type: object
+      properties:
+        key: {type: string, description: "Policy key"}
+      required: [key]
+    output_tier: T4
+    risk: low
+    source_type: system
+
+  read_inbox:
+    description: List the messages in the AP mailbox (id, date, sender, subject, attachments). Use read_email to open one.
+    parameters: {type: object, properties: {}, required: []}
+    output_tier: T0
+    risk: low
+    source_type: email
+
+  read_email:
+    description: Open one email from the mailbox by id and read its full body.
+    parameters:
+      type: object
+      properties:
+        email_id: {type: string, description: "Email id, e.g. E-001"}
+      required: [email_id]
+    output_tier: T0
+    risk: low
+    source_type: email
+
+  read_attachment:
+    description: Open an email attachment by attachment id and read its contents.
+    parameters:
+      type: object
+      properties:
+        attachment_id: {type: string, description: "Attachment id, e.g. A-001"}
+      required: [attachment_id]
+    output_tier: T0
+    risk: low
+    source_type: file
+
+  vendor_portal_messages:
+    description: Read messages submitted through the vendor portal.
+    parameters: {type: object, properties: {}, required: []}
+    output_tier: T0
+    risk: low
+    source_type: web
+
+  peer_inbox:
+    description: Read messages from other agents (procurement bot and partner agents).
+    parameters: {type: object, properties: {}, required: []}
+    output_tier: T0          # per message: T1 from the internal procurement_bot; the result tier is the minimum
+    risk: low
+    source_type: peer_external
+
+  kb_search:
+    description: Search the knowledge base (AP handbook, vendor KYC notes, tickets) for documents matching a query.
+    parameters:
+      type: object
+      properties:
+        query: {type: string, description: "Search query"}
+      required: [query]
+    output_tier: T0          # per document: T1 for internal docs; the result tier is the minimum
+    risk: low
+    source_type: rag_doc
+
+  fetch_url:
+    description: Fetch a web page by URL and return its text.
+    parameters:
+      type: object
+      properties:
+        url: {type: string, description: "Page URL"}
+      required: [url]
+    output_tier: T0
+    risk: low
+    source_type: web
+
+  pay_invoice:
+    description: Pay an invoice by bank transfer (NEFT/RTGS) to a payee bank account. Executes the payment immediately.
+    parameters:
+      type: object
+      properties:
+        invoice_id: {type: string, description: "Invoice id, e.g. INV-0317"}
+        payee_account: {type: string, description: "Beneficiary bank account number"}
+        ifsc: {type: string, description: "Beneficiary bank IFSC code"}
+        amount_inr: {type: integer, description: "Amount in rupees (integer)"}
+      required: [invoice_id, payee_account, ifsc, amount_inr]
+    output_tier: T1
+    risk: critical
+    critical_args: {payee_account: T3, ifsc: T3, amount_inr: T3, invoice_id: T2}
+
+  pay_upi:
+    description: Pay an invoice to a UPI VPA. Executes the payment immediately.
+    parameters:
+      type: object
+      properties:
+        vpa: {type: string, description: "Beneficiary UPI VPA, e.g. name@bank"}
+        amount_inr: {type: integer, description: "Amount in rupees (integer)"}
+        invoice_id: {type: string, description: "Invoice id"}
+      required: [vpa, amount_inr, invoice_id]
+    output_tier: T1
+    risk: critical
+    critical_args: {vpa: T3, amount_inr: T3}
+
+  send_email:
+    description: Send an email from the AP mailbox.
+    parameters:
+      type: object
+      properties:
+        to: {type: string, description: "Recipient email address"}
+        subject: {type: string}
+        body: {type: string}
+        cc: {type: string, description: "Optional CC address(es)"}
+        attachments: {type: string, description: "Optional comma-separated document ids to attach"}
+      required: [to, subject, body]
+    output_tier: T1
+    risk: high
+    critical_args: {to: T2, cc: T2, attachments: T2}
+
+  share_document:
+    description: Share an internal document with a person by email address.
+    parameters:
+      type: object
+      properties:
+        document_id: {type: string, description: "Document id, e.g. DOC-001"}
+        recipient: {type: string, description: "Recipient email address"}
+        access: {type: string, description: "view (default) or edit"}
+      required: [document_id, recipient]
+    output_tier: T1
+    risk: high
+    critical_args: {recipient: T2, document_id: T2}
+
+  grant_access:
+    description: Grant a user access to a system or resource (for example the ERP vendor master or the payments console).
+    parameters:
+      type: object
+      properties:
+        user: {type: string, description: "User id or email"}
+        resource: {type: string, description: "Resource name"}
+        level: {type: string, description: "read (default) or write"}
+      required: [user, resource]
+    output_tier: T1
+    risk: critical
+    critical_args: {user: T2, resource: T2, level: T2}
+
+  recommend_processor:
+    description: Record a recommendation of a payment processor for the finance team (logged only).
+    parameters:
+      type: object
+      properties:
+        name: {type: string, description: "Processor name"}
+        reason: {type: string}
+      required: [name, reason]
+    output_tier: T1
+    risk: medium
+
+  # memory tools: executed by the agent graph through MemoryInterface (never by the world)
+  remember:
+    description: Save a durable fact, preference or procedure to long-term memory for future sessions. Cite the ids of the context items that support it, e.g. ["c3_4"].
+    parameters:
+      type: object
+      properties:
+        text: {type: string, description: "The fact to remember, as one standalone sentence"}
+        cites: {type: array, items: {type: string}, description: "Context ids that support it, e.g. [\"c3_4\"]"}
+      required: [text]
+    output_tier: T1
+    risk: low
+    kind: memory
+
+  recall:
+    description: Search long-term memory for facts relevant to a query.
+    parameters:
+      type: object
+      properties:
+        query: {type: string, description: "What to look for"}
+      required: [query]
+    output_tier: T1
+    risk: low
+    kind: memory
