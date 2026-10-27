@@ -1049,9 +1049,13 @@ def slide_prov_cons(D: Deck):
 
 def slide_access(D: Deck):
     R = D.R
-    D.new_slide("4 · METRICS · PS-04 ④ ISOLATION  ·  UTILITY  ·  OVERHEAD",
-                "Isolation holds, erasure reaches derived data, and the cost is small")
     L = "by_defence.D3."
+    ud0 = R.g(L + "UtilityDelta")
+    small = isinstance(ud0, dict) and ud0.get("delta") is not None and ud0["delta"] >= -0.02
+    tail = "and the utility cost is small" if small else (
+        "but utility has a measured cost" if isinstance(ud0, dict) and ud0.get("delta") is not None else "utility below")
+    D.new_slide("4 · METRICS · PS-04 ④ ISOLATION  ·  UTILITY  ·  OVERHEAD",
+                f"Isolation holds, erasure reaches derived data, {tail}")
     lk = R.g(L + "Leakage")
     if isinstance(lk, dict) and lk.get("n"):
         R._log("D3 leakage k/n", L + "Leakage.k / .n", f"{lk['k']} / {lk['n']}")
