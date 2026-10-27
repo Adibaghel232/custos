@@ -68,5 +68,7 @@ if (-not $NoVideo) {
     & powershell -ExecutionPolicy Bypass -File scripts\make_video.ps1 -Only S11
     if ($LASTEXITCODE) { throw 'make_video failed' }
 }
+Step 'source zip (fallback while the GitHub repo is private)'
+& git archive --format=zip -o (Join-Path $Root 'deliverables\custos_source.zip') HEAD
 Step 'done'
 Get-ChildItem (Join-Path $Root 'deliverables') -Recurse -Include *.pptx, *.mp4, *.md | Format-Table FullName, Length
