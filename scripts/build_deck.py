@@ -535,6 +535,21 @@ def slide_cover(D: Deck):
          align="c", anchor="m")
     D.tb(0.5, 3.85, 12.33, 0.35, "Team Charlies  ·  Aditya Baghel  ·  Karan Singh Madhwal", size=18, color=LINE,
          align="c", anchor="m")
+    R = D.R
+    parts = []
+    a0, a3 = R.g("by_defence.D0.ASR"), R.g("by_defence.D3.ASR")
+    if isinstance(a0, dict) and isinstance(a3, dict) and a0.get("rate") is not None and a3.get("rate") is not None:
+        parts.append(f"Custos-Bench {fpct(a0['rate'], 0)} → {fpct(a3['rate'], 0)}")
+    ad, pr = _ext(R, "external_agentdojo"), _ext(R, "external_poisonedrag")
+    if ad and "none" in ad["defences"] and "custos" in ad["defences"]:
+        parts.append(f"AgentDojo {fpct(ad['defences']['none']['asr'], 0)} → {fpct(ad['defences']['custos']['asr'], 0)}")
+    if pr and pr["cells"].get("D0|trusted|all") and pr["cells"].get("D3|trusted|all"):
+        parts.append(f"PoisonedRAG {fpct(pr['cells']['D0|trusted|all']['asr'], 0)} → {fpct(pr['cells']['D3|trusted|all']['asr'], 0)}")
+    if parts:
+        R._log("cover headline", "by_defence.D0/D3.ASR + external summaries", " · ".join(parts))
+        D.tb(0.5, 4.47, 12.33, 0.4, [{"runs": [("Attack success, undefended → Custos:  ", {"color": SLATE}),
+                                               ("   ·   ".join(parts), {"bold": True, "color": NAVY})]}],
+             size=16, align="c", anchor="m")
 
 
 def slide_relevance(D: Deck):
