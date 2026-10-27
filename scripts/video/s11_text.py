@@ -44,7 +44,9 @@ def lines(final: dict | None, ad: dict | None, pr: dict | None) -> list[str]:
             tail = ", with the same task success." if du <= 0.03 else \
                 f", with task success at {p(c['utility_under_attack'])} percent instead of {p(n['utility_under_attack'])}."
             out.append(f"On AgentDojo's banking tasks, injected payment orders succeeded {p(n['asr'])} percent of the time "
-                       f"without a defence, and {p(c['asr'])} percent with the Custos gate{tail}")
+                       f"without a defence.")
+            out.append(f"With Custos, every attempt became a confirmation request that named the untrusted source, so "
+                       f"{p(c['asr'])} percent got through{tail}")
     if pr:
         c = pr["cells"]
         t0, t3, q3 = c.get("D0|trusted|all"), c.get("D3|trusted|all"), c.get("D3|poison_only|all")

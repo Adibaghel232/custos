@@ -809,7 +809,7 @@ def slide_external(D: Deck):
         src.append(f"PoisonedRAG: 100 NQ targets x 5 attacker passages, web + KB channel, n={n} per defence/condition")
     if ad:
         dd = ad["defences"]
-        names = [("none", "None"), ("spotlight", "Spotlight"), ("pi_filter", "PI filter"), ("custos", "Custos")]
+        names = [("none", "None"), ("spotlight", "Spotlight"), ("pi_filter", "PI filter"), ("custos", "Custos gate")]
         names = [(d, l) for d, l in names if d in dd]
 
         def a(d, k):
@@ -831,11 +831,18 @@ def slide_external(D: Deck):
             rows.append(["No trusted record (honest limit)", f"Custos {fpct(p3['asr'])}: provenance is not fact-checking"])
     if ad and "custos" in ad["defences"]:
         c, n0 = ad["defences"]["custos"], ad["defences"].get("none", {})
-        pi = ad["defences"].get("pi_filter")
-        txt = f"Gate: attack {fpct(n0.get('asr'))} → {fpct(c['asr'])}, utility {fpct(c['utility_under_attack'])}"
+        pi, ap = ad["defences"].get("pi_filter"), ad["defences"].get("custos_approve")
+        ga, gb = c.get("gate_attack") or {}, c.get("gate_benign") or {}
+        txt = f"Attack {fpct(n0.get('asr'))} → {fpct(c['asr'])}: each attempt became a confirmation naming the untrusted source"
+        if ga:
+            txt += f" ({ga.get('ask', 0)} asks; {gb.get('ask', 0)} on benign tasks)"
+        txt += f". Utility {fpct(c['utility_under_attack'])}"
         if pi:
-            txt += f" (PI filter {fpct(pi['asr'])} but utility {fpct(pi['utility_under_attack'])})"
-        rows.append(["Injected payment / password orders", txt])
+            txt += f" vs PI filter {fpct(pi['utility_under_attack'])}"
+        rows.append(["Injected payment / password orders", txt + "."])
+        if ap:
+            R._log("AgentDojo custos_approve asr", "external_agentdojo.custos_approve.asr", fpct(ap["asr"]), src="external_agentdojo/summary.json")
+            src.append(f"Custos rows assume a cautious user; if the user approves every ask, attack success is {fpct(ap['asr'])}")
     D.table(0.5, 5.15, 12.33, rows, [3.6, 8.73], row_h=0.36, bold_first_col=True)
     D.source(" · ".join(src) + ". Agent: Nemotron 3.5 Lightning (vLLM, A100). Custos not tuned on these sets.", y=6.76)
 
