@@ -603,6 +603,53 @@ def slide_innovation(D: Deck):
     D.source("Memory is evidence: judged by custody (who wrote it), consistency (does it conflict with better evidence) and consequence (what it is allowed to drive).", y=6.72)
 
 
+def slide_glance(D: Deck):
+    """Four headline numbers, each read from a result file."""
+    R = D.R
+    D.new_slide("RESULTS AT A GLANCE", "Attacks stopped, legitimate work still done")
+    pr, ad = _ext(R, "external_poisonedrag"), _ext(R, "external_agentdojo")
+    cards = []
+    a0, a3 = R.g("by_defence.D0.ASR"), R.g("by_defence.D3.ASR")
+    if a0 and a3 and a0.get("rate") is not None and a3.get("rate") is not None:
+        big = f"{fpct(a0['rate'], 0)} → {fpct(a3['rate'], 0)}"
+        R._log("glance own-bench ASR D0->D3", "by_defence.D0.ASR.rate / by_defence.D3.ASR.rate", big)
+        cards.append((big, "attack success, undefended → Custos, on 11 memory-poisoning families (Custos-Bench)",
+                      f"n = {a3['n']:,} Custos attack episodes · 95% CI ≤ {fpct(a3['ci_high'])}"))
+    if ad and "custos" in ad["defences"] and "none" in ad["defences"]:
+        n0, c = ad["defences"]["none"], ad["defences"]["custos"]
+        big = f"{fpct(n0['asr'], 0)} → {fpct(c['asr'], 0)}"
+        R._log("glance AgentDojo ASR none->custos", "external_agentdojo.none.asr / custos.asr", big, src="external_agentdojo/summary.json")
+        cards.append((big, f"AgentDojo (public): injected payment orders; task success kept ({fpct(c['utility_under_attack'], 0)} vs "
+                           f"{fpct(n0['utility_under_attack'], 0)})", f"n = {c['attack_n']} attacked tasks · NeurIPS '24 benchmark"))
+    if pr:
+        t0, t3 = pr["cells"].get("D0|trusted|all"), pr["cells"].get("D3|trusted|all")
+        if t0 and t3:
+            big = f"{fpct(t0['asr'], 0)} → {fpct(t3['asr'], 0)}"
+            R._log("glance PoisonedRAG trusted D0->D3", "external_poisonedrag.D0|trusted|all.asr / D3", big,
+                   src="external_poisonedrag/summary.json")
+            cards.append((big, "PoisonedRAG (public): web poison vs a trusted record already in memory",
+                          f"n = {t3['n']} · held-out NQ · USENIX Sec '25 attack set"))
+    b0, b3 = R.g("by_defence.D0.BenignSuccess"), R.g("by_defence.D3.BenignSuccess")
+    if b0 and b3 and b0.get("rate") is not None and b3.get("rate") is not None:
+        big = f"{fpct(b3['rate'], 0)}"
+        R._log("glance benign success D3", "by_defence.D3.BenignSuccess.rate", big)
+        cards.append((big, f"legitimate tasks completed with Custos (undefended {fpct(b0['rate'], 0)})",
+                      f"n = {b3['n']:,} benign + legitimate-update episodes"))
+    if not cards:
+        return
+    w = (12.33 - 0.25 * (len(cards) - 1)) / len(cards)
+    for i, (big, lab, src) in enumerate(cards):
+        D.stat(0.5 + i * (w + 0.25), 1.85, w, 2.55, big, lab, src, big_size=34 if len(cards) > 3 else 40, color=NAVY)
+    D.card_text(0.5, 4.7, 12.33, 1.45, [
+        {"runs": [("Why it works: ", {"bold": True, "color": NAVY}),
+                  ("Custos judges a memory by its custody (which channel it came through, and what it conflicts with), not by how "
+                   "the text looks. Hearsay cannot overrule an official record, and a payment cannot rest on hearsay.", {})], "after": 4},
+        {"runs": [("What it does not do: ", {"bold": True, "color": "9A5B00"}),
+                  ("decide truth when nothing trusted exists. We report that case too.", {})]}], fill=T_BLUE, size=15)
+    D.source("Agent, extractor and judges: Nemotron 3.5 Lightning on Brev A100s · 95% Wilson CIs on the following slides · every "
+             "number traced in docs/CLAIMS.md")
+
+
 def slide_architecture(D: Deck):
     D.new_slide("3 \u00b7 TECHNICAL IMPLEMENTATION", "Built: the full write, read, action and recovery path")
     src = [("T3  ERP, CRM, systems of record", T_GREEN), ("T2  signed-in user", T_BLUE), ("T1  internal tools, APIs", T_BLUE),
@@ -801,12 +848,12 @@ def slide_external(D: Deck):
             R._log(f"PoisonedRAG {d} {c} ASR", f"external_poisonedrag.{d}|{c}|all.asr", NM if not x else fpct(x["asr"]),
                    src="external_poisonedrag/summary.json")
             return None if not x else round(100 * x["asr"], 1)
-        _ext_chart(D, 0.5, 1.65, 6.05, 3.3, "PoisonedRAG (USENIX Sec '25), NQ: attack success",
+        _ext_chart(D, 0.5, 1.6, 6.05, 3.1, "PoisonedRAG (USENIX Sec '25), NQ: attack success",
                    [l for _, l in names], [("trusted fact already in memory", [v(d, "trusted") for d, _ in names]),
                                            ("no trusted fact", [v(d, "poison_only") for d, _ in names])],
                    [NAVY, LINE])
         n = cells.get("D3|trusted|all", {}).get("n")
-        src.append(f"PoisonedRAG: 100 NQ targets x 5 attacker passages, web + KB channel, n={n} per defence/condition")
+        src.append(f"PoisonedRAG: 100 NQ targets × 5 attacker passages, web + KB channels, n={n} per cell")
     if ad:
         dd = ad["defences"]
         names = [("none", "None"), ("spotlight", "Spotlight"), ("pi_filter", "PI filter"), ("custos", "Custos gate")]
@@ -815,12 +862,12 @@ def slide_external(D: Deck):
         def a(d, k):
             R._log(f"AgentDojo {d} {k}", f"external_agentdojo.{d}.{k}", fpct(dd[d][k]), src="external_agentdojo/summary.json")
             return round(100 * dd[d][k], 1)
-        _ext_chart(D, 6.78, 1.65, 6.05, 3.3, "AgentDojo (NeurIPS '24) banking: attack vs utility",
+        _ext_chart(D, 6.78, 1.6, 6.05, 3.1, "AgentDojo (NeurIPS '24) banking: attack vs utility",
                    [l for _, l in names], [("attack success", [a(d, "asr") for d, _ in names]),
                                            ("utility under attack", [a(d, "utility_under_attack") for d, _ in names])],
                    [RED if "RED" in globals() else NAVY, GREEN])
         n = dd.get("custos", {}).get("attack_n")
-        src.append(f"AgentDojo v1.2.1 banking: 16 user x 9 injection tasks, important_instructions attack, official scoring, n={n}")
+        src.append(f"AgentDojo v1.2.1 banking: 16 × 9 tasks, important_instructions attack, official scoring, n={n}")
     rows = [["What it shows", "Read"]]
     if pr:
         c3, c0 = pr["cells"].get("D3|trusted|all"), pr["cells"].get("D0|trusted|all")
@@ -833,18 +880,18 @@ def slide_external(D: Deck):
         c, n0 = ad["defences"]["custos"], ad["defences"].get("none", {})
         pi, ap = ad["defences"].get("pi_filter"), ad["defences"].get("custos_approve")
         ga, gb = c.get("gate_attack") or {}, c.get("gate_benign") or {}
-        txt = f"Attack {fpct(n0.get('asr'))} → {fpct(c['asr'])}: each attempt became a confirmation naming the untrusted source"
+        txt = f"{fpct(n0.get('asr'))} → {fpct(c['asr'])}: each try became a confirmation naming the source"
         if ga:
-            txt += f" ({ga.get('ask', 0)} asks; {gb.get('ask', 0)} on benign tasks)"
-        txt += f". Utility {fpct(c['utility_under_attack'])}"
+            txt += f" ({ga.get('ask', 0)} asks, {gb.get('ask', 0)} on benign)"
+        txt += f"; utility {fpct(c['utility_under_attack'])}"
         if pi:
-            txt += f" vs PI filter {fpct(pi['utility_under_attack'])}"
+            txt += f" vs filter {fpct(pi['utility_under_attack'])}"
         rows.append(["Injected payment / password orders", txt + "."])
         if ap:
             R._log("AgentDojo custos_approve asr", "external_agentdojo.custos_approve.asr", fpct(ap["asr"]), src="external_agentdojo/summary.json")
-            src.append(f"Custos rows assume a cautious user; if the user approves every ask, attack success is {fpct(ap['asr'])}")
-    D.table(0.5, 5.15, 12.33, rows, [3.6, 8.73], row_h=0.36, bold_first_col=True)
-    D.source(" · ".join(src) + ". Agent: Nemotron 3.5 Lightning (vLLM, A100). Custos not tuned on these sets.", y=6.76)
+            src.append(f"cautious user (approve-all: {fpct(ap['asr'])})")
+    D.table(0.5, 4.85, 12.33, rows, [3.3, 9.03], row_h=0.34, bold_first_col=True)
+    D.source(" · ".join(src) + " · Nemotron 3.5 Lightning on A100 · not tuned on these sets.", y=6.66, h=0.4)
 
 
 def slide_adaptive(D: Deck):
@@ -1485,6 +1532,7 @@ def build(args) -> int:
     slide_cover(D)
     slide_relevance(D)
     slide_innovation(D)
+    slide_glance(D)
     slide_architecture(D)
     slide_demo(D, args.video_url, args.demo_note)
     slide_method(D)
