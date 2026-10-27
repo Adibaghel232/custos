@@ -243,6 +243,11 @@ def summarise(fp: Path, dest: Path) -> None:
         out[d] = {"attack_n": len(atk), "asr": a / max(len(atk), 1), "asr_ci95": wilson(a, len(atk)),
                   "utility_under_attack": u / max(len(atk), 1), "benign_n": len(ben),
                   "benign_utility": b / max(len(ben), 1), "benign_utility_ci95": wilson(b, len(ben))}
+        if any("gate" in r for r in atk + ben):
+            cnt = lambda rs: {k: sum(1 for r in rs for g in r.get("gate", []) if g["decision"] == k)  # noqa: E731
+                              for k in ("allow", "ask", "block")}
+            out[d]["gate_attack"], out[d]["gate_benign"] = cnt(atk), cnt(ben)
+            out[d]["attack_runs_with_ask_or_block"] = sum(1 for r in atk if any(g["decision"] != "allow" for g in r.get("gate", [])))
         print(f"{d:15s} ASR={out[d]['asr']:.1%} (n={len(atk)})  utility|attack={out[d]['utility_under_attack']:.1%}  "
               f"benign utility={out[d]['benign_utility']:.1%} (n={len(ben)})")
     dest.write_text(json.dumps({"dataset": f"AgentDojo banking {SUITE_VERSION}, important_instructions attack",
