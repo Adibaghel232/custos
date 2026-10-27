@@ -1,0 +1,11 @@
+name: persist
+description: "persistence: 11 families x {D0,D3,D3-consistency}, 3 trigger sessions, rollback on alert, n=30"
+split: test
+concurrency: 48
+groups:
+  - families: [f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11]
+    defences: [D0, D3, D3-consistency]
+    n: 30
+    memory_state: cold
+    trigger_sessions: 3
+    rollback_on_alert: true

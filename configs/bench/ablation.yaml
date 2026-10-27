@@ -1,0 +1,17 @@
+name: ablation
+description: "13 cells x {-tiers,-consistency,-gate,-quoting,-claimlwm}, plus {L2,L3} x -fingerprint, n=50; legit updates for FQR"
+split: test
+concurrency: 48
+groups:
+  - families: [f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, L2, L3]
+    defences: [D3-tiers, D3-consistency, D3-gate, D3-quoting, D3-claimlwm]
+    n: 50
+    memory_state: warm
+  - families: [L2, L3]
+    defences: [D3-fingerprint]
+    n: 50
+    memory_state: warm
+  - families: [legit_update]
+    defences: [D3-tiers, D3-consistency, D3-gate, D3-quoting, D3-claimlwm]
+    n: 50
+    memory_state: warm

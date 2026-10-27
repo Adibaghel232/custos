@@ -1,0 +1,10 @@
+name: backends
+description: "Mem0 backend (adapter not wired yet: episodes will error until custos.store.adapters.mem0 exists)"
+split: test
+concurrency: 48
+groups:
+  - families: [f01, f03, f04, f05, f08, f09]
+    defences: [D0, D3]
+    n: 50
+    backend: mem0
+    memory_state: warm

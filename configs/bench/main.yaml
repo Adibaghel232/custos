@@ -1,0 +1,19 @@
+name: main
+description: "13 attack cells x {D0,D1,D2,D3}, n=100, warm; plus benign tasks and legit updates x 4"
+split: test
+concurrency: 48
+require_warm: false
+groups:
+  - families: [f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, L2, L3]
+    defences: [D0, D1, D2, D3]
+    n: 100
+    memory_state: warm
+    fatigued_rerun: true
+  - families: [legit_update]
+    defences: [D0, D1, D2, D3]
+    n: 130
+    memory_state: warm
+  - families: [benign]
+    defences: [D0, D1, D2, D3]
+    n: 100
+    memory_state: warm

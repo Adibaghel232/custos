@@ -1,0 +1,9 @@
+name: dev
+description: "dev-split calibration: all 13 attack cells x {D0,D3}, n=3"
+split: dev
+concurrency: 16
+groups:
+  - families: [f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, L2, L3]
+    defences: [D0, D3]
+    n: 3
+    memory_state: cold

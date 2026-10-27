@@ -1,0 +1,9 @@
+name: smoke
+description: "3 families x {D0,D3}, n=5 (30 episodes) - end-to-end sanity check"
+split: test
+concurrency: 16
+groups:
+  - families: [f01, f04, f09]
+    defences: [D0, D3]
+    n: 5
+    memory_state: cold

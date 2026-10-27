@@ -1,0 +1,9 @@
+name: state
+description: "cold-memory comparison: 13 cells x {D0,D3}, n=50"
+split: test
+concurrency: 48
+groups:
+  - families: [f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, L2, L3]
+    defences: [D0, D3]
+    n: 50
+    memory_state: cold
