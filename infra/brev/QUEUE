@@ -8,5 +8,5 @@ until [ -f data/snapshots/finance-d3-test.bin ] && [ -f runs/smoke/metrics.json 
 until [ -f infra/brev/CODE_FROZEN ]; do sleep 60; git pull -q; done; .venv/bin/python scripts/fix_f11_purge.py freeze1 && .venv/bin/python -m custos_bench.cli run configs/bench/main.yaml --out runs/main --concurrency 64
 until [ -f ~/autopilot/par_ablation.done ] && [ -f ~/autopilot/par_utility.done ] && [ -f ~/autopilot/par_adaptive.done ]; do sleep 60; done; echo parallel grids finished
 .venv/bin/python -m custos_bench.cli run configs/bench/main.yaml --out runs/main --concurrency 64 && .venv/bin/python -m custos_bench.cli run configs/bench/ablation.yaml --out runs/ablation --concurrency 64 && .venv/bin/python -m custos_bench.cli run configs/bench/utility.yaml --out runs/utility --concurrency 32
-.venv/bin/python -m custos_bench.cli access runs/main --defences D3,D3-isolation,D0
+.venv/bin/python -m custos_bench.cli access runs --defences D3,D3-isolation,D0 && .venv/bin/python scripts/eval_contradiction.py --out runs/contradiction_eval.csv
 mkdir -p ~/runs_archive && { [ -d runs/smoke ] && mv runs/smoke ~/runs_archive/smoke_$(date +%H%M) || true; } && cp runs/main/run.json runs/run.json && { cp runs/main/run_meta.json runs/run_meta.json || true; } && .venv/bin/python -m custos_bench.cli metrics runs && .venv/bin/python -m custos_bench.cli report runs
