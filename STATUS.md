@@ -12,7 +12,7 @@ running on custos-gpu. Target: deliverables ready ~19:00-20:00 IST, upload by th
   contradiction, drop_stale_rows, metrics, report.
 - Utility (LongMemEval): D0 24.7% vs D3 13.5%; reproduced on healthy infra; D3-claimlwm 12.9%. Cause: ~half of summary
   claims rejected by grounding rule R1 (summary-laundering defence). Disclosed in deck (limits, Q&A) and README.
-- Then on the laptop: `powershell -ExecutionPolicy Bypass -File scriptsinalize.ps1 -DemoNote "<note>"`.
+- Then on the laptop: `powershell -ExecutionPolicy Bypass -File scripts/finalize.ps1 -DemoNote "<note>"`.
 
 ## What runs where (custos-gpu, reach via `ssh 10.81.30.68` then `ssh custos-gpu`)
 | tmux | what | output |
