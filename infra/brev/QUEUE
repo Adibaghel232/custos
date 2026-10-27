@@ -4,6 +4,7 @@
 for s in 7 8 9 10 12 14; do .venv/bin/python scripts/demo_golden_path.py --llm live --gateway real --acts 1 2 --sides D0 D3 --seed $s --out demo/runs/seed$s 2>&1 | grep -E "^  D[03]:|GOLDEN"; done
 for s in 7 8 9; do .venv/bin/python scripts/demo_golden_path.py --llm live --gateway real --acts 2 --act2-variant attachment --sides D0 D3 --seed $s --out demo/runs/attach$s 2>&1 | grep -E "^  D[03]:|GOLDEN"; done
 until [ -f data/snapshots/finance-d3-test.bin ] && [ -f runs/smoke/metrics.json ]; do sleep 60; done; .venv/bin/python -m custos_bench.cli run configs/bench/main.yaml --out runs/main --concurrency 64
+.venv/bin/python scripts/eval_poisonedrag.py --out runs/external_poisonedrag --concurrency 32
 .venv/bin/python -m custos_bench.cli run configs/bench/ablation.yaml --out runs/ablation --concurrency 64
 .venv/bin/python -m custos_bench.cli run configs/bench/utility.yaml --out runs/utility --concurrency 32
 .venv/bin/python -m custos_bench.cli run configs/bench/adaptive.yaml --out runs/adaptive
