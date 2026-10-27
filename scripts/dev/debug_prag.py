@@ -24,7 +24,17 @@ async def trace(item):
         await gw.drain(TENANT)
         for v in vs:
             d = v.model_dump()
-            print(" verdict:", d.get("action"), d.get("rule"), "|", "; ".join(d.get("reasons") or [])[:300])
+            print(" verdict:", d.get("action"), d.get("rule"), "|", "; ".join(d.get("reasons") or [])[:200])
+            for ck in d.get("checks") or []:
+                if ck.get("check") in ("embed_conflict", "nli", "key_conflict"):
+                    print("    ", ck.get("check"), ck.get("label"), ck.get("score"), ck.get("against"))
+    t3 = [r for r in gw.store.records(TENANT)] if hasattr(gw.store, "records") else []
+    import numpy as np
+    recs = await gw.store.similar(TENANT, item["question"], 30)
+    hi = [r for r, _ in recs if int(r.tier) >= 3]; lo = [r for r, _ in recs if int(r.tier) < 3]
+    if hi and lo:
+        v = await gw.store.embedder.embed([hi[0].claim.text] + [r.claim.text for r in lo], "passage")
+        for r, x in zip(lo, v[1:]): print("   cos(T3, %r) = %.3f" % (r.claim.text[:70], float(v[0] @ x)))
     s2 = SessionCtx(tenant_id=TENANT, principal=PRINCIPAL, session_id="dbg-s2", session_no=2)
     rc = await mem.recall(s2, item["question"], "qa")
     print(" RENDERED:\n", rc.rendered[:1500])
