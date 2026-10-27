@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Custos title</title><link rel="stylesheet" href="common.css">
+<style>
+ .wrap { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+ h1 { font-size: 168px; font-weight: 800; letter-spacing: .20em; margin-left: .20em; line-height: 1; }
+ .sub { margin-top: 26px; font-size: 54px; font-weight: 600; color: var(--green); letter-spacing: .01em; }
+ .tag { margin-top: 18px; font-size: 34px; color: var(--muted); }
+ .team { position:absolute; bottom: 92px; left:0; right:0; text-align:center; font-size: 38px; font-weight: 600; }
+ .meta { position:absolute; bottom: 44px; left:0; right:0; text-align:center; font-size: 28px; color: var(--muted); letter-spacing: .04em; }
+ svg { width: 150px; height: 150px; margin-bottom: 30px; }
+</style></head><body><div class="glow"></div>
+<div class="wrap">
+ <div class="fade" id="a"><svg viewBox="0 0 32 32"><path d="M16 3.5l10 4.4v8c0 5.6-4 10-10 12.1C10 25.900 6 21.500 6 15.900v-8z" fill="none" stroke="#76B900" stroke-width="2.2" stroke-linejoin="round"/><circle cx="16" cy="15" r="3.2" fill="#76B900"/><path d="M16 18v5" stroke="#76B900" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+ <h1 class="fade" id="b">CUSTOS</h1>
+ <div class="sub fade" id="c">chain of custody for agent memory</div>
+ <div class="tag fade" id="d">a poisoned email can never become a payment</div>
+</div>
+<div class="team fade" id="e">Team Charlies &nbsp;·&nbsp; Aditya Baghel &nbsp;·&nbsp; Karan Singh Madhwal</div>
+<div class="meta fade" id="f">AEGIS 2026 &nbsp;·&nbsp; PS 04 Agent Memory Governance Evaluation</div>
+<script>
+ const ids=['a','b','c','d','e','f']; ids.forEach((id,i)=>setTimeout(()=>document.getElementById(id).classList.add('on'), 250+i*450));
+</script></body></html>

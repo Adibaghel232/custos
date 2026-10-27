@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Custos end</title><link rel="stylesheet" href="common.css">
+<style>
+ .wrap { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+ h1 { font-size: 150px; font-weight: 800; letter-spacing: .02em; }
+ h1 span { color: var(--green); }
+ .sub { margin-top: 18px; font-size: 40px; color: var(--muted); }
+ .stack { margin-top: 70px; display:flex; gap: 22px; }
+ .pill { background: var(--panel); border: 1.5px solid var(--border); border-radius: 16px; padding: 18px 28px; font-size: 30px; }
+ .pill b { color: var(--green); }
+ .team { position:absolute; bottom: 70px; left:0; right:0; text-align:center; font-size: 38px; font-weight: 600; }
+ .meta { position:absolute; bottom: 28px; left:0; right:0; text-align:center; font-size: 26px; color: var(--muted); }
+</style></head><body><div class="glow"></div>
+<div class="wrap">
+ <h1 class="fade" id="a">Memory is <span>evidence.</span></h1>
+ <div class="sub fade" id="b">Custos &nbsp;·&nbsp; chain of custody for agent memory</div>
+ <div class="stack fade" id="c">
+  <div class="pill"><b>Nemotron 3.5 Lightning</b> 30B-A3B</div>
+  <div class="pill"><b>llama-nemotron-embed</b> 1b-v2</div>
+  <div class="pill">served on <b>NVIDIA A100</b> GPUs</div>
+ </div>
+</div>
+<div class="team fade" id="d">Team Charlies &nbsp;·&nbsp; Aditya Baghel &nbsp;·&nbsp; Karan Singh Madhwal</div>
+<div class="meta fade" id="e">AEGIS 2026 &nbsp;·&nbsp; PS 04 Agent Memory Governance Evaluation</div>
+<script>['a','b','c','d','e'].forEach((id,i)=>setTimeout(()=>document.getElementById(id).classList.add('on'),200+i*500));</script></body></html>

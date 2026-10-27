@@ -21,3 +21,7 @@ data/cache/
 .DS_Store
 Thumbs.db
 .vscode/
+
+# video pipeline (scripts/make_video.ps1): downloaded binaries, node modules, captured frames
+tools/
+deliverables/video/work/
