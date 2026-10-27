@@ -135,73 +135,89 @@ Leave-one-out re-planning confirms it: without that email, the agent writes to t
 address instead.
 
 35
-00:02:19,915 --> 00:02:22,524
+00:02:19,859 --> 00:02:22,468
 Every memory has a chain of custody.
 
 36
-00:02:22,674 --> 00:02:28,332
+00:02:22,618 --> 00:02:28,277
 This quarantined claim came from an email, tier T-zero, from an outside domain.
 
 37
-00:02:28,482 --> 00:02:34,061
+00:02:28,427 --> 00:02:34,005
 Custos checked it against the ERP record, tier T-three, and found a conflict.
 
 38
-00:02:34,211 --> 00:02:36,780
+00:02:34,155 --> 00:02:36,724
 The decision and its rule are on record.
 
 39
-00:02:38,834 --> 00:02:44,506
+00:02:38,654 --> 00:02:44,326
 If a reviewer marks the email as poison, one click rolls back the email and everything made
 
 40
-00:02:44,506 --> 00:02:45,752
+00:02:44,326 --> 00:02:45,573
 from it, hop by hop.
 
 41
-00:02:45,902 --> 00:02:48,631
+00:02:45,723 --> 00:02:48,452
 Then the read log shows who was exposed.
 
 42
-00:02:48,781 --> 00:02:54,088
+00:02:48,602 --> 00:02:53,908
 Here, no session ever read the poisoned claim, and the one action that depended on it was
 
 43
-00:02:54,088 --> 00:02:54,565
+00:02:53,908 --> 00:02:54,385
 blocked.
 
 44
-00:02:54,715 --> 00:02:59,723
+00:02:54,535 --> 00:02:59,543
 The same operation serves a data erasure request under India's DPDP Act.
 
 45
-00:03:01,335 --> 00:03:06,764
+00:03:01,114 --> 00:03:06,542
 Every step goes into a signed, hash-chained ledger, rebuilt here from the recorded run.
 
 46
-00:03:06,914 --> 00:03:09,048
+00:03:06,692 --> 00:03:08,826
 Verification passes.
 
 47
-00:03:09,198 --> 00:03:14,382
+00:03:08,976 --> 00:03:14,160
 Now we edit one entry in a copy, and verification fails at exactly that entry.
 
 48
-00:03:15,936 --> 00:03:21,504
-One demo is not proof, so we built Custos-Bench: eleven attack families, an adaptive
+00:03:15,743 --> 00:03:23,384
+On our benchmark, across 7,175 attack episodes, attacks succeeded 27.2 percent of the time
 
 49
-00:03:21,504 --> 00:03:25,149
-attacker, and a replayable episode behind every number.
+00:03:23,384 --> 00:03:27,375
+without a defence, and 0.2 percent with Custos.
 
 50
-00:03:26,768 --> 00:03:30,126
-Built with Nemotron models on NVIDIA GPUs.
+00:03:27,525 --> 00:03:30,699
+Two public benchmarks that we did not write agree.
 
 51
-00:03:30,276 --> 00:03:33,096
-Custos: memory is evidence.
+00:03:30,849 --> 00:03:36,853
+On AgentDojo, injected payments got through 52.1 percent of the time undefended, and never
 
 52
-00:03:33,246 --> 00:03:34,640
+00:03:36,853 --> 00:03:40,856
+with Custos asking the user first, at the same task success.
+
+53
+00:03:41,006 --> 00:03:46,834
+On PoisonedRAG, poisoning against a trusted record fell from 74 to 3 percent.
+
+54
+00:03:48,519 --> 00:03:51,878
+Built with Nemotron models on NVIDIA GPUs.
+
+55
+00:03:52,028 --> 00:03:54,847
+Custos: memory is evidence.
+
+56
+00:03:54,997 --> 00:03:56,391
 Thank you.
