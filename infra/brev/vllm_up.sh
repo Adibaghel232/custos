@@ -31,6 +31,7 @@ for i in $GPUS; do
   $DOCKER rm -f "vllm$i" >/dev/null 2>&1 || true
   $DOCKER run -d --name "vllm$i" --restart unless-stopped --gpus "\"device=$i\"" --ipc=host -p 127.0.0.1:${PORT}:8000 \
     -v "$HF_CACHE:/root/.cache/huggingface" -e HF_HUB_OFFLINE=1 \
+    -e OMP_NUM_THREADS=8 -e MKL_NUM_THREADS=8 -e OPENBLAS_NUM_THREADS=8 \
     "$IMAGE" \
     --model "$MODEL" --served-model-name "$SERVED" \
     --max-model-len "$MAX_LEN" --max-num-seqs 128 \
