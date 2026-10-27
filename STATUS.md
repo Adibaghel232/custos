@@ -1,7 +1,18 @@
 # STATUS (update after every milestone)
 
-**Now:** Tue 27 Oct ~12:20 IST. Code frozen at `1da789f` (+ tooling/deck commits after it, no gateway changes). Final grids
+**Now:** Tue 27 Oct ~13:55 IST (earlier note: 12:20). Code frozen at `1da789f` (+ tooling/deck commits after it, no gateway changes). Final grids
 running on custos-gpu. Target: deliverables ready ~19:00-20:00 IST, upload by the team 20:00-23:00.
+
+## 13:55 IST update
+- Main re-run done (all 6,120 planned episodes on frozen code; config_hash fe3c09103c9f). Old-hash rows are dropped by
+  scripts/drop_stale_rows.py in the final metrics step. Interim main ASR: D0 27.2% · D1 9.4% · D2 24.5% · D3 0.2% (2/1088, f10).
+- Ablation done (n=25/cell plan + earlier rows). Adaptive still running (tmux par_adaptive; hosted Ultra attacker is rate-limited).
+- Gap-fill for main/ablation/utility runs in tmux par_gap; tmux gap_watch touches ~/autopilot/par_gap.done when they finish
+  (par_gap's own wait loop matches itself and never ends: ignore it). The autopilot then resumes adaptive, runs access +
+  contradiction, drop_stale_rows, metrics, report.
+- Utility (LongMemEval): D0 24.7% vs D3 13.5%; reproduced on healthy infra; D3-claimlwm 12.9%. Cause: ~half of summary
+  claims rejected by grounding rule R1 (summary-laundering defence). Disclosed in deck (limits, Q&A) and README.
+- Then on the laptop: `powershell -ExecutionPolicy Bypass -File scriptsinalize.ps1 -DemoNote "<note>"`.
 
 ## What runs where (custos-gpu, reach via `ssh 10.81.30.68` then `ssh custos-gpu`)
 | tmux | what | output |
