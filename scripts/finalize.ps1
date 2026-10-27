@@ -26,6 +26,8 @@ if (-not $NoPull) {
     $up = [math]::Round([double]$sec / 3600, 0)
     Write-Host "GPU box uptime hours: $up (8 x A100)"
     $env:CUSTOS_GPU_HOURS = [string]($up * 8)
+    $usd = ''; if ($env:CUSTOS_GPU_USD_PER_HOUR) { $usd = [string]([math]::Round($up * [double]$env:CUSTOS_GPU_USD_PER_HOUR, 0)) }
+    "instance,gpu,n_gpus,hours,usd`ncustos-gpu,A100-SXM4-80GB,8,$up,$usd" | Set-Content -Encoding utf8 (Join-Path $Final 'compute.csv')
     Get-ChildItem $Final | Format-Table Name, Length
 }
 if (-not (Test-Path (Join-Path $Final 'metrics.json'))) { throw "results\final\metrics.json missing" }

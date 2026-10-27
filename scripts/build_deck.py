@@ -585,11 +585,11 @@ def slide_innovation(D: Deck):
     D.tb(0.5, 4.2, 3.9, 0.6, "Conflict + lower tier → quarantine, never a silent overwrite", size=14, bold=True, color=NAVY)
     D.card_text(0.5, 4.95, 3.9, 1.65, [{"text": "Two invariants", "bold": True, "color": NAVY, "after": 2},
                                     {"text": "I1  a derived record’s tier = min(parent tiers)", "size": 14, "after": 2},
-                                    {"text": "I2  no high-risk call runs with a critical argument below its required tier", "size": 14}], fill=T_BLUE)
+                                    {"text": "I2  no high-risk call runs unconfirmed with a critical argument below its required tier", "size": 14}], fill=T_BLUE)
     tiles = [("Custody labels", "Source, principal, parents, hash and tier on every record; summaries inherit the lowest tier."),
              ("Trust-ordered revision", "Equal or higher tier versions the old fact; a lower tier is quarantined for review."),
              ("Isolation by construction", "Tenant, purpose and sensitivity filters run before vector search."),
-             ("Consequence gate", "Pay, send, share, grant: critical arguments must rest on T3 memory, or the call stops."),
+             ("Consequence gate", "Pay, send, share, grant: critical arguments must rest on trusted memory, or the call is held for confirmation or blocked."),
              ("Taint-closure rollback", "Revert a poison and everything derived from it; list the sessions it reached."),
              ("Adaptive red-teaming", "A Nemotron attacker sees which check fired and rewrites the payload.")]
     tw, th = 2.6, 2.35
@@ -640,7 +640,7 @@ def slide_architecture(D: Deck):
                                         {"text": "NLI: DeBERTa \u2192 Nemotron judge (NVIDIA-models-only rule)", "size": 14, "after": 3},
                                         {"text": "Agent on self-hosted vLLM, Brev A100s", "size": 14}], fill=T_BLUE, pad=0.12)
     D.card_text(10.4, 4.6, 2.43, 1.18, [{"text": "Stores", "bold": True, "color": NAVY, "after": 2},
-                                       {"text": "Custos-native, LangGraph, Mem0", "size": 14}], fill=CARD, pad=0.12)
+                                       {"text": "Custos-native (SQLite + per-tenant index); LangGraph store for the baselines", "size": 14}], fill=CARD, pad=0.12)
     ay = 6.12
     D.tb(0.5, ay, 1.8, 0.75, "Infosys AI3S", size=16, bold=True, color=NAVY, font="Cambria", anchor="m")
     for i, (a, b, f) in enumerate([("SCAN", "Custos-Bench: attacks, adaptive attacker, 14 metrics", T_BLUE),
@@ -1222,7 +1222,8 @@ def slide_nvidia(D: Deck):
     if R.compute:
         try:
             gh = f"{sum(float(r.get('hours') or 0) * float(r.get('n_gpus') or 1) for r in R.compute):.1f}"
-            cost = f"${sum(float(r.get('usd') or 0) for r in R.compute):,.0f}"
+            usd = sum(float(r.get('usd') or 0) for r in R.compute)
+            cost = f"${usd:,.0f}" if usd > 0 else NM
         except ValueError:
             pass
     R._log("GPU-hours", "compute.csv hours x n_gpus", gh, "compute.csv")
