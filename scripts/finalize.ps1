@@ -75,7 +75,7 @@ if (Test-Path $vid) {
     if ($LASTEXITCODE) { throw 'build_deck (embed) failed' }
 }
 Step 'README results block'
-& $Py scriptseadme_results.py $Final | Out-Null
+& $Py scripts\readme_results.py $Final | Out-Null
 if ($LASTEXITCODE) { throw 'readme_results failed' }
 Step 'source zip (fallback while the GitHub repo is private)'
 & git archive --format=zip -o (Join-Path $Root 'deliverables\custos_source.zip') HEAD
