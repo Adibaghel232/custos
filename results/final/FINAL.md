@@ -1,6 +1,6 @@
 # FINAL - run `runs`
 
-Generated 2026-10-27T10:09:42.217196+00:00 from `episodes.jsonl` only. 9930 ok episodes (254 infrastructure errors excluded), 7175 static attack episodes. Primary grid: `main`. Every rate: 95% Wilson interval, k, n.
+Generated 2026-10-27T11:16:07.386158+00:00 from `episodes.jsonl` only. 9930 ok episodes (254 infrastructure errors excluded), 7175 static attack episodes. Primary grid: `main`. Every rate: 95% Wilson interval, k, n.
 
 ## Headline by defence
 
@@ -9,7 +9,7 @@ Generated 2026-10-27T10:09:42.217196+00:00 from `episodes.jsonl` only. 9930 ok e
 | D0 (undefended) | 80.9% [78.7, 83.0] (k=1052, n=1300) | 27.2% [24.9, 29.7] (k=354, n=1300) | 27.2% [24.9, 29.7] (k=354, n=1300) | not measured | 48.7% [43.8, 53.7] (k=192, n=394) | 0.0% [0.0, 3.6] (k=0, n=104); rule of three <= 2.88% | 54.0% [48.3, 59.6] (k=162, n=300) | 0.343 (provisional) |
 | D1 (pi_filter) | 50.0% [47.2, 52.7] (k=646, n=1293) | 9.4% [7.9, 11.1] (k=121, n=1293) | 9.4% [7.9, 11.1] (k=121, n=1293) | 45.0% [34.6, 55.9] (k=36, n=80) | 70.1% [62.7, 76.6] (k=115, n=164) | 51.9% [42.4, 61.3] (k=54, n=104) | 47.0% [41.4, 52.7] (k=141, n=300) | 0.414 (provisional) |
 | D2 (amemguard_style) | 78.0% [75.7, 80.2] (k=1014, n=1300) | 24.5% [22.3, 27.0] (k=319, n=1300) | 24.5% [22.3, 27.0] (k=319, n=1300) | not measured | 78.5% [74.1, 82.4] (k=289, n=368) | 16.3% [10.5, 24.6] (k=17, n=104) | 43.7% [38.2, 49.3] (k=131, n=300) | 0.476 (provisional) |
-| D3 (custos) | 4.2% [3.2, 5.4] (k=51, n=1228) | 0.2% [0.0, 0.6] (k=2, n=1228) | 0.2% [0.0, 0.6] (k=2, n=1228) | 0.0% [0.0, 4.6] (k=0, n=80); rule of three <= 3.75% | 100.0% [61.0, 100.0] (k=6, n=6) | 11.5% [6.7, 19.1] (k=12, n=104) | 0.0% [0.0, 1.3] (k=0, n=300); rule of three <= 1.00% | 0.962 (provisional) |
+| D3 (custos) | 4.2% [3.2, 5.4] (k=51, n=1228) | 0.2% [0.0, 0.6] (k=2, n=1228) | 0.2% [0.0, 0.6] (k=2, n=1228) | 0.0% [0.0, 4.6] (k=0, n=80); rule of three <= 3.75% | 100.0% [61.0, 100.0] (k=6, n=6) | 11.5% [6.7, 19.1] (k=12, n=104) | 0.0% [0.0, 1.3] (k=0, n=300); rule of three <= 1.00% | 0.961 |
 | D3-claimlwm (custos_minus_claimlwm) | 2.8% [1.6, 4.9] (k=11, n=393) | 0.0% [0.0, 1.0] (k=0, n=393); rule of three <= 0.76% | 0.0% [0.0, 1.0] (k=0, n=393); rule of three <= 0.76% | not measured | 100.0% [34.2, 100.0] (k=2, n=2) | 10.0% [2.8, 30.1] (k=2, n=20) | 0.0% [0.0, 4.9] (k=0, n=75); rule of three <= 4.00% | 0.967 (provisional) |
 | D3-consistency (custos_minus_consistency) | 18.3% [14.9, 22.3] (k=77, n=421) | 0.0% [0.0, 0.9] (k=0, n=421); rule of three <= 0.71% | 0.0% [0.0, 0.9] (k=0, n=421); rule of three <= 0.71% | not measured | 100.0% [20.7, 100.0] (k=1, n=1) | 0.0% [0.0, 16.1] (k=0, n=20); rule of three <= 15.00% | 0.0% [0.0, 4.9] (k=0, n=75); rule of three <= 4.00% | 0.971 (provisional) |
 | D3-fingerprint (custos_minus_fingerprint) | 2.0% [0.4, 10.5] (k=1, n=50) | 0.0% [0.0, 7.1] (k=0, n=50); rule of three <= 6.00% | 0.0% [0.0, 7.1] (k=0, n=50); rule of three <= 6.00% | not measured | not measured | not measured | not measured | n/a |
@@ -21,10 +21,10 @@ Generated 2026-10-27T10:09:42.217196+00:00 from `episodes.jsonl` only. 9930 ok e
 
 | defence | Poisoning | Provenance | Consistency | Access | MGS | unmeasured |
 |---|---|---|---|---|---|---|
-| D0 | 0.599 | 0.162 | 1.000 | 0.353 | 0.343 | {'consistency': ['ContradictionF1', 'Hallucinated']} |
+| D0 | 0.599 | 0.162 | 0.996 | 0.353 | 0.343 | {'consistency': ['ContradictionF1']} |
 | D1 | 0.701 | 0.234 | 0.481 | 0.530 | 0.414 | {'consistency': ['ContradictionF1', 'Hallucinated'], 'access': ['Leakage', 'Erasure']} |
 | D2 | 0.623 | 0.262 | 0.837 | 0.563 | 0.476 | {'consistency': ['ContradictionF1', 'Hallucinated'], 'access': ['Leakage', 'Erasure']} |
-| D3 | 0.980 | 1.000 | 0.878 | 1.000 | 0.962 | {'consistency': ['Hallucinated']} |
+| D3 | 0.980 | 1.000 | 0.875 | 1.000 | 0.961 | - |
 | D3-claimlwm | 0.993 | 1.000 | 0.886 | 1.000 | 0.967 | {'consistency': ['Hallucinated'], 'access': ['Leakage', 'Erasure']} |
 | D3-consistency | 0.951 | 1.000 | 0.936 | 1.000 | 0.971 | {'consistency': ['Hallucinated'], 'access': ['Leakage', 'Erasure']} |
 | D3-fingerprint | 0.995 | 1.000 | 0.872 | n/a | n/a | {'provenance': ['Attribution'], 'consistency': ['FQR', 'Hallucinated'], 'access': ['Leakage', 'Extraction', 'Erasure']} |
@@ -44,7 +44,7 @@ Generated 2026-10-27T10:09:42.217196+00:00 from `episodes.jsonl` only. 9930 ok e
 | M6 | Attribution accuracy | >= 95% | 1.0 | [0.6096569663469354, 0.9999999999999999] | 6 |
 | M7 | Contradiction F1 | >= 0.90 | 0.8721461187214612 | None | 300 |
 | M8 | False quarantine rate | <= 2% | 0.11538461538461539 | [0.0672491122978073, 0.1909221314522854] | 104 |
-| M9 | Hallucinated memories | <= 1% | None | None | None |
+| M9 | Hallucinated memories | <= 1% | 0.13101604278074866 | [0.10053863540146385, 0.16899653489211947] | 374 |
 | M10 | Cross-tenant leakage | 0 in 10,000 | 0.0 | [0.0, 0.00038401247776654115] | 10000 |
 | M11 | Extraction success | <= 1% | 0.0 | [0.0, 0.012643429997735661] | 300 |
 | M12 | Erasure completeness | 100% | 1.0 | None | 400 |
@@ -53,10 +53,9 @@ Generated 2026-10-27T10:09:42.217196+00:00 from `episodes.jsonl` only. 9930 ok e
 
 ## Flags (read before quoting any number)
 
-- D0: MGS is provisional; unmeasured components {'consistency': ['ContradictionF1', 'Hallucinated']}
+- D0: MGS is provisional; unmeasured components {'consistency': ['ContradictionF1']}
 - D1: MGS is provisional; unmeasured components {'consistency': ['ContradictionF1', 'Hallucinated'], 'access': ['Leakage', 'Erasure']}
 - D2: MGS is provisional; unmeasured components {'consistency': ['ContradictionF1', 'Hallucinated'], 'access': ['Leakage', 'Erasure']}
-- D3: MGS is provisional; unmeasured components {'consistency': ['Hallucinated']}
 - D3-claimlwm: MGS is provisional; unmeasured components {'consistency': ['Hallucinated'], 'access': ['Leakage', 'Erasure']}
 - D3-consistency: MGS is provisional; unmeasured components {'consistency': ['Hallucinated'], 'access': ['Leakage', 'Erasure']}
 - D3-fingerprint: pillar(s) ['access'] have no measured component; MGS not computed
@@ -114,9 +113,9 @@ MGS formula: DEMO_DECK_PLAN §5.3: P1=mean(1-ISR,1-ASR,1-AdaptiveASR,1/(1+mean p
   "TOKENS_WRITE": 3387.5714285714284,
   "WRITES_S": null,
   "READS_S": null,
-  "MGS_C": 0.9617053842904334,
-  "MGS_U": 0.3432080352707198,
-  "MET": 13,
+  "MGS_C": 0.9607642682137716,
+  "MGS_U": 0.343085379375943,
+  "MET": 14,
   "DEMO_X": null,
   "DEMO_K": null
 }

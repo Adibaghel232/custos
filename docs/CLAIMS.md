@@ -92,7 +92,7 @@ Last build: `Custos_AEGIS2026_Final.pptx`
 | 11 | D3 false quarantine rate | `by_defence.D3.FQR.rate` | metrics.json |
 | 11 | D3 FQR 95% CI | `by_defence.D3.FQR.ci_low/ci_high` | metrics.json |
 | 11 | D3 FQR n | `by_defence.D3.FQR.n` | metrics.json |
-| 11 | D3 hallucinated memories | `by_defence.D3.Hallucinated` | metrics.json |
+| 11 | D3 hallucinated memories | `by_defence.D3.Hallucinated.rate` | metrics.json |
 | 11 | D3 hallucinated 95% CI | `by_defence.D3.Hallucinated.ci_low/ci_high` | metrics.json |
 | 11 | D3 hallucinated n | `by_defence.D3.Hallucinated.n` | metrics.json |
 | 11 | D0 Pareto point (FQR, ASR) | `by_defence.D0.FQR.rate / ASR.rate` | metrics.json |
@@ -156,6 +156,8 @@ Last build: `Custos_AEGIS2026_Final.pptx`
 | 16 | D3 FQR (review load) | `by_defence.D3.FQR.rate` | metrics.json |
 | 16 | PoisonedRAG D3 poison-only ASR (limits) | `external_poisonedrag.D3|poison_only|all.asr` | external_poisonedrag/summary.json |
 | 16 | utility delta (limits) | `by_defence.D3.UtilityDelta.delta` | metrics.json |
+| 16 | LoCoMo accuracy D3 vs D0 | `external_locomo.defences.D3/D0.acc` | external_locomo/summary.json |
+| 16 | hallucinated D3 (limits) | `by_defence.D3.Hallucinated.rate` | metrics.json |
 | 17 | L2 D0 ASR | `by_family.L2.D0.ASR` | metrics.json |
 | 17 | L2 D1 ASR | `by_family.L2.D1.ASR` | metrics.json |
 | 17 | L2 D2 ASR | `by_family.L2.D2.ASR` | metrics.json |
@@ -288,10 +290,10 @@ Last build: `Custos_AEGIS2026_Final.pptx`
 | 19 | D1 Tamper detection | `by_defence.D1.Tamper` | metrics.json |
 | 19 | D2 Tamper detection | `by_defence.D2.Tamper` | metrics.json |
 | 19 | D3 Tamper detection | `by_defence.D3.Tamper.rate/ci_low/ci_high` | metrics.json |
-| 19 | D0 Hallucinated | `by_defence.D0.Hallucinated` | metrics.json |
+| 19 | D0 Hallucinated | `by_defence.D0.Hallucinated.rate/ci_low/ci_high` | metrics.json |
 | 19 | D1 Hallucinated | `by_defence.D1.Hallucinated` | metrics.json |
 | 19 | D2 Hallucinated | `by_defence.D2.Hallucinated` | metrics.json |
-| 19 | D3 Hallucinated | `by_defence.D3.Hallucinated` | metrics.json |
+| 19 | D3 Hallucinated | `by_defence.D3.Hallucinated.rate/ci_low/ci_high` | metrics.json |
 | 19 | D0 LongMemEval accuracy | `by_defence.D0.Utility.rate/ci_low/ci_high` | metrics.json |
 | 19 | D1 LongMemEval accuracy | `by_defence.D1.Utility` | metrics.json |
 | 19 | D2 LongMemEval accuracy | `by_defence.D2.Utility` | metrics.json |

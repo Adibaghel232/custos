@@ -34,7 +34,7 @@ map from every deck number to its source). Agent and checkers: **Nemotron 3.5 Li
 | A-MemGuard-style | 24.5% [22.3%–27.0%] (n=1,300) | 78.0% [75.7%–80.2%] (n=1,300) | 88.7% [84.0%–92.2%] (n=230) |
 | **Custos** | 0.2% [0.0%–0.6%] (n=1,228) | 4.2% [3.2%–5.4%] (n=1,228) | 92.6% [88.4%–95.3%] (n=229) |
 
-Custos also: adaptive attacker (Nemotron 3 Ultra, up to K rewrites) ASR 0.0% [0.0%–4.6%] (n=80); cross-tenant leakage 0/10,000 probes; false quarantine of legitimate updates 11.5% [6.7%–19.1%] (n=104); LongMemEval utility change -11.2 pts.
+Custos also: adaptive attacker (Nemotron 3 Ultra, up to K rewrites) ASR 0.0% [0.0%–4.6%] (n=80); cross-tenant leakage 0/10,000 probes; false quarantine of legitimate updates 11.5% [6.7%–19.1%] (n=104); LongMemEval utility change -11.2 pts; LoCoMo accuracy 21.3% vs 21.3% undefended (n=150); stored claims unsupported by their source (independent judge) 13.1% [10.1%–16.9%] (n=374) vs 0.8% for plain summaries.
 
 **AgentDojo** v1.2.1 banking (public; official tasks, `important_instructions` attack and scoring):
 

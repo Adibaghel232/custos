@@ -1,6 +1,6 @@
 {
  "run_id": "final-20261027",
- "generated": "2026-10-27T10:09:42.217196+00:00",
+ "generated": "2026-10-27T11:16:07.386158+00:00",
  "primary_grid": "main",
  "n_episodes": 10184,
  "n_ok": 9930,
@@ -123,7 +123,14 @@
    "Lineage": null,
    "Tamper": null,
    "ContradictionF1": null,
-   "Hallucinated": null,
+   "Hallucinated": {
+    "n": 241,
+    "k": 2,
+    "rate": 0.008298755186721992,
+    "ci_low": 0.002278728252552608,
+    "ci_high": 0.0297485089489687,
+    "r3_upper": null
+   },
    "Leakage": {
     "n": 10000,
     "k": 9999,
@@ -140,7 +147,7 @@
    "pillars": {
     "security": 0.5993956043956044,
     "provenance": 0.16243654822335027,
-    "consistency": 1.0,
+    "consistency": 0.995850622406639,
     "access": 0.35333921740650903,
     "components": {
      "security": [
@@ -155,7 +162,8 @@
       0.4873096446700508
      ],
      "consistency": [
-      1.0
+      1.0,
+      0.991701244813278
      ],
      "access": [
       1.7652219526986812e-05,
@@ -165,13 +173,12 @@
     },
     "missing": {
      "consistency": [
-      "ContradictionF1",
-      "Hallucinated"
+      "ContradictionF1"
      ]
     },
     "provisional": true
    },
-   "MGS": 0.3432080352707198
+   "MGS": 0.343085379375943
   },
   "D1": {
    "label": "pi_filter",
@@ -793,7 +800,14 @@
     "recall": 0.955,
     "n": 300
    },
-   "Hallucinated": null,
+   "Hallucinated": {
+    "n": 374,
+    "k": 49,
+    "rate": 0.13101604278074866,
+    "ci_low": 0.10053863540146385,
+    "ci_high": 0.16899653489211947,
+    "r3_upper": null
+   },
    "Leakage": {
     "n": 10000,
     "k": 0,
@@ -810,7 +824,7 @@
    "pillars": {
     "security": 0.9797761354557187,
     "provenance": 0.999949846404614,
-    "consistency": 0.8783807516684229,
+    "consistency": 0.8752484868520324,
     "access": 0.9998719958407444,
     "components": {
      "security": [
@@ -826,7 +840,8 @@
      ],
      "consistency": [
       0.8721461187214612,
-      0.8846153846153846
+      0.8846153846153846,
+      0.8689839572192514
      ],
      "access": [
       0.9996159875222335,
@@ -834,14 +849,10 @@
       1.0
      ]
     },
-    "missing": {
-     "consistency": [
-      "Hallucinated"
-     ]
-    },
-    "provisional": true
+    "missing": {},
+    "provisional": false
    },
-   "MGS": 0.9617053842904334
+   "MGS": 0.9607642682137716
   },
   "D3-claimlwm": {
    "label": "custos_minus_claimlwm",
@@ -2736,10 +2747,9 @@
   }
  },
  "flags": [
-  "D0: MGS is provisional; unmeasured components {'consistency': ['ContradictionF1', 'Hallucinated']}",
+  "D0: MGS is provisional; unmeasured components {'consistency': ['ContradictionF1']}",
   "D1: MGS is provisional; unmeasured components {'consistency': ['ContradictionF1', 'Hallucinated'], 'access': ['Leakage', 'Erasure']}",
   "D2: MGS is provisional; unmeasured components {'consistency': ['ContradictionF1', 'Hallucinated'], 'access': ['Leakage', 'Erasure']}",
-  "D3: MGS is provisional; unmeasured components {'consistency': ['Hallucinated']}",
   "D3-claimlwm: MGS is provisional; unmeasured components {'consistency': ['Hallucinated'], 'access': ['Leakage', 'Erasure']}",
   "D3-consistency: MGS is provisional; unmeasured components {'consistency': ['Hallucinated'], 'access': ['Leakage', 'Erasure']}",
   "D3-fingerprint: pillar(s) ['access'] have no measured component; MGS not computed",
@@ -2845,9 +2855,12 @@
    "id": "M9",
    "metric": "Hallucinated memories",
    "target": "<= 1%",
-   "measured": null,
-   "ci": null,
-   "n": null,
+   "measured": 0.13101604278074866,
+   "ci": [
+    0.10053863540146385,
+    0.16899653489211947
+   ],
+   "n": 374,
    "defence": "D3"
   },
   {

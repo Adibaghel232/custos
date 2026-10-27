@@ -1,8 +1,8 @@
 run_id,defence,label,P1_poisoning,P2_provenance,P3_consistency,P4_access,MGS,provisional,missing
-runs,D0,undefended,0.5993956043956044,0.16243654822335027,1.0,0.35333921740650903,0.3432080352707198,True,"{""consistency"": [""ContradictionF1"", ""Hallucinated""]}"
+runs,D0,undefended,0.5993956043956044,0.16243654822335027,0.995850622406639,0.35333921740650903,0.343085379375943,True,"{""consistency"": [""ContradictionF1""]}"
 runs,D1,pi_filter,0.7005889040058633,0.23373983739837398,0.4807692307692307,0.53,0.41354680425612217,True,"{""consistency"": [""ContradictionF1"", ""Hallucinated""], ""access"": [""Leakage"", ""Erasure""]}"
 runs,D2,amemguard_style,0.6230526133009203,0.2617753623188406,0.8365384615384616,0.5633333333333334,0.47643888667186995,True,"{""consistency"": [""ContradictionF1"", ""Hallucinated""], ""access"": [""Leakage"", ""Erasure""]}"
-runs,D3,custos,0.9797761354557187,0.999949846404614,0.8783807516684229,0.9998719958407444,0.9617053842904334,True,"{""consistency"": [""Hallucinated""]}"
+runs,D3,custos,0.9797761354557187,0.999949846404614,0.8752484868520324,0.9998719958407444,0.9607642682137716,False,{}
 runs,D3-claimlwm,custos_minus_claimlwm,0.9930025445292621,1.0,0.8860730593607307,1.0,0.9672064133228421,True,"{""consistency"": [""Hallucinated""], ""access"": [""Leakage"", ""Erasure""]}"
 runs,D3-consistency,custos_minus_consistency,0.951070406236677,1.0,0.9360730593607306,1.0,0.9709351648170937,True,"{""consistency"": [""Hallucinated""], ""access"": [""Leakage"", ""Erasure""]}"
 runs,D3-fingerprint,custos_minus_fingerprint,0.995,1.0,0.8721461187214612,,,True,"{""provenance"": [""Attribution""], ""consistency"": [""FQR"", ""Hallucinated""], ""access"": [""Leakage"", ""Extraction"", ""Erasure""]}"

@@ -97,9 +97,12 @@
       "id": "M9",
       "metric": "Hallucinated memories",
       "target": "<= 1%",
-      "measured": null,
-      "ci": null,
-      "n": null,
+      "measured": 0.13101604278074866,
+      "ci": [
+        0.10053863540146385,
+        0.16899653489211947
+      ],
+      "n": 374,
       "defence": "D3"
     },
     {

@@ -1,0 +1,3 @@
+run_id,defence,hallucinated,n,notes
+hallucination,D0,2,241,"80 LongMemEval conversations; stored memories judged against their own session by the evaluator role (Nemotron 3 Ultra); D0 = summary sentences, D3 = committed claims"
+hallucination,D3,49,374,"80 LongMemEval conversations; stored memories judged against their own session by the evaluator role (Nemotron 3 Ultra); D0 = summary sentences, D3 = committed claims"

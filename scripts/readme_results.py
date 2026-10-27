@@ -43,6 +43,15 @@ def block(res: Path) -> str:
         extra.append(f"false quarantine of legitimate updates {rate(x3['FQR'])}")
     if isinstance(x3.get("UtilityDelta"), dict) and x3["UtilityDelta"].get("delta") is not None:
         extra.append(f"LongMemEval utility change {100 * x3['UtilityDelta']['delta']:+.1f} pts")
+    lc = res / "external_locomo" / "summary.json"
+    if lc.exists():
+        d = json.loads(lc.read_text(encoding="utf-8"))["defences"]
+        if "D0" in d and "D3" in d:
+            extra.append(f"LoCoMo accuracy {pct(d['D3']['acc'])} vs {pct(d['D0']['acc'])} undefended (n={d['D3']['n']})")
+    if x3.get("Hallucinated"):
+        h0 = bd.get("D0", {}).get("Hallucinated")
+        extra.append(f"stored claims unsupported by their source (independent judge) {rate(x3['Hallucinated'])}"
+                     + (f" vs {pct(h0['rate'])} for plain summaries" if h0 else ""))
     if extra:
         out += ["", "Custos also: " + "; ".join(extra) + "."]
     ad = res / "external_agentdojo" / "summary.json"
