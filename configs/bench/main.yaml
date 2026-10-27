@@ -2,6 +2,7 @@ name: main
 description: "13 attack cells x {D0,D1,D2,D3}, n=100, warm; plus benign tasks and legit updates x 4"
 split: test
 concurrency: 48
+episode_timeout_s: 900
 require_warm: false
 groups:
   - families: [f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, L2, L3]

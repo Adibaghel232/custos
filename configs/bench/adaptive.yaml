@@ -3,6 +3,7 @@ kind: adaptive
 description: "adaptive attacker (role attacker, grey-box feedback): 4 families x {D1,D3} x 20 seeds x K=10 rounds"
 split: test
 concurrency: 48
+episode_timeout_s: 900
 adaptive:
   families: [f01, f04, f05, f09]
   defences: [D1, D3]
