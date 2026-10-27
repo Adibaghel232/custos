@@ -1533,26 +1533,112 @@ def write_claims(R: Results, claims_md: Path, claims_csv: Path, out: Path):
     claims_md.write_text("\n".join(md) + "\n", encoding="utf-8")
 
 
+SPEAKER_NOTES = {
+    "slide_cover": "We are Team Charlies. Custos gives an AI agent's memory a chain of custody, so a forged email cannot quietly "
+                   "become a payment weeks later.",
+    "slide_relevance": "Agents now remember across sessions. Published attacks such as MINJA and AgentPoison show that one planted "
+                       "memory can steer later actions, and the best detectors still miss a large share. OWASP and MITRE ATLAS now "
+                       "list memory poisoning. Our running example: a forged email in session 3 becomes a forty-lakh payment to the "
+                       "attacker in session 9, and no single step looks malicious.",
+    "slide_innovation": "Custos does not guess from how the text looks. It records where every memory came from (an outside email, "
+                        "the signed-in user, the ERP) and gives it a trust tier from that channel. A lower tier can never overwrite a "
+                        "higher one; it is quarantined for review. Risky actions must rest on trusted memory or be confirmed, and "
+                        "a poison can be rolled back together with everything derived from it.",
+    "slide_glance": "Four numbers, all from code output. On our eleven attack families, attack success falls to about zero. On "
+                    "AgentDojo, a public benchmark we did not write, injected payment orders stop getting through and task success "
+                    "is unchanged. On PoisonedRAG, poison against a trusted record almost never wins. And legitimate work still gets "
+                    "done. Be upfront about the limit at the bottom: with nothing trusted to compare against, Custos cannot decide "
+                    "truth.",
+    "slide_architecture": "One gateway is the only path to memory and to risky tools: write (stamp, extract, check, decide), read "
+                          "(filter before search, quote low-trust data), gate (per-argument taint, leave-one-out), recover (taint "
+                          "closure, erasure). Everything runs on NVIDIA Nemotron, self-hosted with vLLM on Brev A100s. For Infosys "
+                          "this maps to Scan, Shield and Steer.",
+    "slide_demo": "Walk through the video: same Nemotron agent and the same email on both sides; only custody differs. The "
+                  "undefended agent pays the attacker; Custos quarantines the forged bank details, the gate stops the follow-up "
+                  "actions and names the email, and one click rolls the poison back. The footnote gives the result over all live "
+                  "runs, not just the one we filmed.",
+    "slide_method": "How we measure: an attacker that controls outside content and ordinary queries, eleven attack families plus "
+                    "laundering variants, an adaptive Nemotron Ultra attacker that sees which check fired, and benign traffic so "
+                    "that blocking everything fails. Every rate has a 95% Wilson interval and an n.",
+    "slide_poisoning": "Injection success is whether the poison became retrievable; attack success is whether it changed what the "
+                       "agent did. Compare the bars with their intervals, not just the point estimates.",
+    "slide_external": "So our numbers do not rest only on attacks we wrote, we ran two public benchmarks unchanged, with their own "
+                      "scoring. AgentDojo: the gate turns every injected payment into a confirmation that names the untrusted "
+                      "source, so nothing gets through and task success holds; the injection filter also stops them but breaks "
+                      "many legitimate tasks. PoisonedRAG: when a trusted record exists, Custos keeps it. When none exists, no "
+                      "defence here works, and we say so.",
+    "slide_adaptive": "Left: an attacker that rewrites its payload after seeing which check fired; the curve is the share of payloads "
+                      "that ever succeeded. Right: switch off one layer at a time to see what each one buys.",
+    "slide_prov_cons": "Custody is auditable: we can name the memory that drove an action, detect tampering in the signed ledger, and "
+                       "measure how often legitimate updates are held for review.",
+    "slide_access": "Isolation is by construction: tenant and purpose filters run before vector search. Erasure follows the "
+                    "provenance graph into summaries derived from the erased data.",
+    "slide_scorecard": "Our round-1 promises, one row each, with the measured value and its interval. Anything we did not "
+                       "measure is marked as not measured.",
+    "slide_mgs": "The Memory Governance Score combines security, provenance, consistency and access as a harmonic mean, so a "
+                 "defence cannot hide a weak pillar behind a strong one.",
+    "slide_nvidia": "Everything is NVIDIA: Nemotron 3.5 Lightning as agent, extractor and judge on our own A100s; Nemotron 3 Ultra "
+                    "as the adaptive attacker and independent judge; NVIDIA embeddings and safety models as baselines.",
+    "slide_limits": "Close on responsibility: what Custos does not solve, how it maps to OWASP, MITRE, NIST and India's DPDP "
+                    "Act, and where it goes next. Memory is evidence.",
+}
+
+
+NOTES_BODY = ('<p:sp xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" '
+              'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><p:nvSpPr><p:cNvPr id="99" name="Notes Placeholder"/>'
+              '<p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="body" idx="1"/></p:nvPr></p:nvSpPr>'
+              '<p:spPr><a:xfrm><a:off x="685800" y="4400550"/><a:ext cx="5486400" cy="3600450"/></a:xfrm></p:spPr>'
+              '<p:txBody><a:bodyPr/><a:lstStyle/><a:p/></p:txBody></p:sp>')
+
+
+def add_notes(D: "Deck", key: str) -> None:
+    """Speaker notes; the template's notes master has no body placeholder, so add a standard one when missing."""
+    text = SPEAKER_NOTES.get(key)
+    if not text or D.slide is None:
+        return
+    ns = D.slide.notes_slide
+    if ns.notes_text_frame is None:
+        from lxml import etree
+        ns.shapes._spTree.append(etree.fromstring(NOTES_BODY))
+    ns.notes_text_frame.text = text
+
+
 def build(args) -> int:
     R = load_results(Path(args.results), args.sample)
     D = Deck(R)
     drop_template_slides(D.prs)
     slide_cover(D)
+    add_notes(D, "slide_cover")
     slide_relevance(D)
+    add_notes(D, "slide_relevance")
     slide_innovation(D)
+    add_notes(D, "slide_innovation")
     slide_glance(D)
+    add_notes(D, "slide_glance")
     slide_architecture(D)
+    add_notes(D, "slide_architecture")
     slide_demo(D, args.video_url, args.demo_note)
+    add_notes(D, "slide_demo")
     slide_method(D)
+    add_notes(D, "slide_method")
     slide_poisoning(D)
+    add_notes(D, "slide_poisoning")
     slide_external(D)
+    add_notes(D, "slide_external")
     slide_adaptive(D)
+    add_notes(D, "slide_adaptive")
     slide_prov_cons(D)
+    add_notes(D, "slide_prov_cons")
     slide_access(D)
+    add_notes(D, "slide_access")
     slide_scorecard(D)
+    add_notes(D, "slide_scorecard")
     slide_mgs(D)
+    add_notes(D, "slide_mgs")
     slide_nvidia(D)
+    add_notes(D, "slide_nvidia")
     slide_limits(D)
+    add_notes(D, "slide_limits")
     slide_a_families(D)
     slide_a_ablation(D)
     slide_a_full(D)
