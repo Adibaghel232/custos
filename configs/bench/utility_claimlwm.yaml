@@ -1,0 +1,9 @@
+name: utility_claimlwm
+kind: utility
+description: "LongMemEval subset (178 Q) x {D0,D3}; judge = LongMemEval rubric on the evaluator role"
+split: test
+concurrency: 48
+episode_timeout_s: 900
+utility:
+  defences: [D3-claimlwm]
+  seed: 0
