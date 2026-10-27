@@ -68,6 +68,12 @@ if (-not $NoVideo) {
     & powershell -ExecutionPolicy Bypass -File scripts\make_video.ps1 -Only S11
     if ($LASTEXITCODE) { throw 'make_video failed' }
 }
+$vid = Join-Path $Root 'deliverables\video\custos_demo_720p.mp4'
+if (Test-Path $vid) {
+    Step 'rebuild the deck with the demo video embedded (FAQ Q4)'
+    & $Py @dargs --embed-video $vid
+    if ($LASTEXITCODE) { throw 'build_deck (embed) failed' }
+}
 Step 'source zip (fallback while the GitHub repo is private)'
 & git archive --format=zip -o (Join-Path $Root 'deliverables\custos_source.zip') HEAD
 Step 'done'
