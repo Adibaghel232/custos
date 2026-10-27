@@ -1,30 +1,35 @@
 # STATUS (update after every milestone)
 
-**Now:** Tue 27 Oct 01:20 IST — lost 17:30–01:07 to usage limit; agents resumed; GPUs serving.
+**Now:** Tue 27 Oct ~12:20 IST. Code frozen at `1da789f` (+ tooling/deck commits after it, no gateway changes). Final grids
+running on custos-gpu. Target: deliverables ready ~19:00-20:00 IST, upload by the team 20:00-23:00.
 
-| Area | State | Notes |
+## What runs where (custos-gpu, reach via `ssh 10.81.30.68` then `ssh custos-gpu`)
+| tmux | what | output |
 |---|---|---|
-| Plan / spec / contracts | ✅ PLAN.md · docs/SPEC.md · docs/CONTRACTS.md | |
-| W1 core (types, llm, embed, ledger, tiers, provenance, store) | ✅ 17 offline + 3 live tests | hosted Lightning: JSON schema ✅ tool calls ✅ embed ✅ |
-| Keys / logins | ✅ NVIDIA key (.env, laptop + lab + GPU box) · ✅ Brev CLI on lab PC | |
-| GPU box `custos-gpu` | ✅ 8× A100-SXM4-80GB, 1.7 TB, docker | `ssh custos-gpu` from lab PC |
-| vLLM Lightning ×8 (ports 8000–8007) | ✅ 60 req/s burst, JSON+tools OK | tmux `vllm` on custos-gpu; log ~/vllm_up.log; urls → ~/vllm_urls.env |
-| W2 write path | ⏳ agent | |
-| W3 read/gate/recover/API | ⏳ agent | |
-| W4 agent + finance world + golden path | ⏳ agent | |
-| W5 bench | ⏳ agent | |
-| UI | ⏳ agent | |
-| W6 data (LongMemEval, legit/contradiction sets) | todo (parent) | |
-| Results / deck / video | — | |
+| `autopilot` | infra/brev/QUEUE: main D3 re-run → waits for par_* done markers → gap-fill re-run (main, ablation, utility) → access → `metrics runs && report runs` | runs/{main,...}, runs/metrics.json, runs/final.json, runs/figures |
+| `par_ablation`, `par_utility`, `par_adaptive` | started by infra/brev/par_grids.sh, touch ~/autopilot/par_<g>.done when they exit | runs/<g>/episodes.jsonl, ~/par_<g>.log |
+| `hotswap` | infra/brev/hotswap.sh: replaces OMP-spinning vLLM engines with capped ones (vllm1x on :801x); old ports 8000-8006 proxied by socat (tmux px<i>) | ~/hotswap.log |
+| `embed` (docker) | llama-nemotron-embed-1b-v2 on GPU 7, :8100 | |
+
+## Results so far (code output)
+- PoisonedRAG NQ (public, held out; final code): trusted-record ASR D0 74.0% · D1 74.0% · D2 37.0% · **D3 3.0% [1.4-6.4]**, acc 96%; poison-only D3 76.5%. `runs/external_poisonedrag/summary.json`.
+- AgentDojo banking v1.2.1 (public): ASR none 52.1% · spotlight 48.6% · PI filter 0.0% (utility 31.2%) · **Custos gate 0.0% (utility 52.8%)**; gate asked 613×, blocked 0×, 0 asks on benign; approve-all user 52.8%. `runs/external_agentdojo/summary.json`.
+- Main grid (old code, f11 excluded): D0 24.5% · D1 5.1% · D2 21.7% · D3 0.0% (n=1072). D3 rows being re-run on final code.
+
+## Fixes made 27 Oct (all re-run on final code)
+- f11 leak check counted the plant session's own remember() (100% ASR for every defence) → scoped to trigger sessions.
+- Unextractable user/agent notes were dropped (D3 recalled 6/26 preferences) → kept as other:note.
+- Tier-aware conflict prefilter: contradictions of higher-tier records now reach NLI (09aa3a5); legend states tier precedence (705802d).
+- AgentDojo D1 detector cross-event-loop bug → shared loop; D1 re-run.
+- vLLM OpenMP spinning starved the 240-core host → OMP_NUM_THREADS=8, hot-swapped.
+
+## Final assembly (laptop)
+`powershell -ExecutionPolicy Bypass -File scripts\finalize.ps1 -DemoNote "<golden-path note>"` → pulls runs/ into
+results/final, writes results/final/ui (console Bench), rewrites S11 narration (scripts/video/s11_text.py), builds
+deliverables/Custos_AEGIS2026_Final.pptx (+ deliverables/deck_png/), copies the public-benchmarks slide to
+scripts/video/cards/public.png, re-shoots S7-S11 and re-assembles the video. Then fill README RESULTS block, push.
+Golden-path note (from autopilot logs): 7 live runs: undefended paid attacker 2; Custos 0, quarantined 7/7, paid genuine ERP 4.
 
 ## Sync path
 laptop `git push lab main` → lab PC `~/custos` (`git pull origin main`) → `git push gpu main` → custos-gpu `~/custos` (`git pull`).
-
-## Open questions for humans
-- 26 Oct 12:00 format update: none sent (Aditya, 17:10). Proceed with round-1 format + criteria.
-- Exact upload deadline time ("end of day" = 23:59 IST?).
-
-## Resume notes (02:20 Tue)
-- Claude paused (usage). GPU autopilot queue: golden-path seed runs (demo/runs/* on custos-gpu); tmux `seeds` sweep -> ~/seed_sweep.log.
-- W5 bench agent was mid-run when paused: resume it (SendMessage), commit src/custos_bench + configs/bench, run smoke on GPU box, then queue main/ablation/adaptive/utility grids in infra/brev/QUEUE.
-- Live golden path on self-hosted: Act 2 D0 pays attacker, D3 quarantines + gate blocks. Act 1 D0 paid ERP at seed 7 (pick seed from sweep).
+GitHub origin https://github.com/Adibaghel232/custos is PRIVATE; ask before making it public.
