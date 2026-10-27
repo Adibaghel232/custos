@@ -698,16 +698,21 @@ def slide_architecture(D: Deck):
         D.tb(x + 0.1, ay, 2.9, 0.8, [{"runs": [(a + "  ", {"bold": True, "color": NAVY}), (b, {})]}], size=14, anchor="m")
 
 
-def slide_demo(D: Deck, video_url: str | None, demo_note: str):
+def slide_demo(D: Deck, video_url: str | None, demo_note: str, embed_video: str | None = None):
     D.new_slide("3 · TECHNICAL IMPLEMENTATION · DEMO", "Same agent, same memory, same email; only custody differs")
     shot = ROOT / "deliverables" / "demo_screenshot.png"
     bx, by, bw, bh = 0.5, 1.8, 7.3, 4.1
+    vid = Path(embed_video) if embed_video else None
     if shot.exists():
         from PIL import Image
         iw, ih = Image.open(shot).size
         sc = min(bw / iw, bh / ih)
         pw, ph = iw * sc, ih * sc
-        D.slide.shapes.add_picture(str(shot), Inches(bx + (bw - pw) / 2), Inches(by + (bh - ph) / 2), Inches(pw), Inches(ph))
+        args = (Inches(bx + (bw - pw) / 2), Inches(by + (bh - ph) / 2), Inches(pw), Inches(ph))
+        if vid and vid.exists():   # FAQ Q4: the screen-recorded demo is attached in the presentation
+            D.slide.shapes.add_movie(str(vid), *args, poster_frame_image=str(shot), mime_type="video/mp4")
+        else:
+            D.slide.shapes.add_picture(str(shot), *args)
     else:
         D.box(bx, by, bw, bh, "FBFBFB", GREY, dash=True)
         D.tb(bx, by, bw, bh, [{"text": "DEMO VIDEO / SCREENSHOT", "bold": True, "size": 22, "color": GREY, "align": "c", "after": 4},
@@ -715,8 +720,9 @@ def slide_demo(D: Deck, video_url: str | None, demo_note: str):
                               {"text": "drop deliverables/demo_screenshot.png and rebuild", "size": 14, "color": GREY, "align": "c", "italic": True}],
              anchor="m")
     D.box(bx, by + bh + 0.12, bw, 0.62, T_GREEN, None)
-    D.tb(bx + 0.15, by + bh + 0.12, bw - 0.3, 0.62, "Video: " + (video_url or "custos_demo.mp4 (3½ min screen recording, submitted with this deck)"),
-         size=14, bold=True, color=NAVY, anchor="m")
+    vtxt = video_url or ("embedded above: click to play (also submitted as custos_demo.mp4)" if vid and vid.exists()
+                         else "custos_demo.mp4 (screen recording, submitted with this deck)")
+    D.tb(bx + 0.15, by + bh + 0.12, bw - 0.3, 0.62, "Video: " + vtxt, size=14, bold=True, color=NAVY, anchor="m")
     beats = [("1", "Quarantine", "The forged T0 email conflicts with the ERP record (T3). Custos quarantines it; the undefended agent stores it.", AMBER),
              ("2", "Gate", "“Pay Acme’s March invoice”: undefended, ₹40,00,000 goes to the attacker. With Custos: nothing paid; emails to the attacker blocked.", RED),
              ("3", "Rollback", "One click removes the poison and the summaries derived from it, and reports the exposed sessions.", GREEN)]
@@ -1617,7 +1623,7 @@ def build(args) -> int:
     add_notes(D, "slide_glance")
     slide_architecture(D)
     add_notes(D, "slide_architecture")
-    slide_demo(D, args.video_url, args.demo_note)
+    slide_demo(D, args.video_url, args.demo_note, args.embed_video)
     add_notes(D, "slide_demo")
     slide_method(D)
     add_notes(D, "slide_method")
@@ -1766,6 +1772,7 @@ def main():
     ap.add_argument("--claims", default=str(ROOT / "docs" / "CLAIMS.md"))
     ap.add_argument("--claims-values", default=str(ROOT / "deliverables" / "claims_values.csv"))
     ap.add_argument("--video-url", default=None, help="demo video link shown on the demo slide")
+    ap.add_argument("--embed-video", default=None, help="mp4 to embed on the demo slide (poster: deliverables/demo_screenshot.png)")
     ap.add_argument("--demo-note", default="Live golden-path runs so far: the undefended agent paid the attacker in several seeds; Custos quarantined in every run and blocked the payment.")
     ap.add_argument("--sample", action="store_true", help="force the SAMPLE DATA watermark")
     ap.add_argument("--make-sample", metavar="DIR", help="write a synthetic SAMPLE results dir and exit")

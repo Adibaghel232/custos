@@ -26,35 +26,26 @@ def load(path: Path) -> dict | None:
 
 
 def lines(final: dict | None, ad: dict | None, pr: dict | None) -> list[str]:
-    out = ["One demo is not proof, so we built Custos-Bench: eleven attack families, an adaptive attacker, "
-           "and a replayable episode behind every number."]
+    """About 30 seconds: the headline number, then the two public benchmarks (details stay in the deck)."""
+    out = ["One demo is not proof, so we built a benchmark."]
     if final and final.get("ASR_U") is not None and final.get("ASR_C") is not None:
         out.append(f"Across {final['N_ATTACK']:,} attack episodes, attacks succeeded {p(final['ASR_U'])} percent of the time "
-                   f"with no defence, and {p(final['ASR_C'])} percent with Custos.")
-    if final and final.get("AASR_C") is not None:
-        s = f"An adaptive attacker that rewrote its payloads up to {final['K']} times reached {p(final['AASR_C'])} percent against Custos"
-        out.append(s + (f", and {p(final['AASR_PI'])} percent against the injection filter." if final.get("AASR_PI") is not None else "."))
+                   f"without a defence, and {p(final['ASR_C'])} percent with Custos.")
     if ad or pr:
-        out.append("Then we ran two public benchmarks that we did not write.")
+        out.append("And we ran two public benchmarks that we did not write.")
     if ad:
         d = ad["defences"]
         n, c = d.get("none"), d.get("custos")
         if n and c:
-            du = abs(c["utility_under_attack"] - n["utility_under_attack"])
-            tail = ", with the same task success." if du <= 0.03 else \
-                f", with task success at {p(c['utility_under_attack'])} percent instead of {p(n['utility_under_attack'])}."
-            out.append(f"On AgentDojo's banking tasks, injected payment orders succeeded {p(n['asr'])} percent of the time "
-                       f"without a defence.")
-            out.append(f"With Custos, every attempt became a confirmation request that named the untrusted source, so "
-                       f"{p(c['asr'])} percent got through{tail}")
+            same = abs(c["utility_under_attack"] - n["utility_under_attack"]) <= 0.03
+            got = "and never with Custos" if c["asr"] == 0 else f"and {p(c['asr'])} percent with Custos"
+            out.append(f"On AgentDojo, injected payments got through {p(n['asr'])} percent of the time without a defence, {got}, "
+                       f"which turned each one into a confirmation request" + (", at the same task success." if same else "."))
     if pr:
         c = pr["cells"]
-        t0, t3, q3 = c.get("D0|trusted|all"), c.get("D3|trusted|all"), c.get("D3|poison_only|all")
+        t0, t3 = c.get("D0|trusted|all"), c.get("D3|trusted|all")
         if t0 and t3:
-            out.append(f"On PoisonedRAG, when the trusted answer is already in memory, poisoning drops from {p(t0['asr'])} "
-                       f"to {p(t3['asr'])} percent.")
-        if q3:
-            out.append("When nothing trusted exists, Custos cannot know the truth, and we report that too.")
+            out.append(f"On PoisonedRAG, poisoning against a trusted record fell from {p(t0['asr'])} to {p(t3['asr'])} percent.")
     return out
 
 
