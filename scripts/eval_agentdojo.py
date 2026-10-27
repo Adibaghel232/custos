@@ -58,6 +58,20 @@ def _loop() -> asyncio.AbstractEventLoop:
     return _tls.loop
 
 
+_SHARED: list[asyncio.AbstractEventLoop] = []
+_SHARED_LOCK = threading.Lock()
+
+
+def _shared_loop() -> asyncio.AbstractEventLoop:
+    """One background loop for the NVIDIA detector clients: their async primitives are bound to a single loop."""
+    with _SHARED_LOCK:
+        if not _SHARED:
+            lp = asyncio.new_event_loop()
+            threading.Thread(target=lp.run_forever, daemon=True).start()
+            _SHARED.append(lp)
+    return _SHARED[0]
+
+
 def wilson(k: int, n: int, z: float = 1.96) -> list[float]:
     if n == 0:
         return [0.0, 0.0]
@@ -166,7 +180,7 @@ class NvidiaPIDetector(PromptInjectionDetector):
         self.flt = PIFilter()
 
     def detect(self, tool_output: str):
-        r = _loop().run_until_complete(self.flt(tool_output))
+        r = asyncio.run_coroutine_threadsafe(self.flt(tool_output), _shared_loop()).result(timeout=600)
         return bool(r.flagged), 1.0 if r.flagged else 0.0
 
 
