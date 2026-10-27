@@ -14,7 +14,7 @@ We finished top-3 with a pitch. The finals are judged on a presentation plus a s
 2. **Real numbers with confidence intervals.** We run Custos-Bench on NVIDIA GPUs and report attack success (ASR), injection success (ISR), false quarantines, utility, leakage, erasure and latency. Each one compares Custos with undefended memory, a prompt-injection filter and A-MemGuard-lite, plus ablations. Every number in the deck comes from `results/final/metrics.json`.
 3. **Genuine NVIDIA stack.** The stack is NVIDIA end to end:
    - Nemotron 3.5 Lightning, self-hosted with vLLM on Brev A100s, for the agent, claim extraction and the NLI/grounding judge.
-   - Nemotron 3 Super (hosted) as the adaptive attacker and the independent judge.
+   - Nemotron 3 Ultra 550B (hosted) as the adaptive attacker and the independent judge.
    - Nemotron 3.5 embeddings.
    - NemoGuard and Nemotron content-safety as baselines.
    - NeMo Guardrails rail, garak probe and cuVS are stretch goals.
@@ -61,7 +61,7 @@ We finished top-3 with a pitch. The finals are judged on a presentation plus a s
 | Role | Model | Where |
 |---|---|---|
 | Agent planner, claim extractor, NLI/grounding judge | `nvidia/nemotron-3.5-lightning-30b-a3b` (thinking off) | Brev A100 via vLLM v0.27.1 for the bench; hosted for dev |
-| Adaptive attacker, independent judge | `nvidia/nemotron-3-super-120b-a12b` | hosted |
+| Adaptive attacker, independent judge | `nvidia/nemotron-3-ultra-550b-a55b` | hosted (Super-120B not enabled on our key) |
 | Embeddings | `nvidia/nemotron-3.5-embed-1b` | hosted, cached |
 | Baseline detectors | NemoGuard JailbreakDetect, `nvidia/nemotron-3.5-content-safety`, PromptArmor-style prompt on Lightning | hosted |
 
