@@ -88,8 +88,10 @@ async def main() -> None:
     ap.add_argument("--defences", default="D0,D1,D2,D3")
     ap.add_argument("--conditions", default="poison_only,trusted")
     ap.add_argument("--channels", default="web,kb")
+    ap.add_argument("--data", default=str(DATA))
     a = ap.parse_args()
-    data = list(json.loads(DATA.read_text(encoding="utf-8")).values())
+    dpath = Path(a.data)
+    data = list(json.loads(dpath.read_text(encoding="utf-8")).values())
     data = data[: a.limit] if a.limit else data
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -121,10 +123,10 @@ async def main() -> None:
                 print(f"{n}/{len(jobs)}", flush=True)
 
     await asyncio.gather(*(run(j) for j in jobs))
-    summarise(fp, out / "summary.json")
+    summarise(fp, out / "summary.json", dpath.stem)
 
 
-def summarise(fp: Path, dest: Path) -> None:
+def summarise(fp: Path, dest: Path, name: str = "nq") -> None:
     rows = {}
     for line in fp.read_text(encoding="utf-8").splitlines():
         r = json.loads(line)
@@ -145,7 +147,7 @@ def summarise(fp: Path, dest: Path) -> None:
                    "asr": x["asr"] / x["n"], "asr_ci95": wilson(x["asr"], x["n"]),
                    "acc": x["acc"] / x["n"], "acc_ci95": wilson(x["acc"], x["n"]),
                    "poison_retrieved_rate": x["poison_retrieved"] / x["n"]}
-    dest.write_text(json.dumps({"dataset": "PoisonedRAG NQ (100 targets x 5 adversarial passages)", "cells": summ}, indent=1))
+    dest.write_text(json.dumps({"dataset": f"PoisonedRAG {name} (targets x 5 adversarial passages)", "cells": summ}, indent=1))
     for k, v in summ.items():
         if v["channel"] == "all":
             print(f"{v['defence']:4s} {v['condition']:12s} n={v['n']:4d} ASR={v['asr']:.1%} "
