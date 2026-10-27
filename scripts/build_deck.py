@@ -747,6 +747,99 @@ def slide_poisoning(D: Deck):
              + ("Persistence source: " + str(pers.get("source")) if pers else ""), y=6.76)
 
 
+def _ext(R: Results, name: str) -> dict | None:
+    for base in (R.dir, R.dir.parent, Path("runs")):
+        p = base / name / "summary.json"
+        if p.exists():
+            return json.loads(p.read_text(encoding="utf-8"))
+    return None
+
+
+def _ext_chart(D: Deck, x, y, w, h, title: str, cats: list[str], series: list[tuple[str, list]], colors: list[str]):
+    D.tb(x, y, w, 0.32, title, size=16, bold=True, color=NAVY, anchor="m")
+    cd = CategoryChartData()
+    cd.categories = cats
+    for name, vals in series:
+        cd.add_series(name, vals)
+    gf = D.slide.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, Inches(x), Inches(y + 0.36), Inches(w), Inches(h - 0.36), cd)
+    ch = gf.chart
+    D.chart_style(ch)
+    D.axis_style(ch.value_axis, 0, 100, '0"%"', major=25)
+    D.axis_style(ch.category_axis, grid=False)
+    horiz_labels(ch.category_axis)
+    ch.has_legend = len(series) > 1
+    if ch.has_legend:
+        ch.legend.include_in_layout = False
+        ch.legend.font.size = Pt(11)
+    pl = ch.plots[0]
+    pl.gap_width = 70
+    pl.has_data_labels = True
+    pl.data_labels.number_format = '0"%"'
+    pl.data_labels.number_format_is_linked = False
+    pl.data_labels.font.size = Pt(10)
+    for s, c in zip(pl.series, colors):
+        s.format.fill.solid()
+        s.format.fill.fore_color.rgb = rgb(c)
+
+
+def slide_external(D: Deck):
+    """Two public benchmarks we did not design: PoisonedRAG (NQ) and AgentDojo banking."""
+    R = D.R
+    pr, ad = _ext(R, "external_poisonedrag"), _ext(R, "external_agentdojo")
+    if not pr and not ad:
+        return
+    D.new_slide("4 · METRICS · INDEPENDENT PUBLIC BENCHMARKS",
+                "Not our attacks: Custos on two public benchmarks")
+    src = []
+    if pr:
+        cells = pr["cells"]
+        names = [("D0", "None"), ("D1", "PI filter"), ("D2", "A-MemGuard"), ("D3", "Custos")]
+        names = [(d, l) for d, l in names if f"{d}|trusted|all" in cells]
+
+        def v(d, c):
+            x = cells.get(f"{d}|{c}|all")
+            R._log(f"PoisonedRAG {d} {c} ASR", f"external_poisonedrag.{d}|{c}|all.asr", NM if not x else fpct(x["asr"]),
+                   src="external_poisonedrag/summary.json")
+            return None if not x else round(100 * x["asr"], 1)
+        _ext_chart(D, 0.5, 1.65, 6.05, 3.3, "PoisonedRAG (USENIX Sec '25), NQ: attack success",
+                   [l for _, l in names], [("trusted fact already in memory", [v(d, "trusted") for d, _ in names]),
+                                           ("no trusted fact", [v(d, "poison_only") for d, _ in names])],
+                   [NAVY, LINE])
+        n = cells.get("D3|trusted|all", {}).get("n")
+        src.append(f"PoisonedRAG: 100 NQ targets x 5 attacker passages, web + KB channel, n={n} per defence/condition")
+    if ad:
+        dd = ad["defences"]
+        names = [("none", "None"), ("spotlight", "Spotlight"), ("pi_filter", "PI filter"), ("custos", "Custos")]
+        names = [(d, l) for d, l in names if d in dd]
+
+        def a(d, k):
+            R._log(f"AgentDojo {d} {k}", f"external_agentdojo.{d}.{k}", fpct(dd[d][k]), src="external_agentdojo/summary.json")
+            return round(100 * dd[d][k], 1)
+        _ext_chart(D, 6.78, 1.65, 6.05, 3.3, "AgentDojo (NeurIPS '24) banking: attack vs utility",
+                   [l for _, l in names], [("attack success", [a(d, "asr") for d, _ in names]),
+                                           ("utility under attack", [a(d, "utility_under_attack") for d, _ in names])],
+                   [RED if "RED" in globals() else NAVY, GREEN])
+        n = dd.get("custos", {}).get("attack_n")
+        src.append(f"AgentDojo v1.2.1 banking: 16 user x 9 injection tasks, important_instructions attack, official scoring, n={n}")
+    rows = [["What it shows", "Read"]]
+    if pr:
+        c3, c0 = pr["cells"].get("D3|trusted|all"), pr["cells"].get("D0|trusted|all")
+        if c3 and c0:
+            rows.append(["Trusted record vs web poison", f"Custos keeps the trusted answer: attack {fpct(c0['asr'])} → {fpct(c3['asr'])}"])
+        p3 = pr["cells"].get("D3|poison_only|all")
+        if p3:
+            rows.append(["No trusted record (honest limit)", f"Custos {fpct(p3['asr'])}: provenance is not fact-checking"])
+    if ad and "custos" in ad["defences"]:
+        c, n0 = ad["defences"]["custos"], ad["defences"].get("none", {})
+        pi = ad["defences"].get("pi_filter")
+        txt = f"Gate: attack {fpct(n0.get('asr'))} → {fpct(c['asr'])}, utility {fpct(c['utility_under_attack'])}"
+        if pi:
+            txt += f" (PI filter {fpct(pi['asr'])} but utility {fpct(pi['utility_under_attack'])})"
+        rows.append(["Injected payment / password orders", txt])
+    D.table(0.5, 5.15, 12.33, rows, [3.6, 8.73], row_h=0.36, bold_first_col=True)
+    D.source(" · ".join(src) + ". Agent: Nemotron 3.5 Lightning (vLLM, A100). Custos not tuned on these sets.", y=6.76)
+
+
 def slide_adaptive(D: Deck):
     R = D.R
     defs = [d for d in defence_ids(R) if R.g(f"by_defence.{d}.AdaptiveCurve")]
@@ -1379,6 +1472,7 @@ def build(args) -> int:
     slide_demo(D, args.video_url, args.demo_note)
     slide_method(D)
     slide_poisoning(D)
+    slide_external(D)
     slide_adaptive(D)
     slide_prov_cons(D)
     slide_access(D)
