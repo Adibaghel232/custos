@@ -295,6 +295,12 @@ await shot('S10', async (T) => {
 // ---- S11 bench (sample data, short) ----
 await shot('S11', async (T) => {
   await glide(page, page.locator('nav[aria-label="Views"] button:has-text("Bench")').first());
+  const ss = S('S11').sentences;
+  const k = ss.findIndex((x) => /public benchmarks/i.test(x.text));
+  if (k > 0 && fs.existsSync(path.join(HERE, 'cards', 'public.png'))) {   // deck slide image of the two public benchmarks
+    await T.until(ss[k].start - 0.2);
+    await page.goto(cardUrl('public.html'));
+  }
   await T.until(S('S11').min_s);
 });
 
