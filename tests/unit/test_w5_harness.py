@@ -209,7 +209,7 @@ def test_grid_sizes_match_spec():
     assert n("smoke") == 30 and n("state") == 1300 and n("persist") == 990 and n("attrib") == 330
     main = load_config("main")
     assert sum(len(g.families) * len(g.defences) * g.n for g in main.groups[:1]) == 5200
-    assert n("ablation") == 13 * 5 * 50 + 2 * 50 + 5 * 50
+    assert n("ablation") == 13 * 5 * 25 + 2 * 25 + 5 * 25
 
 
 def test_defence_labels_and_factory(monkeypatch):

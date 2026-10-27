@@ -242,6 +242,8 @@ def compute_metrics(path: str | Path, *, side_tables: Path | None = None) -> Com
         asrf = rate_row(int(g["target_fatigued"].sum()), len(g)) if len(g) else None
         ga = _headline(att_attr[att_attr["user_policy"] == "cautious"], primary)
         ga = ga[ga["defence"] == d]
+        if is_custos(d):   # Custos names a decisive memory at the gate (leave-one-out); no gate decision -> nothing to attribute
+            ga = ga[ga["attrib_method"] == "loo"]
         attr = rate_row(int(ga["attrib_hit"].astype(bool).sum()), len(ga)) if len(ga) else None
         if attr:
             attr["method"] = ga["attrib_method"].mode().iloc[0]

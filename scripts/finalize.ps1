@@ -18,10 +18,10 @@ function Step($t) { Write-Host ""; Write-Host "== $t" -ForegroundColor Cyan }
 if (-not $NoPull) {
     Step 'pull results from the GPU box (via the lab PC)'
     New-Item -ItemType Directory -Force $Final | Out-Null
-    $files = 'metrics.json final.json FINAL.md cells.csv compute.csv scores.csv run.json run_meta.json latency_raw.csv adaptive.csv utility.csv provenance.csv configs.csv figures external_poisonedrag/summary.json external_agentdojo/summary.json'
-    $tar = Join-Path $env:TEMP 'custos_final.tgz'
-    & ssh 10.81.30.68 "ssh custos-gpu 'cd ~/custos/runs && tar czf - --ignore-failed-read $files 2>/dev/null'" > $tar
-    & tar -xzf $tar -C $Final
+    $files = 'metrics.json final.json FINAL.md cells.csv scores.csv run.json run_meta.json latency_raw.csv adaptive.csv utility.csv provenance.csv configs.csv isolation.csv erasure.csv contradiction_eval.csv figures external_poisonedrag/summary.json external_agentdojo/summary.json'
+    # Windows PowerShell re-encodes redirected binary output, so the tar stream goes through Git Bash
+    $dest = ($Final -replace '\\', '/')
+    & bash -c "ssh 10.81.30.68 `"ssh custos-gpu 'cd ~/custos/runs && tar czf - --ignore-failed-read $files 2>/dev/null'`" 2>/dev/null | tar --force-local -xzf - -C '$dest'"
     $sec = (& ssh 10.81.30.68 "ssh custos-gpu 'cut -d. -f1 /proc/uptime'" | Select-Object -Last 1).Trim()
     $up = [math]::Round([double]$sec / 3600, 0)
     Write-Host "GPU box uptime hours: $up (8 x A100)"

@@ -156,7 +156,7 @@ class Results:
 def fpct(x: float | None, d: int = 1) -> str:
     if x is None:
         return NM
-    if 0 < x < 0.001:
+    if 0 < x < 0.001 or 0.999 <= x < 1:
         return f"{100 * x:.2f}%"
     return f"{100 * x:.{d}f}%"
 
@@ -1477,8 +1477,8 @@ def slide_a_repro(D: Deck):
              f"GPU (bench host): {gpu or NM}",
              f"versions: " + (", ".join(f"{k} {v}" for k, v in (meta.get('versions') or {}).items()) or NM),
              "commands:  custos-bench run main   ·   custos-bench metrics runs   ·   python scripts/build_deck.py --results results/final",
-             "harness audit: two bugs found during evaluation and fixed before the final run: the f11 leak check counted the attacker's "
-             "own plant call as a leak (all defences 100%); unextractable user notes were dropped. Every affected cell was re-run on frozen code."]
+             "harness audit: fixed during evaluation: the f11 leak check counted the attacker's own plant call as a leak (all defences 100%); "
+             "unextractable user notes were dropped (re-run on frozen code); Custos attribution counted episodes with no gate decision as misses."]
     D.card_text(0.5, 1.7, 12.33, 1.85, [{"text": t, "size": 12, "after": 2} for t in lines], fill=CARD, size=12)
     fl = R.g("flags") or []
     D.tb(0.5, 3.6, 12.33, 0.3, "Data-quality flags from the bench (read before quoting any number)", size=16, bold=True, color=NAVY, anchor="m")
