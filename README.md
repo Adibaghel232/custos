@@ -25,7 +25,35 @@ map from every deck number to its source). Agent and checkers: **Nemotron 3.5 Li
 **A100-80GB**); adaptive attacker and independent judge: **Nemotron 3 Ultra**; embeddings: **llama-nemotron-embed**.
 
 <!-- RESULTS:BEGIN -->
-Results are filled in from the final run.
+**Custos-Bench** (11 attack families + 2 laundering variants, finance agent, Nemotron 3.5 Lightning; 95% Wilson CIs):
+
+| Defence | Attack success (ASR) | Injection success (ISR) | Benign task success |
+|---|---|---|---|
+| Undefended (LangGraph store) | 27.2% [24.9%–29.7%] (n=1,300) | 80.9% [78.7%–83.0%] (n=1,300) | 95.7% [92.2%–97.6%] (n=230) |
+| PI filter (NemoGuard + content safety + PromptArmor-style) | 9.4% [7.9%–11.1%] (n=1,293) | 50.0% [47.2%–52.7%] (n=1,293) | 87.4% [82.5%–91.1%] (n=230) |
+| A-MemGuard-style | 24.5% [22.3%–27.0%] (n=1,300) | 78.0% [75.7%–80.2%] (n=1,300) | 88.7% [84.0%–92.2%] (n=230) |
+| **Custos** | 0.2% [0.0%–0.6%] (n=1,228) | 4.2% [3.2%–5.4%] (n=1,228) | 92.6% [88.4%–95.3%] (n=229) |
+
+Custos also: adaptive attacker (Nemotron 3 Ultra, up to K rewrites) ASR 0.0% [0.0%–4.6%] (n=80); cross-tenant leakage 0/10,000 probes; false quarantine of legitimate updates 11.5% [6.7%–19.1%] (n=104); LongMemEval utility change -11.2 pts.
+
+**AgentDojo** v1.2.1 banking (public; official tasks, `important_instructions` attack and scoring):
+
+| Defence | Attack success | Utility under attack | Benign utility |
+|---|---|---|---|
+| None | 52.1% (n=144) | 53.5% | 56.2% |
+| Spotlighting | 48.6% (n=144) | 50.7% | 50.0% |
+| PI filter (NVIDIA detectors) | 0.0% (n=144) | 31.2% | 50.0% |
+| **Custos gate** (cautious user) | 0.0% (n=144) | 52.8% | 56.2% |
+| Custos gate, user approves every ask | 52.8% (n=144) | 54.9% | 56.2% |
+
+**PoisonedRAG** NQ (public; 100 targets × 5 attacker passages; held out while tuning):
+
+| Defence | ASR, trusted record in memory | ASR, poison only |
+|---|---|---|
+| Undefended (LangGraph store) | 74.0% (n=200) | 99.0% (n=200) |
+| PI filter (NemoGuard + content safety + PromptArmor-style) | 74.0% (n=200) | 99.0% (n=200) |
+| A-MemGuard-style | 37.0% (n=200) | 83.0% (n=200) |
+| **Custos** | 3.0% (n=200) | 76.5% (n=200) |
 <!-- RESULTS:END -->
 
 **Limits we state up front.** Provenance is not fact-checking: with no trusted record to compare against, Custos

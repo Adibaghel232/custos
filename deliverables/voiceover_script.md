@@ -14,7 +14,7 @@ What is real in the video
 - The undefended agent used a LangGraph in-memory store and the Custos agent used the Custos native store. Neither used Mem0, so the voiceover never says Mem0 (the console hard-codes that label; the recorder swaps it on screen). The overlay's words "Same memory" mean the same starting facts and the same email.
 - Session 9 of the Custos agent made no payment at all, so the video says "pays nobody" and not "the gate blocked the payment". The gate blocks shown are four send_email calls in session 3. Two of them went to genuine ERP addresses and were blocked too (the source lineage was tainted), which is a false block; the video shows the one to the attacker's address.
 - The ledger on screen is rebuilt from the recorded events and signed with a fresh demo key. It is not the byte-for-byte ledger of the live run.
-- The Bench screen shows SAMPLE data until the final results exist. Its words below contain no numbers on purpose.
+- The Bench screen shows the final run (results/final/ui). The S11 numbers are written by scripts/video/s11_text.py from results/final/final.json and the two public-benchmark summaries.
 
 ---
 
@@ -63,8 +63,8 @@ Every step goes into a signed, hash-chained ledger, rebuilt here from the record
 > screen: Ledger tab, Verify chain, then Tamper demo.
 
 ### S11 · Bench
-One demo is not proof, so we built Custos-Bench: eleven attack families, an adaptive attacker, and a replayable episode behind every number.
-> screen: Bench dashboard. SAMPLE placeholder numbers, kept short. Re-shoot when results/final exists, then add the headline numbers here from results/final.json: attack success undefended vs Custos, adaptive attacker, false quarantine rate, number of episodes. Do not type numbers by hand.
+On our benchmark, across 7,175 attack episodes, attacks succeeded 27.2 percent of the time without a defence, and 0.2 percent with Custos. Two public benchmarks that we did not write agree. On AgentDojo, injected payments got through 52.1 percent of the time undefended, and never with Custos asking the user first, at the same task success. On PoisonedRAG, poisoning against a trusted record fell from 74 to 3 percent.
+> screen: Bench dashboard (results/final/ui), then the public-benchmarks card (deck slide image) from the sentence that mentions public benchmarks. Numbers written by scripts/video/s11_text.py from the result files.
 
 ### S12 · Close
 Built with Nemotron models on NVIDIA GPUs. Custos: memory is evidence. Thank you.
