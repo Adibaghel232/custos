@@ -1317,6 +1317,17 @@ def slide_nvidia(D: Deck):
              color=GREY, italic=True, name="~src")
 
 
+def _util_note(R: Results) -> str:
+    """Utility cost sentence for the limits card when the measured LongMemEval delta misses the -2 pt target."""
+    ud, u0, u3 = R.g("by_defence.D3.UtilityDelta"), R.g("by_defence.D0.Utility"), R.g("by_defence.D3.Utility")
+    if not isinstance(ud, dict) or ud.get("delta") is None or ud["delta"] >= -0.02:
+        return ""
+    t = f"{100 * ud['delta']:+.1f} pts"
+    R._log("utility delta (limits)", "by_defence.D3.UtilityDelta.delta", t)
+    acc = f" ({fpct(u3['rate'], 0)} vs {fpct(u0['rate'], 0)})" if isinstance(u0, dict) and isinstance(u3, dict) and         u0.get("rate") is not None and u3.get("rate") is not None else ""
+    return f" LongMemEval accuracy {t}{acc}: a user's own updates can be held as lower-tier conflicts."
+
+
 def slide_limits(D: Deck):
     R = D.R
     D.new_slide("1 · IMPACT · RESPONSIBLE AI", "Responsible by design: limits, compliance, roadmap")
@@ -1330,7 +1341,8 @@ def slide_limits(D: Deck):
                src="external_poisonedrag/summary.json")
     lim = [("Provenance is not fact-checking:", " with no trusted record to compare, Custos cannot tell which outside fact is true"
             + (f" (PoisonedRAG, poison only: {fpct(q3['asr'])} still succeed)." if q3 else ".")),
-           ("Review load:", f" low-trust updates that contradict a trusted record wait for confirmation; FQR {fqr}."),
+           ("Review load:", f" low-trust updates that contradict a trusted record wait for confirmation; FQR {fqr}."
+            + _util_note(R)),
            ("Compromised T3 source (the ERP) is outside the threat model;", " Custos bounds the blast radius: one rollback."),
            ("Own benchmark is synthetic:", " one domain, one agent family (Nemotron); two public benchmarks back it."),
            ("LLM checkers can err:", " they can miss a conflict or hold a good write, never raise a tier."),
