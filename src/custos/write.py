@@ -5,6 +5,7 @@ Records are PENDING until the verdict; only COMMITTED records are indexed (retri
 """
 from __future__ import annotations
 
+import os
 import asyncio
 import logging
 import time
@@ -56,7 +57,7 @@ from .types import (
 )
 
 log = logging.getLogger("custos.write")
-CHECK_TIMEOUT_S = 20.0
+CHECK_TIMEOUT_S = float(os.getenv("CUSTOS_CHECK_TIMEOUT_S", "90"))  # fail-closed only on genuine checker outages, not queueing under load
 AGENT_VIAS = ("remember", "summary")
 
 
