@@ -472,13 +472,14 @@ class WritePipeline:
         # conflict candidates by embedding
         cand: list[tuple[float, Item, MemoryRecord]] = []
         results = await asyncio.gather(*[
-            embed_candidates(self.store, it.rec, tau=tau, k=k, handled=set(it.conflicts) | {
+            embed_candidates(self.store, it.rec, tau=tau, k=k, tau_uptier=self.th("embed_conflict_cosine_uptier", 0.55),
+                             handled=set(it.conflicts) | {
                 rid for ck in it.checks if ck.check == "key_conflict" for rid in ck.against}) for it in live])
         for it, (ck, cs) in zip(live, results):
             it.checks.append(ck)
             cand += [(s, it, r) for r, s in cs]
-        for s, it, r in sorted(cand, key=lambda x: -x[0]):
-            if len(pairs) >= 8:
+        for s, it, r in sorted(cand, key=lambda x: (int(x[2].tier) <= int(x[1].rec.tier), -x[0])):
+            if len(pairs) >= 12:
                 break
             pid = len(pairs)
             pairs.append({"pair_id": pid, "existing": {"text": r.content, "tier": f"T{int(r.tier)}",

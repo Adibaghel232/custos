@@ -50,6 +50,7 @@ llm:
 thresholds:
   embed_conflict_cosine: 0.80     # candidate conflicts: same tenant, cosine >= this
   embed_candidates_k: 8
+  embed_conflict_cosine_uptier: 0.55  # looser bar vs HIGHER-tier records (contradictions score lower than paraphrases)
   echo_cosine: 0.85               # agent-produced claim echoes a T0/T1 item -> inherits its tier
   nli_min_conf: 0.5
   grounding_min_conf: 0.5
