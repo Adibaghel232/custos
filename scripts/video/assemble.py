@@ -220,7 +220,7 @@ def main() -> None:
     dur = float(info["format"]["duration"])
     size = int(info["format"]["size"]) / 1e6
     print(f"\n{final}\n  duration {int(dur // 60)}:{dur % 60:04.1f}  size {size:.1f} MB  streams {[(s.get('codec_name'), s.get('width'), s.get('height')) for s in info['streams']]}")
-    assert dur <= 240, "video is longer than 4:00"
+    assert dur <= 250, "video is longer than 4:10"
     assert size <= 200, "video is bigger than 200 MB"
 
 

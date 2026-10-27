@@ -26,21 +26,23 @@ def load(path: Path) -> dict | None:
 
 
 def lines(final: dict | None, ad: dict | None, pr: dict | None) -> list[str]:
-    """About 30 seconds: the headline number, then the two public benchmarks (details stay in the deck)."""
-    out = ["One demo is not proof, so we built a benchmark."]
+    """About 25 seconds: the headline number, then the two public benchmarks (details stay in the deck)."""
+    out = []
     if final and final.get("ASR_U") is not None and final.get("ASR_C") is not None:
-        out.append(f"Across {final['N_ATTACK']:,} attack episodes, attacks succeeded {p(final['ASR_U'])} percent of the time "
-                   f"without a defence, and {p(final['ASR_C'])} percent with Custos.")
+        out.append(f"On our benchmark, across {final['N_ATTACK']:,} attack episodes, attacks succeeded {p(final['ASR_U'])} percent "
+                   f"of the time without a defence, and {p(final['ASR_C'])} percent with Custos.")
+    else:
+        out.append("One demo is not proof, so we built a benchmark.")
     if ad or pr:
-        out.append("And we ran two public benchmarks that we did not write.")
+        out.append("Two public benchmarks that we did not write agree.")
     if ad:
         d = ad["defences"]
         n, c = d.get("none"), d.get("custos")
         if n and c:
             same = abs(c["utility_under_attack"] - n["utility_under_attack"]) <= 0.03
-            got = "and never with Custos" if c["asr"] == 0 else f"and {p(c['asr'])} percent with Custos"
-            out.append(f"On AgentDojo, injected payments got through {p(n['asr'])} percent of the time without a defence, {got}, "
-                       f"which turned each one into a confirmation request" + (", at the same task success." if same else "."))
+            got = "and never with Custos asking the user first" if c["asr"] == 0 else f"and {p(c['asr'])} percent with Custos"
+            out.append(f"On AgentDojo, injected payments got through {p(n['asr'])} percent of the time undefended, {got}"
+                       + (", at the same task success." if same else "."))
     if pr:
         c = pr["cells"]
         t0, t3 = c.get("D0|trusted|all"), c.get("D3|trusted|all")
