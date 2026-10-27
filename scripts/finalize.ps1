@@ -22,9 +22,10 @@ if (-not $NoPull) {
     $tar = Join-Path $env:TEMP 'custos_final.tgz'
     & ssh 10.81.30.68 "ssh custos-gpu 'cd ~/custos/runs && tar czf - --ignore-failed-read $files 2>/dev/null'" > $tar
     & tar -xzf $tar -C $Final
-    $up = (& ssh 10.81.30.68 "ssh custos-gpu 'echo `$(( (`$(date +%s) - `$(date -d \""`$(uptime -s)\"" +%s)) / 3600 ))'").Trim()
-    Write-Host "GPU box uptime hours: $up"
-    $env:CUSTOS_GPU_HOURS = [string]([int]$up * 8)
+    $sec = (& ssh 10.81.30.68 "ssh custos-gpu 'cut -d. -f1 /proc/uptime'" | Select-Object -Last 1).Trim()
+    $up = [math]::Round([double]$sec / 3600, 0)
+    Write-Host "GPU box uptime hours: $up (8 x A100)"
+    $env:CUSTOS_GPU_HOURS = [string]($up * 8)
     Get-ChildItem $Final | Format-Table Name, Length
 }
 if (-not (Test-Path (Join-Path $Final 'metrics.json'))) { throw "results\final\metrics.json missing" }
@@ -41,9 +42,9 @@ if ($LASTEXITCODE) { throw 's11_text failed' }
 
 Step 'deck'
 $deck = Join-Path $Root 'deliverables\Custos_AEGIS2026_Final.pptx'
-$args = @('scripts\build_deck.py', '--results', $Final, '--out', $deck)
-if ($DemoNote) { $args += @('--demo-note', $DemoNote) }
-& $Py @args
+$dargs = @('scripts\build_deck.py', '--results', $Final, '--out', $deck)
+if ($DemoNote) { $dargs += @('--demo-note', $DemoNote) }
+& $Py @dargs
 if ($LASTEXITCODE) { throw 'build_deck failed' }
 
 Step 'deck slides -> PNG (public-benchmarks card + QA images)'
