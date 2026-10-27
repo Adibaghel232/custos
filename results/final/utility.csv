@@ -1,0 +1,7 @@
+run_id,dataset,qtype,defence,backend,n,correct
+runs,longmemeval,knowledge-update,D0,primary,72,27
+runs,longmemeval,multi-session,D0,primary,66,10
+runs,longmemeval,temporal-reasoning,D0,primary,40,7
+runs,longmemeval,knowledge-update,D3,primary,72,13
+runs,longmemeval,multi-session,D3,primary,66,4
+runs,longmemeval,temporal-reasoning,D3,primary,40,7

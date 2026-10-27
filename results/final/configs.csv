@@ -1,0 +1,11 @@
+config_id,defence,params_json
+D0,undefended,{}
+D1,pi_filter,{}
+D2,amemguard_style,{}
+D3,custos,"{""tiers"": true, ""consistency"": true, ""gate"": true, ""quoting"": true, ""isolation"": true, ""fingerprint"": true, ""claim_lwm"": false, ""loo"": true}"
+D3-claimlwm,custos_minus_claimlwm,"{""tiers"": true, ""consistency"": true, ""gate"": true, ""quoting"": true, ""isolation"": true, ""fingerprint"": true, ""claim_lwm"": true, ""loo"": true}"
+D3-consistency,custos_minus_consistency,"{""tiers"": true, ""consistency"": false, ""gate"": true, ""quoting"": true, ""isolation"": true, ""fingerprint"": true, ""claim_lwm"": false, ""loo"": true}"
+D3-fingerprint,custos_minus_fingerprint,"{""tiers"": true, ""consistency"": true, ""gate"": true, ""quoting"": true, ""isolation"": true, ""fingerprint"": false, ""claim_lwm"": false, ""loo"": true}"
+D3-gate,custos_minus_gate,"{""tiers"": true, ""consistency"": true, ""gate"": false, ""quoting"": true, ""isolation"": true, ""fingerprint"": true, ""claim_lwm"": false, ""loo"": true}"
+D3-quoting,custos_minus_quote,"{""tiers"": true, ""consistency"": true, ""gate"": true, ""quoting"": false, ""isolation"": true, ""fingerprint"": true, ""claim_lwm"": false, ""loo"": true}"
+D3-tiers,custos_minus_tiers,"{""tiers"": false, ""consistency"": true, ""gate"": true, ""quoting"": true, ""isolation"": true, ""fingerprint"": true, ""claim_lwm"": false, ""loo"": true}"

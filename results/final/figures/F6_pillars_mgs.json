@@ -1,0 +1,51 @@
+{
+  "id": "F6",
+  "title": "Memory Governance Score by pillar",
+  "subtitle": "MGS = harmonic mean of the 4 pillars | PROVISIONAL: some components were not measured",
+  "data": [
+    {
+      "defence": "D0",
+      "pillars": {
+        "Poisoning": 0.5993956043956044,
+        "Provenance": 0.16243654822335027,
+        "Consistency": 1.0,
+        "Access": 0.35333921740650903,
+        "MGS": 0.3432080352707198
+      },
+      "provisional": true
+    },
+    {
+      "defence": "D1",
+      "pillars": {
+        "Poisoning": 0.7005889040058633,
+        "Provenance": 0.23373983739837398,
+        "Consistency": 0.4807692307692307,
+        "Access": 0.53,
+        "MGS": 0.41354680425612217
+      },
+      "provisional": true
+    },
+    {
+      "defence": "D2",
+      "pillars": {
+        "Poisoning": 0.6230526133009203,
+        "Provenance": 0.2617753623188406,
+        "Consistency": 0.8365384615384616,
+        "Access": 0.5633333333333334,
+        "MGS": 0.47643888667186995
+      },
+      "provisional": true
+    },
+    {
+      "defence": "D3",
+      "pillars": {
+        "Poisoning": 0.9797761354557187,
+        "Provenance": 0.999949846404614,
+        "Consistency": 0.8783807516684229,
+        "Access": 0.9998719958407444,
+        "MGS": 0.9617053842904334
+      },
+      "provisional": true
+    }
+  ]
+}

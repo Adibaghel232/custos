@@ -1,0 +1,32 @@
+[
+ {
+  "op": "gate_check",
+  "label": "Gate Check",
+  "defence": "custos",
+  "backend": "native",
+  "p50_ms": 10.68,
+  "p95_ms": 10821.38,
+  "n": 2291,
+  "on_critical_path": true
+ },
+ {
+  "op": "read",
+  "label": "Read",
+  "defence": "custos",
+  "backend": "native",
+  "p50_ms": 1.03,
+  "p95_ms": 2.06,
+  "n": 15803,
+  "on_critical_path": true
+ },
+ {
+  "op": "write_verdict",
+  "label": "Write Verdict",
+  "defence": "custos",
+  "backend": "native",
+  "p50_ms": 9260.85,
+  "p95_ms": 53096.23,
+  "n": 12058,
+  "on_critical_path": false
+ }
+]

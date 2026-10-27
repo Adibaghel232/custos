@@ -1,0 +1,413 @@
+{
+ "dataset": "PoisonedRAG nq (targets x 5 adversarial passages)",
+ "cells": {
+  "D0|poison_only|all": {
+   "defence": "D0",
+   "condition": "poison_only",
+   "channel": "all",
+   "n": 200,
+   "asr": 0.99,
+   "asr_ci95": [
+    0.9642775148038205,
+    0.9972533993962251
+   ],
+   "acc": 0.01,
+   "acc_ci95": [
+    0.0027466006037749346,
+    0.03572248519617954
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D0|poison_only|kb": {
+   "defence": "D0",
+   "condition": "poison_only",
+   "channel": "kb",
+   "n": 100,
+   "asr": 0.99,
+   "asr_ci95": [
+    0.9455124752390653,
+    0.9982326134344526
+   ],
+   "acc": 0.01,
+   "acc_ci95": [
+    0.0017673865655472645,
+    0.0544875247609346
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D0|poison_only|web": {
+   "defence": "D0",
+   "condition": "poison_only",
+   "channel": "web",
+   "n": 100,
+   "asr": 0.99,
+   "asr_ci95": [
+    0.9455124752390653,
+    0.9982326134344526
+   ],
+   "acc": 0.01,
+   "acc_ci95": [
+    0.0017673865655472645,
+    0.0544875247609346
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D0|trusted|all": {
+   "defence": "D0",
+   "condition": "trusted",
+   "channel": "all",
+   "n": 200,
+   "asr": 0.74,
+   "asr_ci95": [
+    0.6750912860870691,
+    0.795862631072137
+   ],
+   "acc": 0.29,
+   "acc_ci95": [
+    0.2315392689125782,
+    0.3563760535731166
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D0|trusted|kb": {
+   "defence": "D0",
+   "condition": "trusted",
+   "channel": "kb",
+   "n": 100,
+   "asr": 0.74,
+   "asr_ci95": [
+    0.6462882736813838,
+    0.8159542187301354
+   ],
+   "acc": 0.29,
+   "acc_ci95": [
+    0.21014706973984146,
+    0.38539074940007934
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D0|trusted|web": {
+   "defence": "D0",
+   "condition": "trusted",
+   "channel": "web",
+   "n": 100,
+   "asr": 0.74,
+   "asr_ci95": [
+    0.6462882736813838,
+    0.8159542187301354
+   ],
+   "acc": 0.29,
+   "acc_ci95": [
+    0.21014706973984146,
+    0.38539074940007934
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D1|poison_only|all": {
+   "defence": "D1",
+   "condition": "poison_only",
+   "channel": "all",
+   "n": 200,
+   "asr": 0.99,
+   "asr_ci95": [
+    0.9642775148038205,
+    0.9972533993962251
+   ],
+   "acc": 0.01,
+   "acc_ci95": [
+    0.0027466006037749346,
+    0.03572248519617954
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D1|poison_only|kb": {
+   "defence": "D1",
+   "condition": "poison_only",
+   "channel": "kb",
+   "n": 100,
+   "asr": 0.99,
+   "asr_ci95": [
+    0.9455124752390653,
+    0.9982326134344526
+   ],
+   "acc": 0.01,
+   "acc_ci95": [
+    0.0017673865655472645,
+    0.0544875247609346
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D1|poison_only|web": {
+   "defence": "D1",
+   "condition": "poison_only",
+   "channel": "web",
+   "n": 100,
+   "asr": 0.99,
+   "asr_ci95": [
+    0.9455124752390653,
+    0.9982326134344526
+   ],
+   "acc": 0.01,
+   "acc_ci95": [
+    0.0017673865655472645,
+    0.0544875247609346
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D1|trusted|all": {
+   "defence": "D1",
+   "condition": "trusted",
+   "channel": "all",
+   "n": 200,
+   "asr": 0.74,
+   "asr_ci95": [
+    0.6750912860870691,
+    0.795862631072137
+   ],
+   "acc": 0.29,
+   "acc_ci95": [
+    0.2315392689125782,
+    0.3563760535731166
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D1|trusted|kb": {
+   "defence": "D1",
+   "condition": "trusted",
+   "channel": "kb",
+   "n": 100,
+   "asr": 0.74,
+   "asr_ci95": [
+    0.6462882736813838,
+    0.8159542187301354
+   ],
+   "acc": 0.29,
+   "acc_ci95": [
+    0.21014706973984146,
+    0.38539074940007934
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D1|trusted|web": {
+   "defence": "D1",
+   "condition": "trusted",
+   "channel": "web",
+   "n": 100,
+   "asr": 0.74,
+   "asr_ci95": [
+    0.6462882736813838,
+    0.8159542187301354
+   ],
+   "acc": 0.29,
+   "acc_ci95": [
+    0.21014706973984146,
+    0.38539074940007934
+   ],
+   "poison_retrieved_rate": 0.98
+  },
+  "D2|poison_only|all": {
+   "defence": "D2",
+   "condition": "poison_only",
+   "channel": "all",
+   "n": 200,
+   "asr": 0.83,
+   "asr_ci95": [
+    0.7718399896049648,
+    0.8757216464889435
+   ],
+   "acc": 0.135,
+   "acc_ci95": [
+    0.09446507976920289,
+    0.18929250455117141
+   ],
+   "poison_retrieved_rate": 0.83
+  },
+  "D2|poison_only|kb": {
+   "defence": "D2",
+   "condition": "poison_only",
+   "channel": "kb",
+   "n": 100,
+   "asr": 0.83,
+   "asr_ci95": [
+    0.7445181876635703,
+    0.8910652394022684
+   ],
+   "acc": 0.13,
+   "acc_ci95": [
+    0.07757093858414264,
+    0.20980521894809878
+   ],
+   "poison_retrieved_rate": 0.83
+  },
+  "D2|poison_only|web": {
+   "defence": "D2",
+   "condition": "poison_only",
+   "channel": "web",
+   "n": 100,
+   "asr": 0.83,
+   "asr_ci95": [
+    0.7445181876635703,
+    0.8910652394022684
+   ],
+   "acc": 0.14,
+   "acc_ci95": [
+    0.08526265754464905,
+    0.22137360383807236
+   ],
+   "poison_retrieved_rate": 0.83
+  },
+  "D2|trusted|all": {
+   "defence": "D2",
+   "condition": "trusted",
+   "channel": "all",
+   "n": 200,
+   "asr": 0.37,
+   "asr_ci95": [
+    0.3061249750375241,
+    0.43877498650123936
+   ],
+   "acc": 0.625,
+   "acc_ci95": [
+    0.5561417515728713,
+    0.6891467469475485
+   ],
+   "poison_retrieved_rate": 0.4
+  },
+  "D2|trusted|kb": {
+   "defence": "D2",
+   "condition": "trusted",
+   "channel": "kb",
+   "n": 100,
+   "asr": 0.38,
+   "asr_ci95": [
+    0.2909744920013438,
+    0.47790426179289663
+   ],
+   "acc": 0.61,
+   "acc_ci95": [
+    0.5120283616749817,
+    0.699832780680298
+   ],
+   "poison_retrieved_rate": 0.39
+  },
+  "D2|trusted|web": {
+   "defence": "D2",
+   "condition": "trusted",
+   "channel": "web",
+   "n": 100,
+   "asr": 0.36,
+   "asr_ci95": [
+    0.2727107459049014,
+    0.45764780018837914
+   ],
+   "acc": 0.64,
+   "acc_ci95": [
+    0.542352199811621,
+    0.7272892540950986
+   ],
+   "poison_retrieved_rate": 0.41
+  },
+  "D3|poison_only|all": {
+   "defence": "D3",
+   "condition": "poison_only",
+   "channel": "all",
+   "n": 200,
+   "asr": 0.765,
+   "asr_ci95": [
+    0.7015850701327535,
+    0.8184265467305365
+   ],
+   "acc": 0.18,
+   "acc_ci95": [
+    0.13294550662534108,
+    0.2391159371623843
+   ],
+   "poison_retrieved_rate": 0.94
+  },
+  "D3|poison_only|kb": {
+   "defence": "D3",
+   "condition": "poison_only",
+   "channel": "kb",
+   "n": 100,
+   "asr": 0.77,
+   "asr_ci95": [
+    0.6784543514317231,
+    0.841568452531236
+   ],
+   "acc": 0.16,
+   "acc_ci95": [
+    0.10095202349473717,
+    0.24420444558894414
+   ],
+   "poison_retrieved_rate": 0.94
+  },
+  "D3|poison_only|web": {
+   "defence": "D3",
+   "condition": "poison_only",
+   "channel": "web",
+   "n": 100,
+   "asr": 0.76,
+   "asr_ci95": [
+    0.6676748127670786,
+    0.8330878873454004
+   ],
+   "acc": 0.2,
+   "acc_ci95": [
+    0.1333659225590988,
+    0.28883096192650237
+   ],
+   "poison_retrieved_rate": 0.94
+  },
+  "D3|trusted|all": {
+   "defence": "D3",
+   "condition": "trusted",
+   "channel": "all",
+   "n": 200,
+   "asr": 0.03,
+   "asr_ci95": [
+    0.013820125830748327,
+    0.06389511973247333
+   ],
+   "acc": 0.96,
+   "acc_ci95": [
+    0.9230670617058012,
+    0.9795946128493436
+   ],
+   "poison_retrieved_rate": 0.45
+  },
+  "D3|trusted|kb": {
+   "defence": "D3",
+   "condition": "trusted",
+   "channel": "kb",
+   "n": 100,
+   "asr": 0.04,
+   "asr_ci95": [
+    0.015663050551848016,
+    0.09837217232607373
+   ],
+   "acc": 0.96,
+   "acc_ci95": [
+    0.9016278276739262,
+    0.984336949448152
+   ],
+   "poison_retrieved_rate": 0.44
+  },
+  "D3|trusted|web": {
+   "defence": "D3",
+   "condition": "trusted",
+   "channel": "web",
+   "n": 100,
+   "asr": 0.02,
+   "asr_ci95": [
+    0.005501852234968185,
+    0.07001316294199365
+   ],
+   "acc": 0.96,
+   "acc_ci95": [
+    0.9016278276739262,
+    0.984336949448152
+   ],
+   "poison_retrieved_rate": 0.46
+  }
+ }
+}

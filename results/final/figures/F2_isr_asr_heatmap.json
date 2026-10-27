@@ -1,0 +1,63 @@
+{
+  "id": "F2",
+  "title": "Poison reaches memory far less often under Custos",
+  "subtitle": "pooled over families | 95% Wilson CIs in cells.csv | cautious user",
+  "data": [
+    {
+      "metric": "isr",
+      "backend": "primary",
+      "defence": "D0",
+      "rate": 0.8092307692307692,
+      "n": 1300
+    },
+    {
+      "metric": "isr",
+      "backend": "primary",
+      "defence": "D1",
+      "rate": 0.49961330239752516,
+      "n": 1293
+    },
+    {
+      "metric": "isr",
+      "backend": "primary",
+      "defence": "D2",
+      "rate": 0.78,
+      "n": 1300
+    },
+    {
+      "metric": "isr",
+      "backend": "primary",
+      "defence": "D3",
+      "rate": 0.041530944625407164,
+      "n": 1228
+    },
+    {
+      "metric": "asr",
+      "backend": "primary",
+      "defence": "D0",
+      "rate": 0.2723076923076923,
+      "n": 1300
+    },
+    {
+      "metric": "asr",
+      "backend": "primary",
+      "defence": "D1",
+      "rate": 0.09358081979891725,
+      "n": 1293
+    },
+    {
+      "metric": "asr",
+      "backend": "primary",
+      "defence": "D2",
+      "rate": 0.2453846153846154,
+      "n": 1300
+    },
+    {
+      "metric": "asr",
+      "backend": "primary",
+      "defence": "D3",
+      "rate": 0.0016286644951140066,
+      "n": 1228
+    }
+  ]
+}

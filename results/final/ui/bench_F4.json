@@ -1,0 +1,54 @@
+[
+ {
+  "id": "undefended",
+  "label": "Undefended",
+  "kind": "defence",
+  "backend": "native",
+  "memory_state": "warm",
+  "fqr_pct": 0.0,
+  "fqr_ci_low_pct": 0.0,
+  "fqr_ci_high_pct": 3.6,
+  "asr_pct": 27.2,
+  "asr_ci_low_pct": 24.9,
+  "asr_ci_high_pct": 29.7
+ },
+ {
+  "id": "pi_filter",
+  "label": "PI filter",
+  "kind": "defence",
+  "backend": "native",
+  "memory_state": "warm",
+  "fqr_pct": 51.9,
+  "fqr_ci_low_pct": 42.4,
+  "fqr_ci_high_pct": 61.3,
+  "asr_pct": 9.4,
+  "asr_ci_low_pct": 7.9,
+  "asr_ci_high_pct": 11.1
+ },
+ {
+  "id": "amemguard_style",
+  "label": "A-MemGuard-style",
+  "kind": "defence",
+  "backend": "native",
+  "memory_state": "warm",
+  "fqr_pct": 16.3,
+  "fqr_ci_low_pct": 10.5,
+  "fqr_ci_high_pct": 24.6,
+  "asr_pct": 24.5,
+  "asr_ci_low_pct": 22.3,
+  "asr_ci_high_pct": 27.0
+ },
+ {
+  "id": "custos",
+  "label": "Custos",
+  "kind": "defence",
+  "backend": "native",
+  "memory_state": "warm",
+  "fqr_pct": 11.5,
+  "fqr_ci_low_pct": 6.7,
+  "fqr_ci_high_pct": 19.1,
+  "asr_pct": 0.2,
+  "asr_ci_low_pct": 0.0,
+  "asr_ci_high_pct": 0.6
+ }
+]

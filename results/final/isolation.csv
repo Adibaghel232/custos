@@ -1,0 +1,7 @@
+probe_type,defence,backend,n_probes,n_leaks,notes,run_id
+cross_tenant_retrieval,D3,native,10000,0,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+extraction_prompt,D3,native,300,0,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+cross_tenant_retrieval,D3-isolation,native,10000,9999,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+extraction_prompt,D3-isolation,native,300,300,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+cross_tenant_retrieval,D0,langgraph,10000,9999,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+extraction_prompt,D0,langgraph,300,300,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs

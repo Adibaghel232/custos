@@ -1,0 +1,43 @@
+{
+  "id": "F9",
+  "title": "Utility change with Custos: -11.2 pts",
+  "subtitle": "LongMemEval subset | judge: Nemotron | paired bootstrap CI in metrics.json",
+  "data": [
+    {
+      "qtype": "knowledge-update",
+      "defence": "D0",
+      "acc": 0.375,
+      "n": 72
+    },
+    {
+      "qtype": "knowledge-update",
+      "defence": "D3",
+      "acc": 0.18055555555555555,
+      "n": 72
+    },
+    {
+      "qtype": "multi-session",
+      "defence": "D0",
+      "acc": 0.15151515151515152,
+      "n": 66
+    },
+    {
+      "qtype": "multi-session",
+      "defence": "D3",
+      "acc": 0.06060606060606061,
+      "n": 66
+    },
+    {
+      "qtype": "temporal-reasoning",
+      "defence": "D0",
+      "acc": 0.175,
+      "n": 40
+    },
+    {
+      "qtype": "temporal-reasoning",
+      "defence": "D3",
+      "acc": 0.175,
+      "n": 40
+    }
+  ]
+}

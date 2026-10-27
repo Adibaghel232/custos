@@ -1,0 +1,101 @@
+request_id,defence,backend,source_records,derived_total,derived_removed,residual_hits,present_before,closure,notes,run_id
+erase-D3-0,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-1,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-2,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-3,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-4,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-5,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-6,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-7,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-8,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-9,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-10,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-11,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-12,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-13,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-14,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-15,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-16,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-17,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-18,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-19,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-20,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-21,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-22,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-23,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-24,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-25,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-26,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-27,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-28,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-29,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-30,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-31,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-32,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-33,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-34,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-35,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-36,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-37,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-38,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-39,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-40,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-41,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-42,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-43,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-44,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-45,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-46,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-47,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-48,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D3-49,D3,native,3,1,1,0,8,8,"HashEmbedder (isolation is enforced by partition/filters, independent of the embedding model); records seeded directly",runs
+erase-D0-0,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-1,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-2,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-3,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-4,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-5,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-6,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-7,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-8,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-9,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-10,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-11,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-12,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-13,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-14,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-15,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-16,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-17,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-18,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-19,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-20,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-21,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-22,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-23,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-24,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-25,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-26,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-27,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-28,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-29,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-30,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-31,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-32,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-33,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-34,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-35,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-36,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-37,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-38,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-39,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-40,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-41,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-42,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-43,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-44,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-45,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-46,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-47,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-48,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
+erase-D0-49,D0,langgraph,3,1,0,2,5,3,owner-scoped delete; no provenance to reach summaries,runs
