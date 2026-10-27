@@ -606,7 +606,11 @@ def slide_innovation(D: Deck):
 def slide_glance(D: Deck):
     """Four headline numbers, each read from a result file."""
     R = D.R
-    D.new_slide("RESULTS AT A GLANCE", "Attacks stopped, legitimate work still done")
+    bs0, bs3 = R.g("by_defence.D0.BenignSuccess"), R.g("by_defence.D3.BenignSuccess")
+    kept = (isinstance(bs0, dict) and isinstance(bs3, dict) and bs0.get("rate") is not None and bs3.get("rate") is not None
+            and bs3["rate"] >= bs0["rate"] - 0.05)
+    D.new_slide("RESULTS AT A GLANCE", "Attacks stopped, legitimate work still done" if kept else
+                "Attacks stopped, at a measured cost to legitimate work")
     pr, ad = _ext(R, "external_poisonedrag"), _ext(R, "external_agentdojo")
     cards = []
     a0, a3 = R.g("by_defence.D0.ASR"), R.g("by_defence.D3.ASR")
@@ -980,8 +984,11 @@ def slide_adaptive(D: Deck):
 
 def slide_prov_cons(D: Deck):
     R = D.R
+    fq = R.g("by_defence.D3.FQR")
+    passes = isinstance(fq, dict) and fq.get("rate") is not None and fq["rate"] <= 0.05
     D.new_slide("4 · METRICS · PS-04 ② PROVENANCE  ③ CONSISTENCY",
-                "Every memory has a source, and legitimate updates still pass")
+                "Every memory has a source, and legitimate updates still pass" if passes else
+                "Every memory has a source; some legitimate updates wait for confirmation")
     L = "by_defence.D3."
     tam = R.g(L + "Tamper")
     f1 = R.g(L + "ContradictionF1")
@@ -1410,7 +1417,7 @@ QA = [("Isn't the gate just blocking everything?", "No. It looks only at high-ri
       ("What does it cost in latency?", "Read p95 {rd} ms; gated call p95 {gt} ms; extra tokens per write p95 {tk}. Only high-risk calls pay for leave-one-out."),
       ("Why tiers instead of a better detector?", "PromptArmor, the strongest detector, catches 42.5% of weak-signal poisons [4]. Tiers depend on where a memory came from, not on its wording."),
       ("Real bank-detail emails exist. Do you break them?", "No: they are held, not dropped, until a T3 system or reviewer confirms; the old fact is closed in time, not deleted."),
-      ("You built the benchmark and the defence. Biased?", "Families follow public taxonomies [1-4]; every defence sees the same episodes; benign traffic is scored; Wilson CIs; an attacker that knows the defence."),
+      ("You built the benchmark and the defence. Biased?", "That is why we also ran two public benchmarks we did not write, unchanged (AgentDojo, PoisonedRAG), and did not tune on them. In ours, every defence sees the same episodes and benign traffic is scored."),
       ("How does erasure reach derived data?", "Same taint closure as rollback: follow provenance to every claim, summary and embedding. Completeness {erc} vs {eru} for the plain store."),
       ("What did the GPUs do?", "Throughput: {calls} Nemotron calls on self-hosted Lightning (7 vLLM replicas, ~60 req/s) instead of hosted rate limits.")]
 
