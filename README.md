@@ -1,6 +1,6 @@
 # Custos: chain of custody for agent memory
 
-**AEGIS 2026 finals · PS-04 Agent Memory Governance Evaluation · Team Charlies (Aditya Baghel, Karan Singh Madhwal)**
+**AEGIS 2026 finals · PS-04 Agent Memory Governance Evaluation · Team Charlies (Aditya Baghel, Karan Singh)**
 
 AI agents now remember things between sessions. An attacker no longer needs to break the agent: one false memory,
 planted by an email or a web page, can trigger a wrong payment many sessions later, when no single step looks wrong

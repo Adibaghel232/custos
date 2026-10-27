@@ -533,7 +533,7 @@ def slide_cover(D: Deck):
          align="c", anchor="m")
     D.tb(0.5, 3.45, 12.33, 0.35, "PS-04 Agent Memory Governance Evaluation  ·  Finals", size=20, bold=True, color=GREEN,
          align="c", anchor="m")
-    D.tb(0.5, 3.85, 12.33, 0.35, "Team Charlies  ·  Aditya Baghel  ·  Karan Singh Madhwal", size=18, color=LINE,
+    D.tb(0.5, 3.85, 12.33, 0.35, "Team Charlies  ·  Aditya Baghel  ·  Karan Singh", size=18, color=LINE,
          align="c", anchor="m")
     R = D.R
     parts = []

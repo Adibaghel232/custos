@@ -1,6 +1,6 @@
 # Custos · Finals plan — demo, video, deck, judge Q&A
 
-AEGIS 2026 · PS 04 Agent Memory Governance Evaluation · Team Charlies (Aditya Baghel, Karan Singh Madhwal)
+AEGIS 2026 · PS 04 Agent Memory Governance Evaluation · Team Charlies (Aditya Baghel, Karan Singh)
 Drafted 26 Oct 2026, ~11:15 IST.
 
 Rules for this document

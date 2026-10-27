@@ -1,6 +1,6 @@
 # Custos + Custos-Bench — Engineering Build Spec (DRAFT v0.1)
 
-> Team Charlies (Aditya Baghel, Karan Singh Madhwal) · AEGIS 2026 · PS-04 Agent Memory Governance Evaluation
+> Team Charlies (Aditya Baghel, Karan Singh) · AEGIS 2026 · PS-04 Agent Memory Governance Evaluation
 > Window: Mon 26 Oct 2026 ~12:00 IST (plan sign-off = T0) → Tue 27 Oct 2026 23:59 IST (target submit 21:00)
 > Status: draft for review. Items marked ⟨VERIFY⟩ are being confirmed by the research agents. They live only in
 > `configs/settings.yaml`, so no code hard-codes a model id, endpoint, package API or price.

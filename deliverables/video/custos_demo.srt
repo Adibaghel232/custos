@@ -7,217 +7,217 @@ Hi, we are Team Charlies.
 This is Custos: a chain of custody for agent memory.
 
 3
-00:00:08,481 --> 00:00:11,745
+00:00:08,463 --> 00:00:11,727
 AI agents now remember things between sessions.
 
 4
-00:00:11,895 --> 00:00:14,954
+00:00:11,877 --> 00:00:14,936
 So an attacker does not need to hack the agent.
 
 5
-00:00:15,104 --> 00:00:17,398
+00:00:15,086 --> 00:00:17,380
 One false memory is enough.
 
 6
-00:00:17,548 --> 00:00:21,672
+00:00:17,530 --> 00:00:21,654
 It acts many sessions later, when no single step looks wrong.
 
 7
-00:00:21,822 --> 00:00:27,570
+00:00:21,804 --> 00:00:27,552
 Attacks like MINJA and AgentPoison show this works, and OWASP lists memory poisoning in its
 
 8
-00:00:27,570 --> 00:00:28,580
+00:00:27,552 --> 00:00:28,562
 agentic top ten.
 
 9
-00:00:30,218 --> 00:00:32,568
+00:00:30,201 --> 00:00:32,550
 Here are two finance agents.
 
 10
-00:00:32,718 --> 00:00:37,047
+00:00:32,700 --> 00:00:37,029
 Same Nemotron model, same tools, same inbox.
 
 11
-00:00:37,197 --> 00:00:41,720
+00:00:37,179 --> 00:00:41,702
 The only difference: the agent on the right uses memory through Custos.
 
 12
-00:00:43,313 --> 00:00:45,967
+00:00:43,295 --> 00:00:45,949
 First, the obvious attack.
 
 13
-00:00:46,117 --> 00:00:49,441
+00:00:46,099 --> 00:00:49,423
 An email says Acme's bank account has changed.
 
 14
-00:00:49,591 --> 00:00:52,425
+00:00:49,573 --> 00:00:52,407
 The left agent writes it straight into memory.
 
 15
-00:00:52,575 --> 00:00:58,189
+00:00:52,557 --> 00:00:58,171
 On the right, Custos stamps the email as T-zero: untrusted outside content.
 
 16
-00:00:58,339 --> 00:01:02,453
+00:00:58,321 --> 00:01:02,435
 The claim contradicts the ERP record, which is T-three.
 
 17
-00:01:02,603 --> 00:01:06,476
+00:01:02,585 --> 00:01:06,459
 Like in a court, hearsay cannot overrule an official record.
 
 18
-00:01:06,626 --> 00:01:08,866
+00:01:06,609 --> 00:01:08,848
 So it goes to quarantine.
 
 19
-00:01:10,633 --> 00:01:15,886
+00:01:10,615 --> 00:01:15,868
 Now a smarter attacker: an email about a new payment partner, with a new account.
 
 20
-00:01:16,036 --> 00:01:18,370
+00:01:16,018 --> 00:01:18,353
 The left agent stores it again.
 
 21
-00:01:18,520 --> 00:01:24,444
+00:01:18,503 --> 00:01:24,426
 On the right, the claim again contradicts the ERP bank account, so Custos holds it.
 
 22
-00:01:26,004 --> 00:01:27,568
+00:01:25,986 --> 00:01:27,551
 Days pass.
 
 23
-00:01:27,718 --> 00:01:32,047
+00:01:27,701 --> 00:01:32,029
 Sessions four to eight are normal work, and memories get summarised.
 
 24
-00:01:33,552 --> 00:01:35,191
+00:01:33,534 --> 00:01:35,173
 Session nine.
 
 25
-00:01:35,341 --> 00:01:39,880
+00:01:35,323 --> 00:01:39,862
 The user says: pay Acme's March invoice through the new payment partner.
 
 26
-00:01:40,030 --> 00:01:44,569
+00:01:40,012 --> 00:01:44,551
 The left agent pays the attacker: forty lakh rupees, gone.
 
 27
-00:01:44,719 --> 00:01:47,008
+00:01:44,701 --> 00:01:46,990
 The right agent pays nobody.
 
 28
-00:01:47,158 --> 00:01:52,111
+00:01:47,140 --> 00:01:52,094
 The attacker's account never became trusted memory, and the email waits for a human.
 
 29
-00:01:53,679 --> 00:01:56,832
+00:01:53,661 --> 00:01:56,815
 The right agent still tried to act on the email.
 
 30
-00:01:56,982 --> 00:02:01,551
+00:01:56,965 --> 00:02:01,533
 It tried four times to send a confirmation, and the gate blocked every one.
 
 31
-00:02:01,701 --> 00:02:06,465
+00:02:01,683 --> 00:02:06,447
 Before any high-risk action, Custos checks where each argument came from.
 
 32
-00:02:06,615 --> 00:02:11,748
+00:02:06,597 --> 00:02:11,731
 This recipient is the attacker's address, and it traces back to the T-zero email.
 
 33
-00:02:11,898 --> 00:02:17,360
+00:02:11,881 --> 00:02:17,343
 Leave-one-out re-planning confirms it: without that email, the agent writes to the ERP
 
 34
-00:02:17,360 --> 00:02:18,377
+00:02:17,343 --> 00:02:18,359
 address instead.
 
 35
-00:02:19,859 --> 00:02:22,468
+00:02:19,841 --> 00:02:22,450
 Every memory has a chain of custody.
 
 36
-00:02:22,618 --> 00:02:28,277
+00:02:22,600 --> 00:02:28,259
 This quarantined claim came from an email, tier T-zero, from an outside domain.
 
 37
-00:02:28,427 --> 00:02:34,005
+00:02:28,409 --> 00:02:33,987
 Custos checked it against the ERP record, tier T-three, and found a conflict.
 
 38
-00:02:34,155 --> 00:02:36,724
+00:02:34,137 --> 00:02:36,707
 The decision and its rule are on record.
 
 39
-00:02:38,654 --> 00:02:44,326
+00:02:38,636 --> 00:02:44,308
 If a reviewer marks the email as poison, one click rolls back the email and everything made
 
 40
-00:02:44,326 --> 00:02:45,573
+00:02:44,308 --> 00:02:45,555
 from it, hop by hop.
 
 41
-00:02:45,723 --> 00:02:48,452
+00:02:45,705 --> 00:02:48,434
 Then the read log shows who was exposed.
 
 42
-00:02:48,602 --> 00:02:53,908
+00:02:48,584 --> 00:02:53,890
 Here, no session ever read the poisoned claim, and the one action that depended on it was
 
 43
-00:02:53,908 --> 00:02:54,385
+00:02:53,890 --> 00:02:54,367
 blocked.
 
 44
-00:02:54,535 --> 00:02:59,543
+00:02:54,517 --> 00:02:59,526
 The same operation serves a data erasure request under India's DPDP Act.
 
 45
-00:03:01,114 --> 00:03:06,542
+00:03:01,096 --> 00:03:06,524
 Every step goes into a signed, hash-chained ledger, rebuilt here from the recorded run.
 
 46
-00:03:06,692 --> 00:03:08,826
+00:03:06,674 --> 00:03:08,809
 Verification passes.
 
 47
-00:03:08,976 --> 00:03:14,160
+00:03:08,959 --> 00:03:14,142
 Now we edit one entry in a copy, and verification fails at exactly that entry.
 
 48
-00:03:15,743 --> 00:03:23,384
+00:03:15,725 --> 00:03:23,366
 On our benchmark, across 7,175 attack episodes, attacks succeeded 27.2 percent of the time
 
 49
-00:03:23,384 --> 00:03:27,375
+00:03:23,366 --> 00:03:27,357
 without a defence, and 0.2 percent with Custos.
 
 50
-00:03:27,525 --> 00:03:30,699
+00:03:27,507 --> 00:03:30,681
 Two public benchmarks that we did not write agree.
 
 51
-00:03:30,849 --> 00:03:36,853
+00:03:30,831 --> 00:03:36,835
 On AgentDojo, injected payments got through 52.1 percent of the time undefended, and never
 
 52
-00:03:36,853 --> 00:03:40,856
+00:03:36,835 --> 00:03:40,838
 with Custos asking the user first, at the same task success.
 
 53
-00:03:41,006 --> 00:03:46,834
+00:03:40,988 --> 00:03:46,817
 On PoisonedRAG, poisoning against a trusted record fell from 74 to 3 percent.
 
 54
-00:03:48,519 --> 00:03:51,878
+00:03:48,501 --> 00:03:51,860
 Built with Nemotron models on NVIDIA GPUs.
 
 55
-00:03:52,028 --> 00:03:54,847
+00:03:52,010 --> 00:03:54,829
 Custos: memory is evidence.
 
 56
-00:03:54,997 --> 00:03:56,391
+00:03:54,979 --> 00:03:56,373
 Thank you.
