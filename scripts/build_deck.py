@@ -1332,6 +1332,16 @@ def slide_nvidia(D: Deck):
              color=GREY, italic=True, name="~src")
 
 
+def _hal_note(R: Results) -> str:
+    h3, h0 = R.g("by_defence.D3.Hallucinated"), R.g("by_defence.D0.Hallucinated")
+    if not isinstance(h3, dict) or h3.get("rate") is None:
+        return ""
+    R._log("hallucinated D3 (limits)", "by_defence.D3.Hallucinated.rate", fpct(h3["rate"]))
+    base = f" vs {fpct(h0['rate'])} for plain summaries" if isinstance(h0, dict) and h0.get("rate") is not None else ""
+    return (f" An independent judge finds {fpct(h3['rate'])} of stored claims unsupported{base}: the extractor can turn the "
+            "assistant's suggestions into user preferences.")
+
+
 def _util_note(R: Results) -> str:
     """Utility cost sentence for the limits card when the measured LongMemEval delta misses the -2 pt target."""
     ud, u0, u3 = R.g("by_defence.D3.UtilityDelta"), R.g("by_defence.D0.Utility"), R.g("by_defence.D3.Utility")
@@ -1360,7 +1370,7 @@ def slide_limits(D: Deck):
             + _util_note(R)),
            ("Compromised T3 source (the ERP) is outside the threat model;", " Custos bounds the blast radius: one rollback."),
            ("Own benchmark is synthetic:", " one domain, one agent family (Nemotron); two public benchmarks back it."),
-           ("LLM checkers can err:", " they can miss a conflict or hold a good write, never raise a tier."),
+           ("LLM checkers can err:", " they can miss a conflict or hold a good write, never raise a tier." + _hal_note(R)),
            ("Baselines are our re-implementations;", " backends evaluated: " + (", ".join(backs) if backs else NM) + ".")]
     if nm:
         lim.append(("Not measured in this run:", " " + "; ".join(nm[:4]) + ("..." if len(nm) > 4 else "") + "."))
