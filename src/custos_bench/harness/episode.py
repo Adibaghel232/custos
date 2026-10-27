@@ -151,6 +151,7 @@ async def _run_once(ep: Any, inst: AttackInstance, grp: Group, env: Env, user_po
     t0 = time.perf_counter()
     memory = TimedMemory(env.make_memory(ep.defence, backend=ep.backend))
     warm = await _maybe_warm(memory, ep, env)
+    base_holds = ev.fail_closed_holds(memory)   # holds inherited from the warm snapshot are not this episode's
     segmented = inst.kind == "attack" and (len(inst.trigger_sessions) > 1 or grp.rollback_on_alert) and \
         inst.target.kind != "leak"
     worlds: dict[str, Any] = {}
@@ -196,8 +197,8 @@ async def _run_once(ep: Any, inst: AttackInstance, grp: Group, env: Env, user_po
     d1 = {k: v for m in ev.chain(memory) for k, v in (getattr(m, "flt", None).errors if hasattr(m, "flt") else {}).items()}
     if d1 and env.strict:
         errs.append(f"D1 detector failure(s) {d1} (a down detector would pass the poison through)")
-    holds = ev.fail_closed_holds(memory)
-    if holds:
+    holds = ev.fail_closed_holds(memory) - base_holds
+    if holds > 0:
         errs.append(f"{holds} write(s) held fail-closed because a checker was unavailable")
     if errs:
         raise InfraError("; ".join(errs[:3]))
