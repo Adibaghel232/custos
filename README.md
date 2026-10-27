@@ -30,7 +30,9 @@ Results are filled in from the final run.
 
 **Limits we state up front.** Provenance is not fact-checking: with no trusted record to compare against, Custos
 cannot tell which outside fact is true (PoisonedRAG "poison only" stays high for every defence). Low-trust updates that
-contradict a trusted record wait for confirmation (review load). The gate escalates; a user who approves every request
+contradict a trusted record wait for confirmation (review load). On long personal chats (LongMemEval) about half of the
+summary claims fail the strict grounding rule that defends against summary laundering, so they are not stored and
+recall accuracy drops; cite-aware summarisation is the next step. The gate escalates; a user who approves every request
 gets no protection from it. Our own benchmark is synthetic (one finance domain); the two public benchmarks are there so
 our numbers do not rest only on attacks we wrote.
 

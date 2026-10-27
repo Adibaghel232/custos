@@ -1325,7 +1325,7 @@ def _util_note(R: Results) -> str:
     t = f"{100 * ud['delta']:+.1f} pts"
     R._log("utility delta (limits)", "by_defence.D3.UtilityDelta.delta", t)
     acc = f" ({fpct(u3['rate'], 0)} vs {fpct(u0['rate'], 0)})" if isinstance(u0, dict) and isinstance(u3, dict) and         u0.get("rate") is not None and u3.get("rate") is not None else ""
-    return f" LongMemEval accuracy {t}{acc}: a user's own updates can be held as lower-tier conflicts."
+    return f" LongMemEval accuracy {t}{acc}: on long chats, summary claims that fail the grounding rule (R1) are not stored."
 
 
 def slide_limits(D: Deck):
@@ -1428,7 +1428,7 @@ QA = [("Isn't the gate just blocking everything?", "No. It looks only at high-ri
       ("What if the attacker compromises the ERP (T3)?", "Then the lie has T3 custody and no memory layer can tell; that needs maker-checker. Custos bounds the blast radius: the ledger lists every record and session, one rollback reverts them."),
       ("What does it cost in latency?", "Read p95 {rd} ms; gated call p95 {gt} ms; extra tokens per write p95 {tk}. Only high-risk calls pay for leave-one-out."),
       ("Why tiers instead of a better detector?", "PromptArmor, the strongest detector, catches 42.5% of weak-signal poisons [4]. Tiers depend on where a memory came from, not on its wording."),
-      ("Why is LongMemEval accuracy lower with Custos?", "Utility change {util}. Custos keeps atomic claims, not whole summaries, and a summary claim takes the lowest tier of its sources, so some details and user updates are held. A re-run reproduced it; claim-level tiers did not fix it. Next: store labelled summaries."),
+      ("Why is LongMemEval accuracy lower with Custos?", "Utility change {util}. On long personal chats about half of the summary claims fail the strict grounding rule (R1, our defence against summary laundering) and are not stored. A re-run reproduced it. Next: cite-aware summaries, grounding against the whole session."),
       ("You built the benchmark and the defence. Biased?", "That is why we also ran two public benchmarks we did not write, unchanged (AgentDojo, PoisonedRAG), and did not tune on them. In ours, every defence sees the same episodes and benign traffic is scored."),
       ("How does erasure reach derived data?", "Same taint closure as rollback: follow provenance to every claim, summary and embedding. Completeness {erc} vs {eru} for the plain store."),
       ("What did the GPUs do?", "Throughput: {calls} Nemotron calls on self-hosted Lightning (7 vLLM replicas, ~60 req/s) instead of hosted rate limits.")]
