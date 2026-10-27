@@ -335,6 +335,8 @@ class WritePipeline:
         self._emit("claims", {"tenant_id": tenant, "source_id": src.source_id,
                               "claims": [{"subject": e.claim.subject, "relation": e.claim.relation,
                                           "object": e.claim.object, "kind": e.claim.kind.value} for e in extracted]})
+        if not extracted and agent:
+            extracted = self.extractor.note(tenant, req.owner, req.content)
         if not extracted:
             return []
         # ---- 3. label + build pending records

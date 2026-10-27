@@ -255,6 +255,13 @@ class Extractor:
             raw = out.claims
         return self._build(tenant_id, raw), called
 
+    def note(self, tenant_id: str, owner: str, content: str) -> list[Extracted]:
+        """Fallback when the extractor finds no claim in a user/agent memory write: keep it as one unstructured note
+        (non-functional, non-critical) so the write is labelled and checked instead of silently dropped."""
+        text = " ".join(content.split())[:600]
+        return self._build(tenant_id, [ExtractedClaim(subject=f"note:{owner}", relation="other:note", object=text,
+                                                      text=text)]) if text else []
+
     def _build(self, tenant_id: str, raw: list[ExtractedClaim]) -> list[Extracted]:
         seen: set[tuple[str, str]] = set()
         out: list[Extracted] = []

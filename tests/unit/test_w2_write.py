@@ -498,3 +498,14 @@ async def test_26_window_lwm_and_echo_rule(tmp_path):
         assert w.rec(vs3[0]).tier == Tier.T2 and "echo_capped" not in w.rec(vs3[0]).flags
     finally:
         set_llm(None)
+
+
+async def test_unextractable_user_note_is_kept_as_note(world):
+    """The extractor finding no claim must not silently drop a user's memory write."""
+    turn = await world.src("Remember that my weekly digest should be called WDIGEST-50ee44.", type=SourceType.USER,
+                           origin="user:priya", principal="priya")
+    vs = await world.remember("Weekly digest should be called WDIGEST-50ee44", [turn.source_id], owner="priya")
+    assert len(vs) == 1 and vs[0].action == "commit"
+    rec = world.rec(vs[0])
+    assert rec.claim.relation == "other:note" and "WDIGEST-50ee44" in rec.content and rec.tier == Tier.T2
+    assert not rec.claim.functional and not rec.claim.critical
